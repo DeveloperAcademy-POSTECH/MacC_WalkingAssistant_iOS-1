@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D0762F128F25A20002FE660 /* SwipingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0762F028F25A20002FE660 /* SwipingController.swift */; };
+		4D0762F328F25ABC002FE660 /* FunctionCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0762F228F25ABC002FE660 /* FunctionCells.swift */; };
 		4DB71CAA28EF7D4900A0E21A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB71CA928EF7D4900A0E21A /* AppDelegate.swift */; };
 		4DB71CAC28EF7D4900A0E21A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB71CAB28EF7D4900A0E21A /* SceneDelegate.swift */; };
 		4DB71CAE28EF7D4900A0E21A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB71CAD28EF7D4900A0E21A /* MainViewController.swift */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4D0762F028F25A20002FE660 /* SwipingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingController.swift; sourceTree = "<group>"; };
+		4D0762F228F25ABC002FE660 /* FunctionCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionCells.swift; sourceTree = "<group>"; };
 		4DB71CA628EF7D4900A0E21A /* Oculo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Oculo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DB71CA928EF7D4900A0E21A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4DB71CAB28EF7D4900A0E21A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +63,8 @@
 				4DB71CA928EF7D4900A0E21A /* AppDelegate.swift */,
 				4DB71CAB28EF7D4900A0E21A /* SceneDelegate.swift */,
 				4DB71CAD28EF7D4900A0E21A /* MainViewController.swift */,
+				4D0762F028F25A20002FE660 /* SwipingController.swift */,
+				4D0762F228F25ABC002FE660 /* FunctionCells.swift */,
 				4DB71CAF28EF7D4900A0E21A /* Main.storyboard */,
 				4DB71CB228EF7D4A00A0E21A /* Assets.xcassets */,
 				4DB71CB428EF7D4A00A0E21A /* LaunchScreen.storyboard */,
@@ -142,6 +148,8 @@
 				4DB71CAE28EF7D4900A0E21A /* MainViewController.swift in Sources */,
 				4DB71CAA28EF7D4900A0E21A /* AppDelegate.swift in Sources */,
 				4DB71CAC28EF7D4900A0E21A /* SceneDelegate.swift in Sources */,
+				4D0762F328F25ABC002FE660 /* FunctionCells.swift in Sources */,
+				4D0762F128F25A20002FE660 /* SwipingController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
