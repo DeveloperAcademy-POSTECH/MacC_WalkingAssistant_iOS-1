@@ -64,6 +64,8 @@
 				4DB71CA928EF7D4900A0E21A /* AppDelegate.swift */,
 				4DB71CAB28EF7D4900A0E21A /* SceneDelegate.swift */,
 				4DB71CAD28EF7D4900A0E21A /* MainViewController.swift */,
+				4D0762F028F25A20002FE660 /* SwipingController.swift */,
+				4D0762F228F25ABC002FE660 /* FunctionCells.swift */,
 				4DB71CAF28EF7D4900A0E21A /* Main.storyboard */,
 				4DB71CB228EF7D4A00A0E21A /* Assets.xcassets */,
 				4DB71CB428EF7D4A00A0E21A /* LaunchScreen.storyboard */,
@@ -148,6 +150,8 @@
 				4DB71CAA28EF7D4900A0E21A /* AppDelegate.swift in Sources */,
 				4296A68928F7EAEB00E769AE /* HealthkitManager.swift in Sources */,
 				4DB71CAC28EF7D4900A0E21A /* SceneDelegate.swift in Sources */,
+				4D0762F328F25ABC002FE660 /* FunctionCells.swift in Sources */,
+				4D0762F128F25A20002FE660 /* SwipingController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
