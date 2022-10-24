@@ -9,7 +9,6 @@ import UIKit
 import Foundation
 
 class ViewController: UIViewController {
-    var selected = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -19,8 +18,8 @@ class ViewController: UIViewController {
         self.view.addSubview(self.label)
 
         self.view.addSubview(self.createNavigateButton)
-        self.view.addSubview(self.createEnvironmentReaderButton)
         self.view.addSubview(self.createTextReadingButton)
+        self.view.addSubview(self.createEnvironmentReaderButton)
     }
 
     lazy var createNavigateButton: UIButton = {
@@ -31,14 +30,11 @@ class ViewController: UIViewController {
             width: self.view.frame.width,
             height: self.view.frame.height * 0.25
         )
-        button.backgroundColor = UIColor.clear
+        button.backgroundColor = UIColor.red
         button.setTitle("Navigation", for: .normal)
         button.layer.cornerRadius = 10.0
-        button.tag = 1
-        button.addTarget(self, action: #selector(onTouchButton), for: .touchUpInside)
-        button.layer.cornerRadius = 10.0
-        button.layer.borderWidth = 10
-        button.layer.borderColor = UIColor.red.cgColor
+
+        self.view.addSubview(button)
 
         return button
     }()
@@ -51,15 +47,12 @@ class ViewController: UIViewController {
             width: self.view.frame.width,
             height: self.view.frame.height * 0.25
         )
-        button.backgroundColor = UIColor.clear
+        button.backgroundColor = UIColor.yellow
         button.setTitle("Environment Reader", for: .normal)
         button.layer.cornerRadius = 10.0
-        button.tag = 2
-        button.addTarget(self, action: #selector(onTouchButton), for: .touchUpInside)
-        button.layer.cornerRadius = 10.0
-        button.layer.borderWidth = 10
-        button.layer.borderColor = UIColor.yellow.cgColor
-        
+
+        self.view.addSubview(button)
+
         return button
     }()
 
@@ -71,15 +64,12 @@ class ViewController: UIViewController {
             width: self.view.frame.width,
             height: self.view.frame.height * 0.25
         )
-        button.backgroundColor = UIColor.clear
+        button.backgroundColor = UIColor.blue
         button.setTitle("Text Reader", for: .normal)
         button.layer.cornerRadius = 10.0
-        button.tag = 3
-        button.addTarget(self, action: #selector(onTouchButton), for: .touchUpInside)
-        button.layer.cornerRadius = 10.0
-        button.layer.borderWidth = 10
-        button.layer.borderColor = UIColor.blue.cgColor
-        
+
+        self.view.addSubview(button)
+
         return button
     }()
 
@@ -136,27 +126,10 @@ class ViewController: UIViewController {
         } else {
             text = "Button UI"
             self.view.addSubview(self.createNavigateButton)
-            self.view.addSubview(self.createEnvironmentReaderButton)
             self.view.addSubview(self.createTextReadingButton)
+            self.view.addSubview(self.createEnvironmentReaderButton)
         }
 
         self.label.text = text
-    }
-    
-    @objc func onTouchButton(_ sender: UIButton) {
-        self.selected = sender.tag
-        if(selected == 1) {
-            self.createNavigateButton.backgroundColor = .red
-            self.createEnvironmentReaderButton.backgroundColor = .clear
-            self.createTextReadingButton.backgroundColor = .clear
-        } else if (self.selected == 2) {
-            self.createNavigateButton.backgroundColor = .clear
-            self.createEnvironmentReaderButton.backgroundColor = .yellow
-            self.createTextReadingButton.backgroundColor = .clear
-        } else if (self.selected == 3) {
-            self.createNavigateButton.backgroundColor = .clear
-            self.createEnvironmentReaderButton.backgroundColor = .clear
-            self.createTextReadingButton.backgroundColor = .blue
-        }
     }
 }
