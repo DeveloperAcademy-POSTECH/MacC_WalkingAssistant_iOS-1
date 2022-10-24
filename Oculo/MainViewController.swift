@@ -16,6 +16,10 @@ class ViewController: UIViewController {
 
         self.view.addSubview(self.controlSwitch)
         self.view.addSubview(self.label)
+
+        self.view.addSubview(self.createNavigateButton)
+        self.view.addSubview(self.createTextReadingButton)
+        self.view.addSubview(self.createEnvironmentReaderButton)
     }
 
     lazy var createNavigateButton: UIButton = {
