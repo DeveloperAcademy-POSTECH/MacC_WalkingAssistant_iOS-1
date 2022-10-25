@@ -8,10 +8,10 @@
 
 
 import Foundation
-import healthKit
+import HealthKit
 
 // MARK: 코드 출처 https://ios-dev-tech.tistory.com/12
-class healthKitManager {
+class HealthKitManager {
 
     // MARK: 프로퍼티
     enum Period {
