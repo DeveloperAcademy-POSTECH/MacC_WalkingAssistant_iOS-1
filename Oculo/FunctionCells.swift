@@ -26,7 +26,6 @@ class FunctionCells: UICollectionViewCell {
         functionViewsLayout()
     }
 
-
     private func functionViewsLayout() {
         let buttonContainerView = UIView()
         addSubview(buttonContainerView)

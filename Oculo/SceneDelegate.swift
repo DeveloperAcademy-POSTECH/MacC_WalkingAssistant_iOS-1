@@ -3,6 +3,7 @@
 //  Oculo
 //
 //  Created by Kim, Raymond on 2022/10/07.
+//  Copyright © 2022 Intelligent ATLAS. All rights reserved.
 //
 
 import UIKit
