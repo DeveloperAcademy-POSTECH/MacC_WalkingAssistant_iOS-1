@@ -20,7 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        let swipingController = SwipingController(collectionViewLayout: layout)
         // Override point for customization after application launch.
         return true
     }
