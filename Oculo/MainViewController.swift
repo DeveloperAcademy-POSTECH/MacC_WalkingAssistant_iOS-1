@@ -8,18 +8,28 @@
 
 import UIKit
 import Foundation
+import AVFoundation
+import Vision
 
-class ViewController: UIViewController {
-    
+class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
+
+    // Variable for UI changing
     var selected = 0
+
+    // Variable for object detection camera view
+    var bufferSize: CGSize = .zero
+    var rootLayer: CALayer! = nil
+
+    @IBOutlet weak private var previewView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         overrideUserInterfaceStyle = .dark
 
-        self.view.addSubview(self.controlSwitch)
-        self.view.addSubview(self.label)
+        // MARK: Marked as an annotation for possible later use -> Swiping UI
+//        self.view.addSubview(self.controlSwitch)
+//        self.view.addSubview(self.label)
 
         self.view.addSubview(self.createNavigateButton)
         self.view.addSubview(self.createEnvironmentReaderButton)
@@ -92,64 +102,66 @@ class ViewController: UIViewController {
         return button
     }()
 
-    lazy var label: UILabel = {
-        let label = UILabel(frame: CGRect(
-            x: 0,
-            y: 0,
-            width: self.view.frame.width,
-            height: self.view.frame.height/17
-        ))
-        label.backgroundColor = UIColor.black
-        label.layer.masksToBounds = true
-        label.textColor = UIColor.white
-        label.textAlignment = NSTextAlignment.center
-        label.layer.position = CGPoint(
-            x: self.view.bounds.width/2,
-            y: self.view.bounds.height/14
-        )
-        label.text = "Button UI"
+    // MARK: marked as an annotation for possible later use -> Swiping UI
+//    lazy var label: UILabel = {
+//        let label = UILabel(frame: CGRect(
+//            x: 0,
+//            y: 0,
+//            width: self.view.frame.width,
+//            height: self.view.frame.height/17
+//        ))
+//        label.backgroundColor = UIColor.black
+//        label.layer.masksToBounds = true
+//        label.textColor = UIColor.white
+//        label.textAlignment = NSTextAlignment.center
+//        label.layer.position = CGPoint(
+//            x: self.view.bounds.width/2,
+//            y: self.view.bounds.height/14
+//        )
+//        label.text = "Button UI"
+//
+//        return label
+//    }()
 
-        return label
-    }()
-
-    lazy var controlSwitch: UISwitch = {
-        // Create a Switch.
-        let swicth: UISwitch = UISwitch()
-        swicth.layer.position = CGPoint(
-            x: self.view.frame.width/2,
-            y: self.view.frame.height/1.07
-        )
-
-        // Display the border of Swicth.
-        swicth.tintColor = UIColor.orange
-
-        // Set Switch to On.
-        swicth.isOn = false
-
-        // Set the event to be called when switching On / Off of Switch.
-        swicth.addTarget(self,
-                         action: #selector(onClickSwitch(sender:)),
-                         for: UIControl.Event.valueChanged)
-
-        return swicth
-    }()
+    // MARK: Marked as an annotation for possible later use -> Swiping UI
+//    lazy var controlSwitch: UISwitch = {
+//        // Create a Switch.
+//        let UIToggleSwitch: UISwitch = UISwitch()
+//        UIToggleSwitch.layer.position = CGPoint(
+//            x: self.view.frame.width/2,
+//            y: self.view.frame.height/1.07
+//        )
+//
+//        // Display the border of switch.
+//        UIToggleSwitch.tintColor = UIColor.orange
+//
+//        // Set Switch to On.
+//        UIToggleSwitch.isOn = false
+//
+//        // Set the event to be called when switching On / Off of Switch.
+//        UIToggleSwitch.addTarget(self,
+//                action: #selector(onClickSwitch(sender:)),
+//                for: UIControl.Event.valueChanged)
+//
+//        return UIToggleSwitch
+//    }()
 
     @objc func onClickSwitch(sender: UISwitch) {
         var text: String!
 
         if sender.isOn {
-            text = "Swipe UI"
+//            text = "Swipe UI"  // MARK: Marked as an annotation for possible later use -> Swiping UI
             createNavigateButton.removeFromSuperview()
             createTextReadingButton.removeFromSuperview()
             createEnvironmentReaderButton.removeFromSuperview()
         } else {
-            text = "Button UI"
+//            text = "Button UI"  // MARK: Marked as an annotation for possible later use -> Swiping UI
             self.view.addSubview(self.createNavigateButton)
             self.view.addSubview(self.createTextReadingButton)
             self.view.addSubview(self.createEnvironmentReaderButton)
         }
 
-        self.label.text = text
+//        self.label.text = text  // MARK: Marked as an annotation for possible later use -> Swiping UI
     }
     
     @objc func onTouchButton(_ sender: UIButton) {
