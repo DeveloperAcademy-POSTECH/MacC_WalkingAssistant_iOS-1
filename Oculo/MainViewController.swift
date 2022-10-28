@@ -22,10 +22,27 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
 
     @IBOutlet weak private var previewView: UIView!
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // set
+        UIDevice.current.isProximityMonitoringEnabled = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIDevice.current.isProximityMonitoringEnabled = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         overrideUserInterfaceStyle = .dark
+        
+        UIDevice.current.isProximityMonitoringEnabled = true
+        
+        if UIDevice.current.isProximityMonitoringEnabled {
+            NotificationCenter.default.addObserver(self, selector: #selector(proximityStateDidChange), name: UIDevice.proximityStateDidChangeNotification, object: nil)
+        }
 
         // MARK: Marked as an annotation for possible later use -> Swiping UI
 //        self.view.addSubview(self.controlSwitch)
@@ -34,6 +51,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         self.view.addSubview(self.createNavigateButton)
         self.view.addSubview(self.createEnvironmentReaderButton)
         self.view.addSubview(self.createTextReadingButton)
+        self.view.addSubview(self.createSettingButton)
     }
 
     lazy var createNavigateButton: UIButton = {
@@ -96,6 +114,23 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         button.layer.cornerRadius = 10.0
         button.layer.borderWidth = 10
         button.layer.borderColor = UIColor.blue.cgColor
+
+        self.view.addSubview(button)
+
+        return button
+    }()
+    
+    lazy var createSettingButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.frame = CGRect(
+            x: self.view.frame.width - 120,
+            y: self.view.frame.height - 80,
+            width: 120,
+            height: 40
+        )
+        button.backgroundColor = UIColor.clear
+        button.setTitle("Settings", for: .normal)
+        button.addTarget(self, action: #selector(openSettingView), for: .touchUpInside)
 
         self.view.addSubview(button)
 
@@ -179,6 +214,15 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
             self.createEnvironmentReaderButton.backgroundColor = .clear
             self.createTextReadingButton.backgroundColor = .blue
         }
+    }
+    
+    @objc func openSettingView() {
+        let mainVC = SettingViewController()
+        present(mainVC, animated: true, completion: nil)
+    }
+    
+    @objc func proximityStateDidChange() {
+        print("\(UIDevice.current.proximityState ? "디바이스가 정상입니다" : "디바이스를 뒤집어 주세요")");
     }
 }
 
