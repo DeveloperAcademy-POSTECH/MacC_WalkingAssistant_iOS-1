@@ -14,6 +14,7 @@
 		4DB71CB128EF7D4900A0E21A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DB71CAF28EF7D4900A0E21A /* Main.storyboard */; };
 		4DB71CB328EF7D4A00A0E21A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DB71CB228EF7D4A00A0E21A /* Assets.xcassets */; };
 		4DB71CB628EF7D4A00A0E21A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DB71CB428EF7D4A00A0E21A /* LaunchScreen.storyboard */; };
+		FE1997F1290A77C2001DA2CF /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1997F0290A77C2001DA2CF /* SettingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		4DB71CB228EF7D4A00A0E21A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4DB71CB528EF7D4A00A0E21A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4DB71CB728EF7D4A00A0E21A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FE1997F0290A77C2001DA2CF /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,8 +66,7 @@
 				4DB71CA928EF7D4900A0E21A /* AppDelegate.swift */,
 				4DB71CAB28EF7D4900A0E21A /* SceneDelegate.swift */,
 				4DB71CAD28EF7D4900A0E21A /* MainViewController.swift */,
-				4D0762F028F25A20002FE660 /* SwipingController.swift */,
-				4D0762F228F25ABC002FE660 /* FunctionCells.swift */,
+				FE1997F0290A77C2001DA2CF /* SettingViewController.swift */,
 				4DB71CAF28EF7D4900A0E21A /* Main.storyboard */,
 				4DB71CB228EF7D4A00A0E21A /* Assets.xcassets */,
 				4DB71CB428EF7D4A00A0E21A /* LaunchScreen.storyboard */,
@@ -146,12 +147,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE1997F1290A77C2001DA2CF /* SettingViewController.swift in Sources */,
 				4DB71CAE28EF7D4900A0E21A /* MainViewController.swift in Sources */,
 				4DB71CAA28EF7D4900A0E21A /* AppDelegate.swift in Sources */,
 				4296A68928F7EAEB00E769AE /* HealthkitManager.swift in Sources */,
 				4DB71CAC28EF7D4900A0E21A /* SceneDelegate.swift in Sources */,
-				4D0762F328F25ABC002FE660 /* FunctionCells.swift in Sources */,
-				4D0762F128F25A20002FE660 /* SwipingController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,16 +297,21 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Oculo/Oculo.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 59HAHH5VLW;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 7U333QCZ4W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Oculo/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Oculo;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.navigation";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "사용자의 보폭을 통해 거리를 계산하기위해 필요한 권한입니다";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "사용자의 보폭을 통해 거리를 계산하기위해 필요한 권한입니다";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -314,8 +319,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Intelligent-ATLAS.Oculo";
+				PRODUCT_BUNDLE_IDENTIFIER = IntelligentATLAS.Oculo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = dev_Oculo;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -331,16 +338,21 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Oculo/Oculo.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 59HAHH5VLW;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 7U333QCZ4W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Oculo/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Oculo;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.navigation";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "사용자의 보폭을 통해 거리를 계산하기위해 필요한 권한입니다";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "사용자의 보폭을 통해 거리를 계산하기위해 필요한 권한입니다";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -348,8 +360,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Intelligent-ATLAS.Oculo";
+				PRODUCT_BUNDLE_IDENTIFIER = IntelligentATLAS.Oculo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = adhoc_Oculo;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
