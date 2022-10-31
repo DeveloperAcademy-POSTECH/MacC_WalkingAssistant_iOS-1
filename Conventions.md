@@ -1,3 +1,22 @@
+# Table of Contents
+- [1. 작업 흐름(Workflow)](https://github.com/ADA-1st-macro-walikngAssistant/WalkingAssistant_iOS/edit/dev/Conventions.md#1-%EC%9E%91%EC%97%85-%ED%9D%90%EB%A6%84workflow)
+- [2. 이슈 컨벤션(Issue Convention)](https://github.com/ADA-1st-macro-walikngAssistant/WalkingAssistant_iOS/edit/dev/Conventions.md#2-%EC%9D%B4%EC%8A%88-%EC%BB%A8%EB%B2%A4%EC%85%98issue-convention)
+- [3. 커밋 컨벤션(Commit Convention)](https://github.com/ADA-1st-macro-walikngAssistant/WalkingAssistant_iOS/edit/dev/Conventions.md#3-%EC%BB%A4%EB%B0%8B-%EC%BB%A8%EB%B2%A4%EC%85%98commit-convention)
+  * [3.1. 커밋 메시지 구조(Commit Message Structure)<br>](https://github.com/ADA-1st-macro-walikngAssistant/WalkingAssistant_iOS/edit/dev/Conventions.md#31-%EC%BB%A4%EB%B0%8B-%EB%A9%94%EC%8B%9C%EC%A7%80-%EA%B5%AC%EC%A1%B0commit-message-structure)
+  * [3.2. 각 항목의 설명(Explanation for each item)](https://github.com/ADA-1st-macro-walikngAssistant/WalkingAssistant_iOS/edit/dev/Conventions.md#32-%EA%B0%81-%ED%95%AD%EB%AA%A9%EC%9D%98-%EC%84%A4%EB%AA%85explanation-for-each-item)
+    + [① Type(필수; required)](https://github.com/ADA-1st-macro-walikngAssistant/WalkingAssistant_iOS/edit/dev/Conventions.md#-type%ED%95%84%EC%88%98-required)
+    + [② Subject(필수; required)](https://github.com/ADA-1st-macro-walikngAssistant/WalkingAssistant_iOS/edit/dev/Conventions.md#-subject%ED%95%84%EC%88%98-required)
+    + [③ Body(옵셔널; optional)](https://github.com/ADA-1st-macro-walikngAssistant/WalkingAssistant_iOS/edit/dev/Conventions.md#-body%EC%98%B5%EC%85%94%EB%84%90-optional)
+    + [④ Footer(옵셔널; optional)](https://github.com/ADA-1st-macro-walikngAssistant/WalkingAssistant_iOS/edit/dev/Conventions.md#-footer%EC%98%B5%EC%85%94%EB%84%90-optional)
+- [4. PR 컨벤션(Pull Request Convention)](https://github.com/ADA-1st-macro-walikngAssistant/WalkingAssistant_iOS/edit/dev/Conventions.md#4-pr-%EC%BB%A8%EB%B2%A4%EC%85%98pull-request-convention)
+  * [4.1. PR 메시지 구조(Pull Request Message Structure)](https://github.com/ADA-1st-macro-walikngAssistant/WalkingAssistant_iOS/edit/dev/Conventions.md#41-pr-%EB%A9%94%EC%8B%9C%EC%A7%80-%EA%B5%AC%EC%A1%B0pull-request-message-structure)
+  * [4.2. 각 항목의 설명(Explanation for each item)]([#42----------explanation-for-each-item-](https://github.com/ADA-1st-macro-walikngAssistant/WalkingAssistant_iOS/edit/dev/Conventions.md#42-%EA%B0%81-%ED%95%AD%EB%AA%A9%EC%9D%98-%EC%84%A4%EB%AA%85explanation-for-each-item))
+    + [① Motivation(필수; Required)](https://github.com/ADA-1st-macro-walikngAssistant/WalkingAssistant_iOS/edit/dev/Conventions.md#-motivation%ED%95%84%EC%88%98-required)
+    + [② Key Changes(필수; Required)]([#--key-changes-----required-](https://github.com/ADA-1st-macro-walikngAssistant/WalkingAssistant_iOS/edit/dev/Conventions.md#-key-changes%ED%95%84%EC%88%98-required))
+    + [③ To Reviewers(필수; Required)](https://github.com/ADA-1st-macro-walikngAssistant/WalkingAssistant_iOS/edit/dev/Conventions.md#-to-reviewers%ED%95%84%EC%88%98-required)<br><br><br>
+
+
+
 # 1. 작업 흐름(Workflow)
 - 이슈 발급 -> 커밋 -> 이슈종료 지향<br>Issuing -> Commit -> Issue closing<br><br><br>
 
@@ -42,14 +61,14 @@
 - 서브젝트는 50글자가 넘지 않도록 작성합니다.<br>It is recommended not to exceed 50 characters writing a subject<br><br>
 - 서브젝트는 마침표를 찍지 않습니다.<br>You **do not** use a period writing a subject<br><br>
 - 영어로 작성하는 경우 첫 문자는 대문자로 작성합니다.<br>If the subject is written in English, the first character must be capitalized<br>
-<br><br>
+<br>
 
 ### ③ Body(옵셔널; optional)
 - 바디는 서브젝트에서 한 줄 건너뛰고 작성합니다.<br>Leave one blank line between the subject section and body section<br><br>
 - 바디는 없어도 큰 문제가 없는 경우도 많습니다. 따라서 항상 작성해야 하는 부분은 아닙니다.<br>You do not asked to write the body section. The body section is completely optional<br><br>
 - 설명해야 하는 변경점이 있는 경우에만 작성하도록 합시다!<br>If you need to explain something to others, then write the body section<br><br>
 - 바디에는 뭐가 어떻게 변경됐다는 구체적 정보보다는 왜 이 작업을 했는지에 대한 정보를 적는 것이 좋습니다.<br>It is better to write the reason for your work than write the concrete contents of the work<br>
-<br><br>
+<br>
 
 ### ④ Footer(옵셔널; optional)
 - 푸터도 바디와 마찬가지로 옵션입니다.<br>The footer section is another optional section to write<br><br>
