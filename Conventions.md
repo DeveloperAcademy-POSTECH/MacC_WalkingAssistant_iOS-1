@@ -10,9 +10,9 @@
     + [④ Footer(옵셔널; optional)](https://github.com/ADA-1st-macro-walikngAssistant/WalkingAssistant_iOS/edit/dev/Conventions.md#-footer%EC%98%B5%EC%85%94%EB%84%90-optional)
 - [4. PR 컨벤션(Pull Request Convention)](https://github.com/ADA-1st-macro-walikngAssistant/WalkingAssistant_iOS/edit/dev/Conventions.md#4-pr-%EC%BB%A8%EB%B2%A4%EC%85%98pull-request-convention)
   * [4.1. PR 메시지 구조(Pull Request Message Structure)](https://github.com/ADA-1st-macro-walikngAssistant/WalkingAssistant_iOS/edit/dev/Conventions.md#41-pr-%EB%A9%94%EC%8B%9C%EC%A7%80-%EA%B5%AC%EC%A1%B0pull-request-message-structure)
-  * [4.2. 각 항목의 설명(Explanation for each item)]([#42----------explanation-for-each-item-](https://github.com/ADA-1st-macro-walikngAssistant/WalkingAssistant_iOS/edit/dev/Conventions.md#42-%EA%B0%81-%ED%95%AD%EB%AA%A9%EC%9D%98-%EC%84%A4%EB%AA%85explanation-for-each-item))
+  * [4.2. 각 항목의 설명(Explanation for each item)](https://github.com/ADA-1st-macro-walikngAssistant/WalkingAssistant_iOS/edit/dev/Conventions.md#42-%EA%B0%81-%ED%95%AD%EB%AA%A9%EC%9D%98-%EC%84%A4%EB%AA%85explanation-for-each-item)
     + [① Motivation(필수; Required)](https://github.com/ADA-1st-macro-walikngAssistant/WalkingAssistant_iOS/edit/dev/Conventions.md#-motivation%ED%95%84%EC%88%98-required)
-    + [② Key Changes(필수; Required)]([#--key-changes-----required-](https://github.com/ADA-1st-macro-walikngAssistant/WalkingAssistant_iOS/edit/dev/Conventions.md#-key-changes%ED%95%84%EC%88%98-required))
+    + [② Key Changes(필수; Required)](https://github.com/ADA-1st-macro-walikngAssistant/WalkingAssistant_iOS/edit/dev/Conventions.md#-key-changes%ED%95%84%EC%88%98-required)
     + [③ To Reviewers(필수; Required)](https://github.com/ADA-1st-macro-walikngAssistant/WalkingAssistant_iOS/edit/dev/Conventions.md#-to-reviewers%ED%95%84%EC%88%98-required)<br><br><br>
 
 
