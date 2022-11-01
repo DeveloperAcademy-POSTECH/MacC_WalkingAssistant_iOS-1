@@ -11,7 +11,7 @@ import Foundation
 import AVFoundation
 import Vision
 
-class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
+class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
 
     // Variable for UI changing
     var selected = 0
@@ -62,7 +62,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             width: self.view.frame.width,
             height: self.view.frame.height * 0.25
         )
-        button.backgroundColor = UIColor.black
+        button.backgroundColor = UIColor.clear
         button.setTitle("Navigation", for: .normal)
         button.layer.cornerRadius = 10.0
         button.tag = 1
@@ -84,7 +84,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             width: self.view.frame.width,
             height: self.view.frame.height * 0.25
         )
-        button.backgroundColor = UIColor.black
+        button.backgroundColor = UIColor.clear
         button.setTitle("Environment Reader", for: .normal)
         button.layer.cornerRadius = 10.0
         button.tag = 2
@@ -106,7 +106,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             width: self.view.frame.width,
             height: self.view.frame.height * 0.25
         )
-        button.backgroundColor = UIColor.black
+        button.backgroundColor = UIColor.clear
         button.setTitle("Text Reader", for: .normal)
         button.layer.cornerRadius = 10.0
         button.tag = 3
@@ -128,7 +128,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             width: 120,
             height: 40
         )
-        button.backgroundColor = UIColor.black
+        button.backgroundColor = UIColor.clear
         button.setTitle("Settings", for: .normal)
         button.addTarget(self, action: #selector(openSettingView), for: .touchUpInside)
 
@@ -182,7 +182,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
 //    }()
 
     @objc func onClickSwitch(sender: UISwitch) {
-//        var text: String!
+        var text: String!
 
         if sender.isOn {
 //            text = "Swipe UI"  // MARK: Marked as an annotation for possible later use -> Swiping UI
@@ -203,15 +203,15 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         self.selected = sender.tag
         if(selected == 1) {
             self.createNavigateButton.backgroundColor = .red
-            self.createEnvironmentReaderButton.backgroundColor = .black
-            self.createTextReadingButton.backgroundColor = .black
+            self.createEnvironmentReaderButton.backgroundColor = .clear
+            self.createTextReadingButton.backgroundColor = .clear
         } else if (self.selected == 2) {
-            self.createNavigateButton.backgroundColor = .black
+            self.createNavigateButton.backgroundColor = .clear
             self.createEnvironmentReaderButton.backgroundColor = .yellow
-            self.createTextReadingButton.backgroundColor = .black
+            self.createTextReadingButton.backgroundColor = .clear
         } else if (self.selected == 3) {
-            self.createNavigateButton.backgroundColor = .black
-            self.createEnvironmentReaderButton.backgroundColor = .black
+            self.createNavigateButton.backgroundColor = .clear
+            self.createEnvironmentReaderButton.backgroundColor = .clear
             self.createTextReadingButton.backgroundColor = .blue
         }
     }
