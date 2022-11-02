@@ -11,7 +11,7 @@ import Foundation
 import AVFoundation
 import Vision
 
-class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
+class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
 
     // Variable for UI changing
     var selected = 0
@@ -182,7 +182,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
 //    }()
 
     @objc func onClickSwitch(sender: UISwitch) {
-        var text: String!
+//        var text: String!  // MARK: Marked as an annotation for possible later use -> Swiping UI
 
         if sender.isOn {
 //            text = "Swipe UI"  // MARK: Marked as an annotation for possible later use -> Swiping UI
