@@ -62,7 +62,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             width: self.view.frame.width,
             height: self.view.frame.height * 0.25
         )
-        button.backgroundColor = UIColor.clear
+        button.backgroundColor = UIColor.black
         button.setTitle("Navigation", for: .normal)
         button.layer.cornerRadius = 10.0
         button.tag = 1
@@ -84,7 +84,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             width: self.view.frame.width,
             height: self.view.frame.height * 0.25
         )
-        button.backgroundColor = UIColor.clear
+        button.backgroundColor = UIColor.black
         button.setTitle("Environment Reader", for: .normal)
         button.layer.cornerRadius = 10.0
         button.tag = 2
@@ -106,7 +106,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             width: self.view.frame.width,
             height: self.view.frame.height * 0.25
         )
-        button.backgroundColor = UIColor.clear
+        button.backgroundColor = UIColor.black
         button.setTitle("Text Reader", for: .normal)
         button.layer.cornerRadius = 10.0
         button.tag = 3
@@ -128,7 +128,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             width: 120,
             height: 40
         )
-        button.backgroundColor = UIColor.clear
+        button.backgroundColor = UIColor.black
         button.setTitle("Settings", for: .normal)
         button.addTarget(self, action: #selector(openSettingView), for: .touchUpInside)
 
@@ -203,15 +203,15 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         self.selected = sender.tag
         if(selected == 1) {
             self.createNavigateButton.backgroundColor = .red
-            self.createEnvironmentReaderButton.backgroundColor = .clear
-            self.createTextReadingButton.backgroundColor = .clear
+            self.createEnvironmentReaderButton.backgroundColor = .black
+            self.createTextReadingButton.backgroundColor = .black
         } else if (self.selected == 2) {
-            self.createNavigateButton.backgroundColor = .clear
+            self.createNavigateButton.backgroundColor = .black
             self.createEnvironmentReaderButton.backgroundColor = .yellow
-            self.createTextReadingButton.backgroundColor = .clear
+            self.createTextReadingButton.backgroundColor = .black
         } else if (self.selected == 3) {
-            self.createNavigateButton.backgroundColor = .clear
-            self.createEnvironmentReaderButton.backgroundColor = .clear
+            self.createNavigateButton.backgroundColor = .black
+            self.createEnvironmentReaderButton.backgroundColor = .black
             self.createTextReadingButton.backgroundColor = .blue
         }
     }
