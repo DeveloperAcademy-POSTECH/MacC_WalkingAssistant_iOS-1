@@ -36,8 +36,6 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        overrideUserInterfaceStyle = .dark
         
         UIDevice.current.isProximityMonitoringEnabled = true
         
