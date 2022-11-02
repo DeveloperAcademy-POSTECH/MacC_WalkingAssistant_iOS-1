@@ -20,7 +20,8 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     var bufferSize: CGSize = .zero
     var rootLayer: CALayer! = nil
 
-    @IBOutlet weak private var previewView: UIView!
+//    @IBOutlet weak private var previewView: UIView!  // MARK: Storyboard component
+    private var previewView: UIView!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
