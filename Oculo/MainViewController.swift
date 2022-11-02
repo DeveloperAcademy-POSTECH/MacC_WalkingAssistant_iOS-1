@@ -11,7 +11,7 @@ import Foundation
 import AVFoundation
 import Vision
 
-class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
+class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
 
     // Variable for UI changing
     var selected = 0
@@ -20,7 +20,8 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     var bufferSize: CGSize = .zero
     var rootLayer: CALayer! = nil
 
-    @IBOutlet weak private var previewView: UIView!
+//    @IBOutlet weak private var previewView: UIView!  // MARK: Storyboard component
+    private var previewView: UIView!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -62,7 +63,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
             width: self.view.frame.width,
             height: self.view.frame.height * 0.25
         )
-        button.backgroundColor = UIColor.clear
+        button.backgroundColor = UIColor.black
         button.setTitle("Navigation", for: .normal)
         button.layer.cornerRadius = 10.0
         button.tag = 1
@@ -84,7 +85,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
             width: self.view.frame.width,
             height: self.view.frame.height * 0.25
         )
-        button.backgroundColor = UIColor.clear
+        button.backgroundColor = UIColor.black
         button.setTitle("Environment Reader", for: .normal)
         button.layer.cornerRadius = 10.0
         button.tag = 2
@@ -106,7 +107,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
             width: self.view.frame.width,
             height: self.view.frame.height * 0.25
         )
-        button.backgroundColor = UIColor.clear
+        button.backgroundColor = UIColor.black
         button.setTitle("Text Reader", for: .normal)
         button.layer.cornerRadius = 10.0
         button.tag = 3
@@ -128,7 +129,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
             width: 120,
             height: 40
         )
-        button.backgroundColor = UIColor.clear
+        button.backgroundColor = UIColor.black
         button.setTitle("Settings", for: .normal)
         button.addTarget(self, action: #selector(openSettingView), for: .touchUpInside)
 
@@ -182,7 +183,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
 //    }()
 
     @objc func onClickSwitch(sender: UISwitch) {
-        var text: String!
+//        var text: String!  // MARK: Marked as an annotation for possible later use -> Swiping UI
 
         if sender.isOn {
 //            text = "Swipe UI"  // MARK: Marked as an annotation for possible later use -> Swiping UI
@@ -203,15 +204,15 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         self.selected = sender.tag
         if(selected == 1) {
             self.createNavigateButton.backgroundColor = .red
-            self.createEnvironmentReaderButton.backgroundColor = .clear
-            self.createTextReadingButton.backgroundColor = .clear
+            self.createEnvironmentReaderButton.backgroundColor = .black
+            self.createTextReadingButton.backgroundColor = .black
         } else if (self.selected == 2) {
-            self.createNavigateButton.backgroundColor = .clear
+            self.createNavigateButton.backgroundColor = .black
             self.createEnvironmentReaderButton.backgroundColor = .yellow
-            self.createTextReadingButton.backgroundColor = .clear
+            self.createTextReadingButton.backgroundColor = .black
         } else if (self.selected == 3) {
-            self.createNavigateButton.backgroundColor = .clear
-            self.createEnvironmentReaderButton.backgroundColor = .clear
+            self.createNavigateButton.backgroundColor = .black
+            self.createEnvironmentReaderButton.backgroundColor = .black
             self.createTextReadingButton.backgroundColor = .blue
         }
     }
