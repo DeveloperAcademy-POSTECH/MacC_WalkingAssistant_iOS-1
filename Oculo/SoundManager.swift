@@ -26,7 +26,7 @@ class SoundManager {
 
         self.environmentNode.listenerPosition = AVAudio3DPoint(x: 0, y: 0, z: 0)  // 사용자의 위치를 0,0,0 으로 지정
         self.audioEngine.attach(self.environmentNode)  // AvAudioEngine 에 environmentNode 연결
-        let stereoFormat =  AVAudioFormat(standardFormatWithSampleRate: self.audioEngine.outputNode.outputFormat(forBus: 0).sampleRate, channels: 2)
+        let stereoFormat = AVAudioFormat(standardFormatWithSampleRate: self.audioEngine.outputNode.outputFormat(forBus: 0).sampleRate, channels: 2)
         //2채널 스테레오 포맷 생성
 
         self.audioEngine.connect(self.environmentNode, to: self.audioEngine.outputNode, format: stereoFormat)  // environmentNode 을 outputNode에 연결
