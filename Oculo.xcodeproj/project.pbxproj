@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		420E3D352913B85000E16D16 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420E3D342913B85000E16D16 /* SoundManager.swift */; };
+		420E3D382913B85600E16D16 /* defaultBeep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 420E3D372913B85600E16D16 /* defaultBeep.mp3 */; };
 		4296A68928F7EAEB00E769AE /* HealthkitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4296A68828F7EAEB00E769AE /* HealthkitManager.swift */; };
 		4DB71CAA28EF7D4900A0E21A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB71CA928EF7D4900A0E21A /* AppDelegate.swift */; };
 		4DB71CAC28EF7D4900A0E21A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB71CAB28EF7D4900A0E21A /* SceneDelegate.swift */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		420E3D342913B85000E16D16 /* SoundManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		420E3D372913B85600E16D16 /* defaultBeep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = defaultBeep.mp3; sourceTree = "<group>"; };
 		4296A68828F7EAEB00E769AE /* HealthkitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthkitManager.swift; sourceTree = "<group>"; };
 		4296A68A28F7EB2200E769AE /* Oculo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Oculo.entitlements; sourceTree = "<group>"; };
 		4DB71CA628EF7D4900A0E21A /* Oculo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Oculo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -38,6 +42,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		420E3D362913B85600E16D16 /* sources */ = {
+			isa = PBXGroup;
+			children = (
+				420E3D372913B85600E16D16 /* defaultBeep.mp3 */,
+			);
+			path = sources;
+			sourceTree = "<group>";
+		};
 		4DB71C9D28EF7D4900A0E21A = {
 			isa = PBXGroup;
 			children = (
@@ -63,6 +75,8 @@
 				4DB71CAD28EF7D4900A0E21A /* MainViewController.swift */,
 				FE1997F0290A77C2001DA2CF /* SettingViewController.swift */,
 				4296A68828F7EAEB00E769AE /* HealthkitManager.swift */,
+				420E3D342913B85000E16D16 /* SoundManager.swift */,
+				420E3D362913B85600E16D16 /* sources */,
 				4DB71CB228EF7D4A00A0E21A /* Assets.xcassets */,
 				4DB71CB728EF7D4A00A0E21A /* Info.plist */,
 			);
@@ -128,6 +142,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				420E3D382913B85600E16D16 /* defaultBeep.mp3 in Resources */,
 				4DB71CB328EF7D4A00A0E21A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -144,6 +159,7 @@
 				4DB71CAA28EF7D4900A0E21A /* AppDelegate.swift in Sources */,
 				4296A68928F7EAEB00E769AE /* HealthkitManager.swift in Sources */,
 				4DB71CAC28EF7D4900A0E21A /* SceneDelegate.swift in Sources */,
+				420E3D352913B85000E16D16 /* SoundManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
