@@ -10,6 +10,9 @@
 		420E3D352913B85000E16D16 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420E3D342913B85000E16D16 /* SoundManager.swift */; };
 		420E3D382913B85600E16D16 /* defaultBeep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 420E3D372913B85600E16D16 /* defaultBeep.mp3 */; };
 		4296A68928F7EAEB00E769AE /* HealthkitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4296A68828F7EAEB00E769AE /* HealthkitManager.swift */; };
+		4D41E0692913C2B500A05726 /* ObjectRecognitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D41E0682913C2B500A05726 /* ObjectRecognitionViewController.swift */; };
+		4D41E06B2913C30800A05726 /* VisionObjectRecognitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D41E06A2913C30800A05726 /* VisionObjectRecognitionViewController.swift */; };
+		4D41E06E2913C49200A05726 /* yolov7tiny.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4D41E06D2913C49100A05726 /* yolov7tiny.mlmodel */; };
 		4DB71CAA28EF7D4900A0E21A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB71CA928EF7D4900A0E21A /* AppDelegate.swift */; };
 		4DB71CAC28EF7D4900A0E21A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB71CAB28EF7D4900A0E21A /* SceneDelegate.swift */; };
 		4DB71CAE28EF7D4900A0E21A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB71CAD28EF7D4900A0E21A /* MainViewController.swift */; };
@@ -23,6 +26,9 @@
 		420E3D372913B85600E16D16 /* defaultBeep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = defaultBeep.mp3; sourceTree = "<group>"; };
 		4296A68828F7EAEB00E769AE /* HealthkitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthkitManager.swift; sourceTree = "<group>"; };
 		4296A68A28F7EB2200E769AE /* Oculo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Oculo.entitlements; sourceTree = "<group>"; };
+		4D41E0682913C2B500A05726 /* ObjectRecognitionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectRecognitionViewController.swift; sourceTree = "<group>"; };
+		4D41E06A2913C30800A05726 /* VisionObjectRecognitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionObjectRecognitionViewController.swift; sourceTree = "<group>"; };
+		4D41E06D2913C49100A05726 /* yolov7tiny.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = yolov7tiny.mlmodel; sourceTree = "<group>"; };
 		4DB71CA628EF7D4900A0E21A /* Oculo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Oculo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DB71CA928EF7D4900A0E21A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4DB71CAB28EF7D4900A0E21A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -52,6 +58,14 @@
 			path = sources;
 			sourceTree = "<group>";
 		};
+		4D41E06C2913C34A00A05726 /* AIModels */ = {
+			isa = PBXGroup;
+			children = (
+				4D41E06D2913C49100A05726 /* yolov7tiny.mlmodel */,
+			);
+			path = AIModels;
+			sourceTree = "<group>";
+		};
 		4DB71C9D28EF7D4900A0E21A = {
 			isa = PBXGroup;
 			children = (
@@ -71,15 +85,18 @@
 		4DB71CA828EF7D4900A0E21A /* Oculo */ = {
 			isa = PBXGroup;
 			children = (
+				4D41E06C2913C34A00A05726 /* AIModels */,
+				420E3D362913B85600E16D16 /* sources */,
 				4296A68A28F7EB2200E769AE /* Oculo.entitlements */,
 				FE1997F4291A1CDD001DA2CF /* TextReaderViewController.swift */,
 				4DB71CA928EF7D4900A0E21A /* AppDelegate.swift */,
 				4DB71CAB28EF7D4900A0E21A /* SceneDelegate.swift */,
 				4DB71CAD28EF7D4900A0E21A /* MainViewController.swift */,
+				4D41E0682913C2B500A05726 /* ObjectRecognitionViewController.swift */,
+				4D41E06A2913C30800A05726 /* VisionObjectRecognitionViewController.swift */,
 				FE1997F0290A77C2001DA2CF /* SettingViewController.swift */,
 				4296A68828F7EAEB00E769AE /* HealthkitManager.swift */,
 				420E3D342913B85000E16D16 /* SoundManager.swift */,
-				420E3D362913B85600E16D16 /* sources */,
 				4DB71CB228EF7D4A00A0E21A /* Assets.xcassets */,
 				4DB71CB728EF7D4A00A0E21A /* Info.plist */,
 			);
@@ -160,6 +177,7 @@
 				FE1997F1290A77C2001DA2CF /* SettingViewController.swift in Sources */,
 				4DB71CAE28EF7D4900A0E21A /* MainViewController.swift in Sources */,
 				4DB71CAA28EF7D4900A0E21A /* AppDelegate.swift in Sources */,
+				4D41E06E2913C49200A05726 /* yolov7tiny.mlmodel in Sources */,
 				4296A68928F7EAEB00E769AE /* HealthkitManager.swift in Sources */,
 				FE1997F5291A1CDD001DA2CF /* TextReaderViewController.swift in Sources */,
 				4DB71CAC28EF7D4900A0E21A /* SceneDelegate.swift in Sources */,
