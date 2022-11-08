@@ -15,12 +15,18 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
 
     // Variable for UI changing
     var selected = 0
+    
+    // Variable for UI Button
+    lazy var navigationButton = UIButton()
+    lazy var environmentReaderButton = UIButton()
+    lazy var textReaderButton = UIButton()
+    lazy var settingButton = UIButton()
 
     // Variable for object detection camera view
     var bufferSize: CGSize = .zero
     var rootLayer: CALayer! = nil
 
-//    @IBOutlet weak private var previewView: UIView!  // MARK: Storyboard component
+    // @IBOutlet weak private var previewView: UIView!  // MARK: Storyboard component
     private var previewView: UIView!
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,176 +48,112 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         if UIDevice.current.isProximityMonitoringEnabled {
             NotificationCenter.default.addObserver(self, selector: #selector(proximityStateDidChange), name: UIDevice.proximityStateDidChangeNotification, object: nil)
         }
-
-        // MARK: Marked as an annotation for possible later use -> Swiping UI
-//        self.view.addSubview(self.controlSwitch)
-//        self.view.addSubview(self.label)
-
-        self.view.addSubview(self.createNavigateButton)
-        self.view.addSubview(self.createEnvironmentReaderButton)
-        self.view.addSubview(self.createTextReadingButton)
-        self.view.addSubview(self.createSettingButton)
+        
+        self.view.addSubview(navigationButton)
+        self.view.addSubview(environmentReaderButton)
+        self.view.addSubview(textReaderButton)
+        self.view.addSubview(settingButton)
+        
+        createNavigateButton()
+        createEnvironmentReaderButton()
+        createTextReaderButton()
+        createSettingButton()
+        
+        addConstraints()
+    }
+    
+    func createNavigateButton() {
+        navigationButton.backgroundColor = UIColor.black
+        navigationButton.setTitle("Navigation", for: .normal)
+        navigationButton.layer.cornerRadius = 10.0
+        navigationButton.tag = 1
+        navigationButton.addTarget(self, action: #selector(onTouchButton), for: .touchUpInside)
+        navigationButton.layer.cornerRadius = 10.0
+        navigationButton.layer.borderWidth = 10
+        navigationButton.layer.borderColor = UIColor.red.cgColor
     }
 
-    lazy var createNavigateButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.frame = CGRect(
-            x: 0,
-            y: self.view.frame.height * 0.1,
-            width: self.view.frame.width,
-            height: self.view.frame.height * 0.25
-        )
-        button.backgroundColor = UIColor.black
-        button.setTitle("Navigation", for: .normal)
-        button.layer.cornerRadius = 10.0
-        button.tag = 1
-        button.addTarget(self, action: #selector(onTouchButton), for: .touchUpInside)
-        button.layer.cornerRadius = 10.0
-        button.layer.borderWidth = 10
-        button.layer.borderColor = UIColor.red.cgColor
+    func createEnvironmentReaderButton() {
+        environmentReaderButton.backgroundColor = UIColor.black
+        environmentReaderButton.setTitle("Environment Reader", for: .normal)
+        environmentReaderButton.layer.cornerRadius = 10.0
+        environmentReaderButton.tag = 2
+        environmentReaderButton.addTarget(self, action: #selector(onTouchButton), for: .touchUpInside)
+        environmentReaderButton.layer.cornerRadius = 10.0
+        environmentReaderButton.layer.borderWidth = 10
+        environmentReaderButton.layer.borderColor = UIColor.yellow.cgColor
+    }
 
-        self.view.addSubview(button)
-
-        return button
-    }()
-
-    lazy var createEnvironmentReaderButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.frame = CGRect(
-            x: 0,
-            y: self.view.frame.height * 0.35 + 20,
-            width: self.view.frame.width,
-            height: self.view.frame.height * 0.25
-        )
-        button.backgroundColor = UIColor.black
-        button.setTitle("Environment Reader", for: .normal)
-        button.layer.cornerRadius = 10.0
-        button.tag = 2
-        button.addTarget(self, action: #selector(onTouchButton), for: .touchUpInside)
-        button.layer.cornerRadius = 10.0
-        button.layer.borderWidth = 10
-        button.layer.borderColor = UIColor.yellow.cgColor
-
-        self.view.addSubview(button)
-
-        return button
-    }()
-
-    lazy var createTextReadingButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.frame = CGRect(
-            x: 0,
-            y: self.view.frame.height * 0.6 + 40,
-            width: self.view.frame.width,
-            height: self.view.frame.height * 0.25
-        )
-        button.backgroundColor = UIColor.black
-        button.setTitle("Text Reader", for: .normal)
-        button.layer.cornerRadius = 10.0
-        button.tag = 3
-        button.addTarget(self, action: #selector(onTouchButton), for: .touchUpInside)
-        button.layer.cornerRadius = 10.0
-        button.layer.borderWidth = 10
-        button.layer.borderColor = UIColor.blue.cgColor
-
-        self.view.addSubview(button)
-
-        return button
-    }()
+    func createTextReaderButton() {
+        textReaderButton.backgroundColor = UIColor.black
+        textReaderButton.setTitle("Text Reader", for: .normal)
+        textReaderButton.layer.cornerRadius = 10.0
+        textReaderButton.tag = 3
+        textReaderButton.addTarget(self, action: #selector(onTouchButton), for: .touchUpInside)
+        textReaderButton.layer.cornerRadius = 10.0
+        textReaderButton.layer.borderWidth = 10
+        textReaderButton.layer.borderColor = UIColor.blue.cgColor
+    }
     
-    lazy var createSettingButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.frame = CGRect(
-            x: self.view.frame.width - 120,
-            y: self.view.frame.height - 80,
-            width: 120,
-            height: 40
-        )
-        button.backgroundColor = UIColor.black
-        button.setTitle("Settings", for: .normal)
-        button.addTarget(self, action: #selector(openSettingView), for: .touchUpInside)
-
-        self.view.addSubview(button)
-
-        return button
-    }()
-
-    // MARK: marked as an annotation for possible later use -> Swiping UI
-//    lazy var label: UILabel = {
-//        let label = UILabel(frame: CGRect(
-//            x: 0,
-//            y: 0,
-//            width: self.view.frame.width,
-//            height: self.view.frame.height/17
-//        ))
-//        label.backgroundColor = UIColor.black
-//        label.layer.masksToBounds = true
-//        label.textColor = UIColor.white
-//        label.textAlignment = NSTextAlignment.center
-//        label.layer.position = CGPoint(
-//            x: self.view.bounds.width/2,
-//            y: self.view.bounds.height/14
-//        )
-//        label.text = "Button UI"
-//
-//        return label
-//    }()
-
-    // MARK: Marked as an annotation for possible later use -> Swiping UI
-//    lazy var controlSwitch: UISwitch = {
-//        // Create a Switch.
-//        let UIToggleSwitch: UISwitch = UISwitch()
-//        UIToggleSwitch.layer.position = CGPoint(
-//            x: self.view.frame.width/2,
-//            y: self.view.frame.height/1.07
-//        )
-//
-//        // Display the border of switch.
-//        UIToggleSwitch.tintColor = UIColor.orange
-//
-//        // Set Switch to On.
-//        UIToggleSwitch.isOn = false
-//
-//        // Set the event to be called when switching On / Off of Switch.
-//        UIToggleSwitch.addTarget(self,
-//                action: #selector(onClickSwitch(sender:)),
-//                for: UIControl.Event.valueChanged)
-//
-//        return UIToggleSwitch
-//    }()
-
-    @objc func onClickSwitch(sender: UISwitch) {
-//        var text: String!  // MARK: Marked as an annotation for possible later use -> Swiping UI
-
-        if sender.isOn {
-//            text = "Swipe UI"  // MARK: Marked as an annotation for possible later use -> Swiping UI
-            createNavigateButton.removeFromSuperview()
-            createTextReadingButton.removeFromSuperview()
-            createEnvironmentReaderButton.removeFromSuperview()
-        } else {
-//            text = "Button UI"  // MARK: Marked as an annotation for possible later use -> Swiping UI
-            self.view.addSubview(self.createNavigateButton)
-            self.view.addSubview(self.createTextReadingButton)
-            self.view.addSubview(self.createEnvironmentReaderButton)
-        }
-
-//        self.label.text = text  // MARK: Marked as an annotation for possible later use -> Swiping UI
+    func createSettingButton() {
+        settingButton.backgroundColor = UIColor.black
+        settingButton.setTitle("Settings", for: .normal)
+        settingButton.addTarget(self, action: #selector(openSettingView), for: .touchUpInside)
+    }
+    
+    func addConstraints() {
+        navigationButton.translatesAutoresizingMaskIntoConstraints = false
+        environmentReaderButton.translatesAutoresizingMaskIntoConstraints = false
+        textReaderButton.translatesAutoresizingMaskIntoConstraints = false
+        settingButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        let navigationButtonConstraints = [
+            navigationButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            navigationButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            navigationButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            navigationButton.bottomAnchor.constraint(equalTo: navigationButton.topAnchor, constant: self.view.frame.height * 0.25)
+        ]
+        
+        let environMentReaderButtonConstraints = [
+            environmentReaderButton.topAnchor.constraint(equalTo: navigationButton.bottomAnchor, constant: 16),
+            environmentReaderButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            environmentReaderButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            environmentReaderButton.bottomAnchor.constraint(equalTo: environmentReaderButton.topAnchor, constant: self.view.frame.height * 0.25)
+        ]
+        
+        let textReaderButtonConstraints = [
+            textReaderButton.topAnchor.constraint(equalTo: environmentReaderButton.bottomAnchor, constant: 16),
+            textReaderButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            textReaderButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            textReaderButton.bottomAnchor.constraint(equalTo: textReaderButton.topAnchor, constant: self.view.frame.height * 0.25)
+        ]
+        
+        let settingButtonConstraints = [
+            settingButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            settingButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8)
+            
+        ]
+        
+        NSLayoutConstraint.activate(navigationButtonConstraints)
+        NSLayoutConstraint.activate(environMentReaderButtonConstraints)
+        NSLayoutConstraint.activate(textReaderButtonConstraints)
+        NSLayoutConstraint.activate(settingButtonConstraints)
     }
     
     @objc func onTouchButton(_ sender: UIButton) {
         self.selected = sender.tag
         if(selected == 1) {
-            self.createNavigateButton.backgroundColor = .red
-            self.createEnvironmentReaderButton.backgroundColor = .black
-            self.createTextReadingButton.backgroundColor = .black
+            self.navigationButton.backgroundColor = .red
+            self.environmentReaderButton.backgroundColor = .black
+            self.textReaderButton.backgroundColor = .black
         } else if (self.selected == 2) {
-            self.createNavigateButton.backgroundColor = .black
-            self.createEnvironmentReaderButton.backgroundColor = .yellow
-            self.createTextReadingButton.backgroundColor = .black
+            self.navigationButton.backgroundColor = .black
+            self.environmentReaderButton.backgroundColor = .yellow
+            self.textReaderButton.backgroundColor = .black
         } else if (self.selected == 3) {
-            self.createNavigateButton.backgroundColor = .black
-            self.createEnvironmentReaderButton.backgroundColor = .black
-            self.createTextReadingButton.backgroundColor = .blue
+            self.navigationButton.backgroundColor = .black
+            self.environmentReaderButton.backgroundColor = .black
+            self.textReaderButton.backgroundColor = .blue
         }
     }
     
