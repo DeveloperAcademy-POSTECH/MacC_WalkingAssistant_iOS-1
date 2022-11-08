@@ -154,6 +154,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             self.navigationButton.backgroundColor = .black
             self.environmentReaderButton.backgroundColor = .black
             self.textReaderButton.backgroundColor = .blue
+            present(TextReaderViewController(), animated: true)
         }
     }
     
