@@ -15,6 +15,7 @@
 		4DB71CAE28EF7D4900A0E21A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB71CAD28EF7D4900A0E21A /* MainViewController.swift */; };
 		4DB71CB328EF7D4A00A0E21A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DB71CB228EF7D4A00A0E21A /* Assets.xcassets */; };
 		FE1997F1290A77C2001DA2CF /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1997F0290A77C2001DA2CF /* SettingViewController.swift */; };
+		FE1997F5291A1CDD001DA2CF /* TextReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1997F4291A1CDD001DA2CF /* TextReaderViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		4DB71CB228EF7D4A00A0E21A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4DB71CB728EF7D4A00A0E21A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FE1997F0290A77C2001DA2CF /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		FE1997F4291A1CDD001DA2CF /* TextReaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextReaderViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				4296A68A28F7EB2200E769AE /* Oculo.entitlements */,
+				FE1997F4291A1CDD001DA2CF /* TextReaderViewController.swift */,
 				4DB71CA928EF7D4900A0E21A /* AppDelegate.swift */,
 				4DB71CAB28EF7D4900A0E21A /* SceneDelegate.swift */,
 				4DB71CAD28EF7D4900A0E21A /* MainViewController.swift */,
@@ -158,6 +161,7 @@
 				4DB71CAE28EF7D4900A0E21A /* MainViewController.swift in Sources */,
 				4DB71CAA28EF7D4900A0E21A /* AppDelegate.swift in Sources */,
 				4296A68928F7EAEB00E769AE /* HealthkitManager.swift in Sources */,
+				FE1997F5291A1CDD001DA2CF /* TextReaderViewController.swift in Sources */,
 				4DB71CAC28EF7D4900A0E21A /* SceneDelegate.swift in Sources */,
 				420E3D352913B85000E16D16 /* SoundManager.swift in Sources */,
 			);
