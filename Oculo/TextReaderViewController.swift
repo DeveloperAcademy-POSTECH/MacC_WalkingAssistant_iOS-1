@@ -11,12 +11,15 @@ import RealityKit
 import VisionKit
 import AVFoundation
 
-
+// TTS 기능의 소리 제어
 let synthesizer = AVSpeechSynthesizer()
 
+// String을 입력 받아 TTS 수행
 func speak(_ string: String) {
     let utterance = AVSpeechUtterance(string: string)
     utterance.voice = AVSpeechSynthesisVoice(language: "ko-KR")
+    
+    // synthesizer에서 현재 말하는 중인 경우 즉시 중단한다. (소리가 겹쳐서 들리는 현상 방지)
     if (synthesizer.isSpeaking) {
         synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
     }
@@ -25,10 +28,14 @@ func speak(_ string: String) {
 
 class TextReaderViewController: UIViewController, ImageAnalysisInteractionDelegate, UIGestureRecognizerDelegate {
     
+    // 카메라 역할을 수행할 ARView
     var arView = ARView()
+    // 실제 사용시에 카메라 화면을 가리기 위한 View
     var hideView = UIView()
+    // Test Flight에서 실제 사용 방법을 안내하는 Label
     var informTextLabel = UILabel()
     
+    // LiveText의 구성 요소
     let analyzer = ImageAnalyzer()
     let interaction = ImageAnalysisInteraction()
 
@@ -36,7 +43,7 @@ class TextReaderViewController: UIViewController, ImageAnalysisInteractionDelega
         super.viewDidLoad()
         
         self.view.addSubview(arView)
-        self.view.insertSubview(hideView, belowSubview: arView)
+        self.view.insertSubview(hideView, belowSubview: arView) // Test Flight용 앱에서는 화면을 보여줘야 하기 때문에 가리는 뷰를 ARView 뒤로 숨깁니다.
         self.view.insertSubview(informTextLabel, aboveSubview: arView)
         
         createHideView()
@@ -53,10 +60,12 @@ class TextReaderViewController: UIViewController, ImageAnalysisInteractionDelega
         arView.session.pause()
     }
     
+    // hideView의 배경색 지정
     func createHideView() {
         hideView.backgroundColor = .black
     }
     
+    // 안내 문구 label 생성
     func createInformTextLabel() {
         informTextLabel.text = """
         터치: 글자 읽기
@@ -67,6 +76,7 @@ class TextReaderViewController: UIViewController, ImageAnalysisInteractionDelega
         informTextLabel.numberOfLines = 0
     }
     
+    // 요소별 Constraints 추가
     func addConstraints() {
         arView.translatesAutoresizingMaskIntoConstraints = false
         hideView.translatesAutoresizingMaskIntoConstraints = false
@@ -96,12 +106,14 @@ class TextReaderViewController: UIViewController, ImageAnalysisInteractionDelega
         NSLayoutConstraint.activate(informTextLabelConstraints)
     }
     
+    // 화면을 탭할 경우 수행할 동작 추가
     func addGestures() {
-        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(analyzeCurrentImage))
+        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(analyzeCurrentImageAndSpeak))
         self.view.addGestureRecognizer(tapGesture)
     }
     
-    @objc func analyzeCurrentImage() {
+    // ARView에 그려진 영상을 LiveText로 분석 후 TTS 수행
+    @objc func analyzeCurrentImageAndSpeak() {
         if let imgBuffer = self.arView.session.currentFrame?.capturedImage {
             let ciimg = CIImage(cvImageBuffer: imgBuffer)
             let image = UIImage(ciImage: ciimg)
