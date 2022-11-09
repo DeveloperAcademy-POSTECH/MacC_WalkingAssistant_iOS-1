@@ -98,8 +98,6 @@ class TextReaderViewController: UIViewController, ImageAnalysisInteractionDelega
     
     func addGestures() {
         let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(analyzeCurrentImage))
-        let swipeGesture: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(deleteThisView))
-        swipeGesture.numberOfTouchesRequired = 3
         self.view.addGestureRecognizer(tapGesture)
     }
     
@@ -133,9 +131,4 @@ class TextReaderViewController: UIViewController, ImageAnalysisInteractionDelega
             }
         }
     }
-    
-    @objc func deleteThisView() {
-        self.dismiss(animated: true)
-    }
-
 }
