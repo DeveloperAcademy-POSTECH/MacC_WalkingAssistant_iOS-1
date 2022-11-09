@@ -20,8 +20,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = MainViewController() // 자신의 시작 ViewController
+        let mainViewController = MainViewController()
+
+        window.rootViewController = mainViewController // 자신의 시작 ViewController
         window.makeKeyAndVisible()
+
         self.window = window
     }
 
