@@ -63,7 +63,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
 
     func createNavigateButton() {
         navigationButton.backgroundColor = UIColor.black
-        navigationButton.setTitle("Navigation", for: .normal)
+        navigationButton.setTitle(Language(rawValue: "Navigation")?.localized, for: .normal)
         navigationButton.layer.cornerRadius = 10.0
         navigationButton.tag = 1
         navigationButton.addTarget(self, action: #selector(onTouchButton), for: .touchUpInside)
@@ -74,7 +74,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
 
     func createEnvironmentReaderButton() {
         environmentReaderButton.backgroundColor = UIColor.black
-        environmentReaderButton.setTitle("Environment Reader", for: .normal)
+        environmentReaderButton.setTitle(Language(rawValue: "Environment Reader")?.localized, for: .normal)
         environmentReaderButton.layer.cornerRadius = 10.0
         environmentReaderButton.tag = 2
         environmentReaderButton.addTarget(self, action: #selector(onTouchButton), for: .touchUpInside)
@@ -85,7 +85,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
 
     func createTextReaderButton() {
         textReaderButton.backgroundColor = UIColor.black
-        textReaderButton.setTitle("Text Reader", for: .normal)
+        textReaderButton.setTitle(Language(rawValue: "Text Reader")?.localized, for: .normal)
         textReaderButton.layer.cornerRadius = 10.0
         textReaderButton.tag = 3
         textReaderButton.addTarget(self, action: #selector(onTouchButton), for: .touchUpInside)
@@ -96,7 +96,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
 
     func createSettingButton() {
         settingButton.backgroundColor = UIColor.black
-        settingButton.setTitle("Settings", for: .normal)
+        settingButton.setTitle(Language(rawValue: "Settings")?.localized, for: .normal)
         settingButton.addTarget(self, action: #selector(openSettingView), for: .touchUpInside)
     }
 

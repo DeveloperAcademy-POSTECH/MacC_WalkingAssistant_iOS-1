@@ -1,0 +1,23 @@
+/* 
+  Localizable.strings
+  Oculo
+
+  Created by 최윤석 on 2022/11/10.
+  Copyright © 2022 Intelligent ATLAS. All rights reserved.
+*/
+
+
+// Main View
+"Navigation" = "Navigation";
+"Environment Reader" = "Environment Reader";
+"Text Reader" = "Text Reader";
+"Settings" = "Settings";
+
+// Setting View
+"Membership" = "Member ship";
+"Agreement on sending recorded video" = "Agreement on sending recorded video";
+
+"Terms of arrangement" = "Terms of arrangement";
+"Privacy" = "Privacy";
+"License" = "License";
+"Contact Us" = "Contact Us";

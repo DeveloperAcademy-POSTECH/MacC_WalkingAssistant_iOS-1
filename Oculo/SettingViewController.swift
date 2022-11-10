@@ -15,7 +15,7 @@ class SettingViewController: UIViewController {
     lazy var footerLableView = UILabel()
     lazy var logoImageStackView = UIStackView()
 
-    let data = [["멤버십", "보행정보 제공 동의"], ["이용 약관 (Terms of arrangement)", "개인정보 보호 (Privacy)", "사용권 조항 (License)", "고객센터 (Contact Us)"]]
+    let data = [["Membership", "Agreement on sending recorded video"], ["Terms of arrangement", "Privacy", "License", "Contact Us"]]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,7 +75,7 @@ extension SettingViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: .none)
-        cell.textLabel?.text = data[indexPath.section][indexPath.row]
+        cell.textLabel?.text = Language(rawValue: data[indexPath.section][indexPath.row])?.localized
         return cell
     }
 }
