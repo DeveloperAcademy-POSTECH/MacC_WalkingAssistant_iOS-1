@@ -130,7 +130,7 @@ class HealthKitManager {
     }
 
     /// 건강 앱의 보폭 데이터를 받아오는 메소드
-    public func retrieveWalkingStepLength(period : Period, completion : @escaping (Double) -> Void) {
+    public func retrieveWalkingStepLength(period: Period, completion: @escaping (Double) -> Void) {
 
         /// 보폭 데이터를 받아올 것이라는 타입 지정
         guard let walkingStepLengthType = HKSampleType.quantityType(forIdentifier: .walkingStepLength) else { return }
