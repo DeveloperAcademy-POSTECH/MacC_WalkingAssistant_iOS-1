@@ -2,7 +2,7 @@
 //  UIImage_CVPixelBufferTool.swift
 //  Oculo
 //
-//  Created by raymond on 2022/11/08.
+//  Created by Kim, Raymond on 2022/11/08.
 //  Copyright © 2022 IntelligentATLAS. All rights reserved.
 //
 
@@ -11,7 +11,7 @@ import UIKit
 extension UIImage {
     func pixelBufferFromImage() -> CVPixelBuffer {
         let ciimage = CIImage(image: self)
-        //let cgimage = convertCIImageToCGImage(inputImage: ciimage!)
+        // let cgimage = convertCIImageToCGImage(inputImage: ciimage!)
         let tmpcontext = CIContext(options: nil)
         let cgimage =  tmpcontext.createCGImage(ciimage!, from: ciimage!.extent)
 
@@ -29,8 +29,8 @@ extension UIImage {
         let width = cgimage!.width
         let height = cgimage!.height
 
-        var pxbuffer: CVPixelBuffer?
-        // if pxbuffer = nil, you will get status = -6661
+        var pxbuffer: CVPixelBuffer?  /// pxbuffer = nil인 경우, status = -6661가 된다.
+
         var status = CVPixelBufferCreate(kCFAllocatorDefault, width, height,
                                          kCVPixelFormatType_32BGRA, options, &pxbuffer)
         status = CVPixelBufferLockBaseAddress(pxbuffer!, CVPixelBufferLockFlags(rawValue: 0));
@@ -48,8 +48,8 @@ extension UIImage {
                                 space: rgbColorSpace,
                                 bitmapInfo: CGImageAlphaInfo.premultipliedFirst.rawValue | CGBitmapInfo.byteOrder32Little.rawValue);
         context?.concatenate(CGAffineTransform(rotationAngle: 0))
-        context?.concatenate(__CGAffineTransformMake( 1, 0, 0, -1, 0, CGFloat(height) )) //Flip Vertical
-//        context?.concatenate(__CGAffineTransformMake( -1.0, 0.0, 0.0, 1.0, CGFloat(width), 0.0)) //Flip Horizontal
+        context?.concatenate(__CGAffineTransformMake( 1, 0, 0, -1, 0, CGFloat(height) )) /// Flip Vertical
+//        context?.concatenate(__CGAffineTransformMake( -1.0, 0.0, 0.0, 1.0, CGFloat(width), 0.0)) /// Flip Horizontal
 
 
         context?.draw(cgimage!, in: CGRect(x:0, y:0, width:CGFloat(width), height:CGFloat(height)));

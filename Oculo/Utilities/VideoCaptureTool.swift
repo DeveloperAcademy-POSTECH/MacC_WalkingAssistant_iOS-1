@@ -2,7 +2,7 @@
 //  VideoCaptureTool.swift
 //  Oculo
 //
-//  Created by raymond on 2022/11/04.
+//  Created by Kim, Raymond on 2022/11/04.
 //  Copyright © 2022 IntelligentATLAS. All rights reserved.
 //
 
@@ -95,7 +95,7 @@ public class VideoCapture: NSObject {
 
 extension VideoCapture: AVCaptureVideoDataOutputSampleBufferDelegate {
     public func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        // 디바이스 캡쳐의 FPS를 낮추면 뚝뚝 끊겨 보이므로 일단 최고 FPS로 캡쳐하지만 덷리게이트 패턴 호출은 설정한 프레임 레이트에 맞춰 이루어짐
+        /// 디바이스 캡쳐의 FPS를 낮추면 뚝뚝 끊겨 보이므로 일단 최고 FPS로 캡쳐하지만 덷리게이트 패턴 호출은 설정한 프레임 레이트에 맞춰 이루어짐
         let timestamp = CMSampleBufferGetPresentationTimeStamp(sampleBuffer)
         let deltaTime = timestamp - lastTimestamp
 

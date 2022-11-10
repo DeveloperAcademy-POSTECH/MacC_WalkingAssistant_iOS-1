@@ -15,15 +15,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        // In case of iOS version >= 13.0
+        /// In case of iOS version >= 13.0
         if #available(iOS 13.0, *) {
             return true
         }
 
-        // In case of iOS version < 13.0
+        /// In case of iOS version < 13.0
         window = UIWindow()
         window?.makeKeyAndVisible()
-        window?.rootViewController = MainViewController()  // 최초 뷰 컨트롤러
+        window?.rootViewController = MainViewController()  /// 최초 뷰 컨트롤러
 
         // MARK: Marked as an annotation for possible later use -> Swiping UI
 //        let layout = UICollectionViewFlowLayout()
