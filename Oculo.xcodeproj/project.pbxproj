@@ -10,6 +10,7 @@
 		420E3D352913B85000E16D16 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420E3D342913B85000E16D16 /* SoundManager.swift */; };
 		420E3D382913B85600E16D16 /* defaultBeep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 420E3D372913B85600E16D16 /* defaultBeep.mp3 */; };
 		4296A68928F7EAEB00E769AE /* HealthkitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4296A68828F7EAEB00E769AE /* HealthkitManager.swift */; };
+		4D4006C1291C83D70084450B /* AreaRateChangeTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4006C0291C83D70084450B /* AreaRateChangeTracker.swift */; };
 		4D5D87EB291BB98B0024C16D /* MeasurementsTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5D87E8291BB98B0024C16D /* MeasurementsTool.swift */; };
 		4D5D87EC291BB98B0024C16D /* VideoCaptureTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5D87E9291BB98B0024C16D /* VideoCaptureTool.swift */; };
 		4D5D87ED291BB98B0024C16D /* UIImage_CVPixelBufferTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5D87EA291BB98B0024C16D /* UIImage_CVPixelBufferTool.swift */; };
@@ -30,6 +31,7 @@
 		420E3D372913B85600E16D16 /* defaultBeep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = defaultBeep.mp3; sourceTree = "<group>"; };
 		4296A68828F7EAEB00E769AE /* HealthkitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthkitManager.swift; sourceTree = "<group>"; };
 		4296A68A28F7EB2200E769AE /* Oculo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Oculo.entitlements; sourceTree = "<group>"; };
+		4D4006C0291C83D70084450B /* AreaRateChangeTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaRateChangeTracker.swift; sourceTree = "<group>"; };
 		4D5D87E8291BB98B0024C16D /* MeasurementsTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementsTool.swift; sourceTree = "<group>"; };
 		4D5D87E9291BB98B0024C16D /* VideoCaptureTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCaptureTool.swift; sourceTree = "<group>"; };
 		4D5D87EA291BB98B0024C16D /* UIImage_CVPixelBufferTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage_CVPixelBufferTool.swift; sourceTree = "<group>"; };
@@ -58,12 +60,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		420E3D362913B85600E16D16 /* sources */ = {
+		420E3D362913B85600E16D16 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				420E3D372913B85600E16D16 /* defaultBeep.mp3 */,
 			);
-			path = sources;
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		4D41E06C2913C34A00A05726 /* AIModels */ = {
@@ -80,6 +82,7 @@
 				4D5D87E8291BB98B0024C16D /* MeasurementsTool.swift */,
 				4D5D87EA291BB98B0024C16D /* UIImage_CVPixelBufferTool.swift */,
 				4D5D87E9291BB98B0024C16D /* VideoCaptureTool.swift */,
+				4D4006C0291C83D70084450B /* AreaRateChangeTracker.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -116,7 +119,7 @@
 				4D5D87EE291BBA680024C16D /* ObjectRecognizer */,
 				4D5D87E7291BB9590024C16D /* Utilities */,
 				4D41E06C2913C34A00A05726 /* AIModels */,
-				420E3D362913B85600E16D16 /* sources */,
+				420E3D362913B85600E16D16 /* Sources */,
 				4296A68A28F7EB2200E769AE /* Oculo.entitlements */,
 				FE1997F4291A1CDD001DA2CF /* TextReaderViewController.swift */,
 				4DB71CA928EF7D4900A0E21A /* AppDelegate.swift */,
@@ -214,6 +217,7 @@
 				4DB71CAC28EF7D4900A0E21A /* SceneDelegate.swift in Sources */,
 				420E3D352913B85000E16D16 /* SoundManager.swift in Sources */,
 				4D5D87F4291BBA8E0024C16D /* BoundingBoxDisplayView.swift in Sources */,
+				4D4006C1291C83D70084450B /* AreaRateChangeTracker.swift in Sources */,
 				4D5D87F2291BBA8E0024C16D /* LabelsTableViewCell.swift in Sources */,
 				4D5D87EB291BB98B0024C16D /* MeasurementsTool.swift in Sources */,
 			);

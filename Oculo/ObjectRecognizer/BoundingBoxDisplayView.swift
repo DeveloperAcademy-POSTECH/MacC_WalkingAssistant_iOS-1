@@ -2,7 +2,7 @@
 //  BoundingBoxDisplayView.swift
 //  objDetectorTest
 //
-//  Created by raymond on 2022/11/08.
+//  Created by Kim, Raymond on 2022/11/08.
 //  Copyright © 2022 IntelligentATLAS. All rights reserved.
 //
 
@@ -78,7 +78,7 @@ class BoundingBoxDisplayView: UIView {
         /// Store the object's center coordinates in the array, in the form of [label: [x coordinate, y coordinate]].
         objectCenterCoordinates[labelString!] = [bgRect.midX, bgRect.midY]
 
-        // Create a lineView to connect the center of the same object.
+        /// Create a lineView to connect the center of the same object.
         let lineView = UIView(frame: CGRect(x: bgRect.midX, y: bgRect.midY, width: 0, height: 0))
         lineView.layer.borderColor = color.cgColor
         lineView.layer.borderWidth = 2

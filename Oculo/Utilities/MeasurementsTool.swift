@@ -2,7 +2,7 @@
 //  MeasurementsTool.swift
 //  Oculo
 //
-//  Created by raymond on 2022/11/04.
+//  Created by Kim, Raymond on 2022/11/04.
 //  Copyright © 2022 IntelligentATLAS. All rights reserved.
 //
 
@@ -72,7 +72,7 @@ class NumericMeasurements {
 
     }
 
-    // 로그 프린트
+    /// 로그 프린트
     func printLogs() {
 
     }

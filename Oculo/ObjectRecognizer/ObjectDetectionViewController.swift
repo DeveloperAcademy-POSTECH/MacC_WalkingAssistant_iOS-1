@@ -2,7 +2,7 @@
 //  ObjectDetectionViewController.swift
 //  objDetectorTest
 //
-//  Created by raymond on 2022/11/04.
+//  Created by Kim, Raymond on 2022/11/04.
 //
 
 import UIKit
@@ -40,27 +40,30 @@ class ObjectDetectionViewController: UIViewController {
         let inferenceLabel = UILabel()
         inferenceLabel.contentMode = .left
         inferenceLabel.font = UIFont.systemFont(ofSize: 10)
+        inferenceLabel.textColor = UIColor.green
         inferenceLabel.translatesAutoresizingMaskIntoConstraints = false
 
         return inferenceLabel
     }()
 
-    lazy var etimeLabel: UILabel = {
-        let etimeLabel = UILabel()
-        etimeLabel.contentMode = .left
-        etimeLabel.font = UIFont.systemFont(ofSize: 10)
-        etimeLabel.translatesAutoresizingMaskIntoConstraints = false
+    lazy var executionTimeLabel: UILabel = {
+        let executionTimeLabel = UILabel()
+        executionTimeLabel.contentMode = .left
+        executionTimeLabel.font = UIFont.systemFont(ofSize: 10)
+        executionTimeLabel.textColor = UIColor.green
+        executionTimeLabel.translatesAutoresizingMaskIntoConstraints = false
 
-        return etimeLabel
+        return executionTimeLabel
     }()
 
-    lazy var fpsLabel: UILabel = {
-        let fpsLabel = UILabel()
-        fpsLabel.contentMode = .left
-        fpsLabel.font = UIFont.systemFont(ofSize: 10)
-        fpsLabel.translatesAutoresizingMaskIntoConstraints = false
+    lazy var FPSLabel: UILabel = {
+        let FPSLabel = UILabel()
+        FPSLabel.contentMode = .left
+        FPSLabel.font = UIFont.systemFont(ofSize: 10)
+        FPSLabel.textColor = UIColor.green
+        FPSLabel.translatesAutoresizingMaskIntoConstraints = false
 
-        return fpsLabel
+        return FPSLabel
     }()
 
     lazy var boundingBoxView: BoundingBoxDisplayView = {
@@ -123,7 +126,7 @@ class ObjectDetectionViewController: UIViewController {
         videoCapture.sessionSetup(sessionPreset: .vga640x480) { success in
 
             if success {
-                // 레이어에 프리뷰 뷰 추가
+                /// 레이어에 프리뷰 뷰 추가
                 if let previewLayer = self.videoCapture.previewLayer {
                     self.videoPreview.layer.addSublayer(previewLayer)
                     self.resizePreviewLayer()
@@ -172,14 +175,14 @@ class ObjectDetectionViewController: UIViewController {
         self.view.addSubview(labelsTableView)
         self.view.addSubview(customView)
         customView.addSubview(inferenceLabel)
-        customView.addSubview(etimeLabel)
-        customView.addSubview(fpsLabel)
+        customView.addSubview(executionTimeLabel)
+        customView.addSubview(FPSLabel)
 
         setVideoPreviewConstraints(width: screenWidth)
         setCustomViewConstraints()
         setInferenceLabelConstraints()
         setEtimeLabelConstraints()
-        setFpsLabelConstraints()
+        setFPSLabelConstraints()
         setBoundingBoxViewConstraints()
         setLablesTableViewConstraints()
 
@@ -212,15 +215,15 @@ class ObjectDetectionViewController: UIViewController {
     }
 
     func setEtimeLabelConstraints() {
-        etimeLabel.topAnchor.constraint(equalTo: customView.topAnchor).isActive = true
-        etimeLabel.leadingAnchor.constraint(equalTo: customView.leadingAnchor, constant: 184).isActive = true
-        etimeLabel.bottomAnchor.constraint(equalTo: customView.bottomAnchor).isActive = true
+        executionTimeLabel.topAnchor.constraint(equalTo: customView.topAnchor).isActive = true
+        executionTimeLabel.leadingAnchor.constraint(equalTo: customView.leadingAnchor, constant: 184).isActive = true
+        executionTimeLabel.bottomAnchor.constraint(equalTo: customView.bottomAnchor).isActive = true
     }
 
-    func setFpsLabelConstraints() {
-        fpsLabel.topAnchor.constraint(equalTo: customView.topAnchor).isActive = true
-        fpsLabel.leadingAnchor.constraint(equalTo: customView.leadingAnchor, constant: 352).isActive = true
-        fpsLabel.bottomAnchor.constraint(equalTo: customView.bottomAnchor).isActive = true
+    func setFPSLabelConstraints() {
+        FPSLabel.topAnchor.constraint(equalTo: customView.topAnchor).isActive = true
+        FPSLabel.leadingAnchor.constraint(equalTo: customView.leadingAnchor, constant: 352).isActive = true
+        FPSLabel.bottomAnchor.constraint(equalTo: customView.bottomAnchor).isActive = true
     }
 
     func setBoundingBoxViewConstraints() {
@@ -248,14 +251,14 @@ class ObjectDetectionViewController: UIViewController {
 
 extension ObjectDetectionViewController: VideoCaptureDelegate {
     func videoCapture(_ capture: VideoCapture, didCaptureVideoFrame: CVPixelBuffer?, timestamp: CMTime)  {
-        // 카메라로 캡쳐한 이미지를 픽셀 버퍼로 보냄
+        /// 카메라로 캡쳐한 이미지를 픽셀 버퍼로 보냄
         if !self.didInference, let pixelBuffer = didCaptureVideoFrame {
             self.didInference = true
 
-            // 측정 시작
+            /// 측정 시작
             self.performanceMeasurement.didStartNumericMeasurement()
 
-            // 추론 시작
+            /// 추론 시작
             self.predictUsingVision(pixelBuffer: pixelBuffer)
         }
     }
@@ -285,13 +288,13 @@ extension ObjectDetectionViewController {
                 self.boundingBoxView.predictedObjects = predictions
                 self.labelsTableView.reloadData()
 
-                // 측정 종료
+                /// 측정 종료
                 self.performanceMeasurement.didEndNumericMeasurement()
 
                 self.didInference = false
             }
         } else {
-            // 측정 종료
+            /// 측정 종료
             self.performanceMeasurement.didEndNumericMeasurement()
 
             self.didInference = false
@@ -332,8 +335,8 @@ extension ObjectDetectionViewController: NumericMeasurementsDelegate {
             self.movingAverageFilter3.appendElement(element: fps)
 
             self.inferenceLabel.text = "Inference: \(self.movingAverageFilter1.averageValue) ms"
-            self.etimeLabel.text = "Execution: \(self.movingAverageFilter2.averageValue) ms"
-            self.fpsLabel.text = "FPS: \(self.movingAverageFilter3.averageValue)"
+            self.executionTimeLabel.text = "Execution: \(self.movingAverageFilter2.averageValue) ms"
+            self.FPSLabel.text = "FPS: \(self.movingAverageFilter3.averageValue)"
         }
     }
 }

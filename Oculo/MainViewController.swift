@@ -13,16 +13,16 @@ import Vision
 
 class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
 
-    // Variable for UI changing
+    /// Variable for UI changing
     var selected = 0
 
-    // Variable for UI Button
+    /// Variable for UI Button
     lazy var navigationButton = UIButton()
     lazy var environmentReaderButton = UIButton()
     lazy var textReaderButton = UIButton()
     lazy var settingButton = UIButton()
 
-    // Variable for object detection camera view
+    /// Variable for object detection camera view
     var bufferSize: CGSize = .zero
     var rootLayer: CALayer! = nil
 
@@ -52,12 +52,12 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         self.view.addSubview(environmentReaderButton)
         self.view.addSubview(textReaderButton)
         self.view.addSubview(settingButton)
-        
+
         createNavigateButton()
         createEnvironmentReaderButton()
         createTextReaderButton()
         createSettingButton()
-        
+
         addConstraints()
     }
 
@@ -131,7 +131,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             settingButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             settingButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8)
         ]
-        
+
         NSLayoutConstraint.activate(navigationButtonConstraints)
         NSLayoutConstraint.activate(environMentReaderButtonConstraints)
         NSLayoutConstraint.activate(textReaderButtonConstraints)
