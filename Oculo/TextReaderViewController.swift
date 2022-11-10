@@ -20,10 +20,14 @@ func speak(_ string: String) {
     utterance.voice = AVSpeechSynthesisVoice(language: "ko-KR")
 
     /// synthesizer에서 현재 말하는 중인 경우 즉시 중단한다. (소리가 겹쳐서 들리는 현상 방지)
+    stopSpeak()
+    synthesizer.speak(utterance)
+}
+
+func stopSpeak() {
     if (synthesizer.isSpeaking) {
         synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
     }
-    synthesizer.speak(utterance)
 }
 
 class TextReaderViewController: UIViewController, ImageAnalysisInteractionDelegate, UIGestureRecognizerDelegate {
@@ -58,7 +62,7 @@ class TextReaderViewController: UIViewController, ImageAnalysisInteractionDelega
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-
+        stopSpeak()
         arView.session.pause()
     }
 
