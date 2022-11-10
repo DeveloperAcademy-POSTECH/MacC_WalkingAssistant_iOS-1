@@ -15,7 +15,7 @@ class SettingViewController: UIViewController {
     lazy var footerLableView = UILabel()
     lazy var logoImageStackView = UIStackView()
 
-    let data = [["Membershib", "Agreement on sending recorded video"], ["Terms of arrangement", "Privacy", "License", "Contact Us"]]
+    let data = [["Membership", "Agreement on sending recorded video"], ["Terms of arrangement", "Privacy", "License", "Contact Us"]]
 
     override func viewDidLoad() {
         super.viewDidLoad()

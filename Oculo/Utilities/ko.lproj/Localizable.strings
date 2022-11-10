@@ -8,13 +8,13 @@
 
 
 // Main View
-"Navigation" = "네비게이션";
+"Navigation" = "내비게이션";
 "Environment Reader" = "주변 환경 읽기";
 "Text Reader" = "긁자 읽기";
 "Settings" = "설정";
 
 // Setting View
-"Membershib" = "멤버십";
+"Membership" = "멤버십";
 "Agreement on sending recorded video" = "보행 간 정보 제공 동의";
 
 "Terms of arrangement" = "이용 약관";

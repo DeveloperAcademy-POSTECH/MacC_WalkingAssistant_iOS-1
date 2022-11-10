@@ -30,7 +30,7 @@ enum Language: String, Localizable {
     case textReader = "Text Reader"
     case settings = "Settings"
     // Settings View
-    case memvershib = "Membershib"
+    case membership = "Membership"
     case agreement =  "Agreement on sending recorded video"
     case arrangement = "Terms of arrangement"
     case privacy = "Privacy"
