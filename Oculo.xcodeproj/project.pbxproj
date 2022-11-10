@@ -24,6 +24,10 @@
 		4DB71CB328EF7D4A00A0E21A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DB71CB228EF7D4A00A0E21A /* Assets.xcassets */; };
 		FE1997F1290A77C2001DA2CF /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1997F0290A77C2001DA2CF /* SettingViewController.swift */; };
 		FE1997F5291A1CDD001DA2CF /* TextReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1997F4291A1CDD001DA2CF /* TextReaderViewController.swift */; };
+		FED8C3BD291CFB880028F659 /* EnvironmentReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED8C3BC291CFB880028F659 /* EnvironmentReaderViewController.swift */; };
+		FED8C3BF291CFB930028F659 /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED8C3BE291CFB930028F659 /* Plane.swift */; };
+		FED8C3C1291CFB990028F659 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED8C3C0291CFB990028F659 /* Utilities.swift */; };
+		FED8C3C5291CFF310028F659 /* Assets.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = FED8C3C4291CFF310028F659 /* Assets.scnassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +51,10 @@
 		4DB71CB728EF7D4A00A0E21A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FE1997F0290A77C2001DA2CF /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		FE1997F4291A1CDD001DA2CF /* TextReaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextReaderViewController.swift; sourceTree = "<group>"; };
+		FED8C3BC291CFB880028F659 /* EnvironmentReaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentReaderViewController.swift; sourceTree = "<group>"; };
+		FED8C3BE291CFB930028F659 /* Plane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
+		FED8C3C0291CFB990028F659 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		FED8C3C4291CFF310028F659 /* Assets.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Assets.scnassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +124,7 @@
 		4DB71CA828EF7D4900A0E21A /* Oculo */ = {
 			isa = PBXGroup;
 			children = (
+				FED8C3BB291CFB000028F659 /* EnvironmentReader */,
 				4D5D87EE291BBA680024C16D /* ObjectRecognizer */,
 				4D5D87E7291BB9590024C16D /* Utilities */,
 				4D41E06C2913C34A00A05726 /* AIModels */,
@@ -129,9 +138,20 @@
 				4296A68828F7EAEB00E769AE /* HealthkitManager.swift */,
 				420E3D342913B85000E16D16 /* SoundManager.swift */,
 				4DB71CB228EF7D4A00A0E21A /* Assets.xcassets */,
+				FED8C3C4291CFF310028F659 /* Assets.scnassets */,
 				4DB71CB728EF7D4A00A0E21A /* Info.plist */,
 			);
 			path = Oculo;
+			sourceTree = "<group>";
+		};
+		FED8C3BB291CFB000028F659 /* EnvironmentReader */ = {
+			isa = PBXGroup;
+			children = (
+				FED8C3C0291CFB990028F659 /* Utilities.swift */,
+				FED8C3BE291CFB930028F659 /* Plane.swift */,
+				FED8C3BC291CFB880028F659 /* EnvironmentReaderViewController.swift */,
+			);
+			path = EnvironmentReader;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,6 +213,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FED8C3C5291CFF310028F659 /* Assets.scnassets in Resources */,
 				420E3D382913B85600E16D16 /* defaultBeep.mp3 in Resources */,
 				4DB71CB328EF7D4A00A0E21A /* Assets.xcassets in Resources */,
 			);
@@ -209,9 +230,12 @@
 				4D5D87ED291BB98B0024C16D /* UIImage_CVPixelBufferTool.swift in Sources */,
 				4D5D87F3291BBA8E0024C16D /* ObjectDetectionViewController.swift in Sources */,
 				FE1997F1290A77C2001DA2CF /* SettingViewController.swift in Sources */,
+				FED8C3BF291CFB930028F659 /* Plane.swift in Sources */,
 				4DB71CAE28EF7D4900A0E21A /* MainViewController.swift in Sources */,
+				FED8C3C1291CFB990028F659 /* Utilities.swift in Sources */,
 				4DB71CAA28EF7D4900A0E21A /* AppDelegate.swift in Sources */,
 				4D5D87EC291BB98B0024C16D /* VideoCaptureTool.swift in Sources */,
+				FED8C3BD291CFB880028F659 /* EnvironmentReaderViewController.swift in Sources */,
 				4296A68928F7EAEB00E769AE /* HealthkitManager.swift in Sources */,
 				FE1997F5291A1CDD001DA2CF /* TextReaderViewController.swift in Sources */,
 				4DB71CAC28EF7D4900A0E21A /* SceneDelegate.swift in Sources */,

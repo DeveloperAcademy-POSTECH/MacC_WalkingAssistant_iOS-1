@@ -149,6 +149,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             self.navigationButton.backgroundColor = .black
             self.environmentReaderButton.backgroundColor = .yellow
             self.textReaderButton.backgroundColor = .black
+            present(EnvironmentReaderViewController(), animated: true)
         } else if (self.selected == 3) {
             self.navigationButton.backgroundColor = .black
             self.environmentReaderButton.backgroundColor = .black
