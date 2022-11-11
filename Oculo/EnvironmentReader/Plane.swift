@@ -35,7 +35,7 @@ class Plane: SCNNode {
         meshNode = SCNNode(geometry: meshGeometry)
         
         // Create a node to visualize the plane's bounding rectangle.
-        let extentPlane: SCNPlane = SCNPlane(width: CGFloat(anchor.extent.x), height: CGFloat(anchor.extent.z))
+        let extentPlane: SCNPlane = SCNPlane(width: CGFloat(anchor.planeExtent.width), height: CGFloat(anchor.planeExtent.height))
         extentNode = SCNNode(geometry: extentPlane)
         extentNode.simdPosition = anchor.center
         
@@ -105,7 +105,7 @@ class Plane: SCNNode {
 
         let textNode = SCNNode(geometry: textGeometry)
         // scale down the size of the text
-        textNode.simdScale = float3(0.0005)
+        textNode.simdScale = SIMD3<Float>(repeating: 0.0005)
         
         return textNode
     }
