@@ -29,6 +29,7 @@
 		FED8C3BF291CFB930028F659 /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED8C3BE291CFB930028F659 /* Plane.swift */; };
 		FED8C3C1291CFB990028F659 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED8C3C0291CFB990028F659 /* Utilities.swift */; };
 		FED8C3C5291CFF310028F659 /* Assets.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = FED8C3C4291CFF310028F659 /* Assets.scnassets */; };
+		FED8C3C7291E2E7E0028F659 /* TTSTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED8C3C6291E2E7E0028F659 /* TTSTool.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		FED8C3BE291CFB930028F659 /* Plane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
 		FED8C3C0291CFB990028F659 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		FED8C3C4291CFF310028F659 /* Assets.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Assets.scnassets; sourceTree = "<group>"; };
+		FED8C3C6291E2E7E0028F659 /* TTSTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTSTool.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 				4D5D87EA291BB98B0024C16D /* UIImage_CVPixelBufferTool.swift */,
 				4D4006C0291C83D70084450B /* AreaRateChangeTracker.swift */,
 				794FC9A6291D36B700F9B6C2 /* StringExtension.swift */,
+				FED8C3C6291E2E7E0028F659 /* TTSTool.swift */,
 				794FC9A4291D364200F9B6C2 /* Localizable.strings */,
 			);
 			path = Utilities;
@@ -232,7 +235,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2FE00C75291E408B000DE586 /* yolov5x6.mlmodel in Sources */,
+				2F148C4F291D16CF0088B351 /* yolov5x6.mlmodel in Sources */,
+				FED8C3C7291E2E7E0028F659 /* TTSTool.swift in Sources */,
 				4D5D87ED291BB98B0024C16D /* UIImage_CVPixelBufferTool.swift in Sources */,
 				4D5D87F3291BBA8E0024C16D /* ObjectDetectionViewController.swift in Sources */,
 				FE1997F1290A77C2001DA2CF /* SettingViewController.swift in Sources */,
