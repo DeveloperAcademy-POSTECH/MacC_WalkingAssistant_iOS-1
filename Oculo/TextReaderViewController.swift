@@ -9,26 +9,6 @@
 import UIKit
 import RealityKit
 import VisionKit
-import AVFoundation
-
-/// TTS 기능의 소리 제어
-let synthesizer = AVSpeechSynthesizer()
-
-/// String을 입력 받아 TTS 수행
-func speak(_ string: String) {
-    let utterance = AVSpeechUtterance(string: string)
-    utterance.voice = AVSpeechSynthesisVoice(language: "ko-KR")
-
-    /// synthesizer에서 현재 말하는 중인 경우 즉시 중단한다. (소리가 겹쳐서 들리는 현상 방지)
-    stopSpeak()
-    synthesizer.speak(utterance)
-}
-
-func stopSpeak() {
-    if (synthesizer.isSpeaking) {
-        synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
-    }
-}
 
 class TextReaderViewController: UIViewController, ImageAnalysisInteractionDelegate, UIGestureRecognizerDelegate {
 
@@ -44,6 +24,8 @@ class TextReaderViewController: UIViewController, ImageAnalysisInteractionDelega
     /// LiveText의 구성 요소
     let analyzer = ImageAnalyzer()
     let interaction = ImageAnalysisInteraction()
+    
+    let textReadetTTS = TTSTool()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,7 +44,7 @@ class TextReaderViewController: UIViewController, ImageAnalysisInteractionDelega
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        stopSpeak()
+        self.textReadetTTS.stopSpeak()
         arView.session.pause()
     }
 
@@ -138,9 +120,9 @@ class TextReaderViewController: UIViewController, ImageAnalysisInteractionDelega
                         
                         if (analysis.hasResults(for: .text)) {
                             print(analysis.transcript)
-                            speak(analysis.transcript)
+                            self.textReadetTTS.speak(analysis.transcript)
                         } else {
-                            speak("글자가 인식되지 않았습니다.")
+                            self.textReadetTTS.speak("글자가 인식되지 않았습니다.")
                         }
                     }
                 }
