@@ -8,15 +8,17 @@
 import UIKit
 import Vision
 import CoreMedia
+import ARKit
+import SceneKit
 
-class ObjectDetectionViewController: UIViewController {
+class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNViewDelegate {
 
     // MARK: UI 프로퍼티
-    lazy var videoPreview: UIView = {
-        let videoPreview = UIView(frame: self.view.frame)
+    lazy var videoPreview: ARSCNView = {
+        let videoPreview = ARSCNView(frame: self.view.frame)
         videoPreview.clipsToBounds = true
         videoPreview.translatesAutoresizingMaskIntoConstraints = false
-
+        
         return videoPreview
     }()
 
@@ -90,7 +92,6 @@ class ObjectDetectionViewController: UIViewController {
     var didInference = false
 
     // MARK: AV 프레임워크 프로퍼티
-    var videoCapture: VideoCapture!
     let semaphore = DispatchSemaphore(value: 1)
     var lastExecution = Date()
 
@@ -117,29 +118,77 @@ class ObjectDetectionViewController: UIViewController {
             fatalError("Fail to create vision model")
         }
     }
+    
+// MARK: ARSession 시작 정지 함수 정의
+    func startARSession() {
+        guard ARWorldTrackingConfiguration.supportsFrameSemantics([.sceneDepth]) else { return }
+        // Enable both the `sceneDepth` and `smoothedSceneDepth` frame semantics.
+        let config = ARWorldTrackingConfiguration()
+        config.frameSemantics = [.sceneDepth]
+        videoPreview.session.run(config)
+    }
+    
+    func pauseARSession() {
+        videoPreview.session.pause()
+    }
+    
+// MARK: ARSession의 기능 정의
+    func session(_ session: ARSession, didUpdate frame: ARFrame) {
+        guard let depth = frame.sceneDepth?.depthMap else { return }
+        guard let confidence = frame.sceneDepth?.confidenceMap else { return }
+        let depthWidth = CVPixelBufferGetWidth(depth)   // 256
+        let depthHeight = CVPixelBufferGetHeight(depth)     // 192
+        
+        CVPixelBufferLockBaseAddress(depth, .readOnly)
+        CVPixelBufferLockBaseAddress(confidence, .readOnly)
+        
+        guard let depthBaseAddress = CVPixelBufferGetBaseAddress(depth) else { return }
+        guard let confidecneBaseAddress = CVPixelBufferGetBaseAddress(confidence) else { return }
+        
+        // UnsafeMutabelRawPointer -> UnsafeBufferPointer
+        let bindDepthPtr = depthBaseAddress.bindMemory(to: Float32.self, capacity: depthWidth * depthHeight)
+        let bindConfidencePtr = confidecneBaseAddress.bindMemory(to: Int8.self, capacity: depthWidth * depthHeight)
+        
+        //UnsafeMutablePointer -> UnsafeBufferPointer
+        let depthBufPtr = UnsafeBufferPointer(start: bindDepthPtr, count: depthWidth * depthHeight)
+        let confidenceBufPtr = UnsafeBufferPointer(start: bindConfidencePtr, count: depthWidth * depthHeight)
+        
+        let depthArray = Array(depthBufPtr)
+        let confidenceArray = Array(confidenceBufPtr)
+        
+//        print(depthArray[0])
+//        print(confidenceArray[0])
 
-    // MARK: 카메라/비디오 캡쳐 설정
-    func setupCamera() {
-        videoCapture = VideoCapture()
-        videoCapture.delegate = self
-        videoCapture.fps = 30
-        videoCapture.sessionSetup(sessionPreset: .vga640x480) { success in
+        CVPixelBufferUnlockBaseAddress(depth, .readOnly)
+        CVPixelBufferUnlockBaseAddress(confidence, .readOnly)
+        
+        // MARK: ARSCNView의 이미지 캡쳐 및 CVPixelBuffer로 변환 후 인공지능 예측
+        guard let image = videoPreview.snapshot().convertToBuffer() else { return }
+        
+        if !self.didInference {
+            self.didInference = true
 
-            if success {
-                /// 레이어에 프리뷰 뷰 추가
-                if let previewLayer = self.videoCapture.previewLayer {
-                    self.videoPreview.layer.addSublayer(previewLayer)
-                    self.resizePreviewLayer()
-                }
+            // start of measure
+            self.performanceMeasurement.didStartNumericMeasurement()
 
-                // 세션 셋업 후 비디오 프리뷰 시작
-                self.videoCapture.start()
-            }
+            // predict!
+            self.predictUsingVision(pixelBuffer: image)
         }
     }
-
-    func resizePreviewLayer() {
-        videoCapture.previewLayer?.frame = videoPreview.bounds
+    
+    func session(_ session: ARSession, didFailWithError error: Error) {
+        // Present an error message to the user
+        
+    }
+    
+    func sessionWasInterrupted(_ session: ARSession) {
+        // Inform the user that the session has been interrupted, for example, by presenting an overlay
+        // 15 14
+    }
+    
+    func sessionInterruptionEnded(_ session: ARSession) {
+        // Reset tracking and/or remove existing anchors if consistent tracking is required
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -148,24 +197,25 @@ class ObjectDetectionViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.videoCapture.start()
+        startARSession()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.videoCapture.stop()
+        pauseARSession()
     }
 
     // MARK: 뷰 컨트롤러 라이프사이클 정의
     override func viewDidLoad() {
         super.viewDidLoad()
         let screenWidth = self.view.frame.width
+        
+        /// ARSession 델리게이트 호출
+        videoPreview.delegate = self
+        videoPreview.session.delegate = self
 
         /// 모델 클래스 호출
         setupCoreMLModel()
-
-        /// 카메라 클래스 호출
-        setupCamera()
 
         /// 퍼포먼스 측정 클래스 호출
         performanceMeasurement.delegate = self
@@ -191,7 +241,6 @@ class ObjectDetectionViewController: UIViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        resizePreviewLayer()
     }
 
     func setVideoPreviewConstraints(width: CGFloat) {
@@ -248,22 +297,6 @@ class ObjectDetectionViewController: UIViewController {
 
 }
 
-
-extension ObjectDetectionViewController: VideoCaptureDelegate {
-    func videoCapture(_ capture: VideoCapture, didCaptureVideoFrame: CVPixelBuffer?, timestamp: CMTime)  {
-        /// 카메라로 캡쳐한 이미지를 픽셀 버퍼로 보냄
-        if !self.didInference, let pixelBuffer = didCaptureVideoFrame {
-            self.didInference = true
-
-            /// 측정 시작
-            self.performanceMeasurement.didStartNumericMeasurement()
-
-            /// 추론 시작
-            self.predictUsingVision(pixelBuffer: pixelBuffer)
-        }
-    }
-}
-
 extension ObjectDetectionViewController {
     func predictUsingVision(pixelBuffer: CVPixelBuffer) {
         guard let request = request else { fatalError() }
@@ -308,17 +341,22 @@ extension ObjectDetectionViewController: UITableViewDelegate, UITableViewDataSou
         return predictions.count
     }
 
+    /// predcition의 정보가 업데이트 되기전에 indexPath에서 호출하는 문제를 해결하기위해 조건을 걸어 빈 셀을 호출
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = labelsTableView.dequeueReusableCell(withIdentifier: "InformationCell", for: indexPath) as! LabelsTableViewCell
-
-        let rectString = predictions[indexPath.row].boundingBox.toString(digit: 3)
-        let confidence = predictions[indexPath.row].labels.first?.confidence ?? -1
-        let confidenceString = String(format: "%.3f", confidence)  // MARK: confidence: Math.sigmoid(confidence)
-
-        cell.predictedLabel.text = predictions[indexPath.row].label ?? "N/A"
-        cell.informationLabel.text = "\(rectString), \(confidenceString)"
-
-        return cell
+        if(indexPath.row > predictions.count-1) {
+            return UITableViewCell()
+        } else {
+            let cell = labelsTableView.dequeueReusableCell(withIdentifier: "InformationCell", for: indexPath) as! LabelsTableViewCell
+            
+            let rectString = predictions[indexPath.row].boundingBox.toString(digit: 3)
+                    let confidence = predictions[indexPath.row].labels.first?.confidence ?? -1
+                    let confidenceString = String(format: "%.3f", confidence)  // MARK: confidence: Math.sigmoid(confidence)
+            
+                    cell.predictedLabel.text = predictions[indexPath.row].label ?? "N/A"
+                    cell.informationLabel.text = "\(rectString), \(confidenceString)"
+            
+            return cell
+        }
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -356,5 +394,53 @@ class MovingAverageFilter {
         guard !arr.isEmpty else { return 0 }
         let sum = arr.reduce(0) { $0 + $1 }
         return Int(sum/arr.count)
+    }
+}
+
+extension UIImage {
+    func convertToBuffer() -> CVPixelBuffer? {
+        
+        let attributes = [
+            kCVPixelBufferCGImageCompatibilityKey: kCFBooleanTrue,
+            kCVPixelBufferCGBitmapContextCompatibilityKey: kCFBooleanTrue
+        ] as CFDictionary
+        
+        var pixelBuffer: CVPixelBuffer?
+        
+        let status = CVPixelBufferCreate(
+            kCFAllocatorDefault, Int(self.size.width),
+            Int(self.size.height),
+            kCVPixelFormatType_32ARGB,
+            attributes,
+            &pixelBuffer)
+        
+        guard (status == kCVReturnSuccess) else {
+            return nil
+        }
+        
+        CVPixelBufferLockBaseAddress(pixelBuffer!, CVPixelBufferLockFlags(rawValue: 0))
+        
+        let pixelData = CVPixelBufferGetBaseAddress(pixelBuffer!)
+        let rgbColorSpace = CGColorSpaceCreateDeviceRGB()
+        
+        let context = CGContext(
+            data: pixelData,
+            width: Int(self.size.width),
+            height: Int(self.size.height),
+            bitsPerComponent: 8,
+            bytesPerRow: CVPixelBufferGetBytesPerRow(pixelBuffer!),
+            space: rgbColorSpace,
+            bitmapInfo: CGImageAlphaInfo.noneSkipFirst.rawValue)
+        
+        context?.translateBy(x: 0, y: self.size.height)
+        context?.scaleBy(x: 1.0, y: -1.0)
+        
+        UIGraphicsPushContext(context!)
+        self.draw(in: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
+        UIGraphicsPopContext()
+        
+        CVPixelBufferUnlockBaseAddress(pixelBuffer!, CVPixelBufferLockFlags(rawValue: 0))
+        
+        return pixelBuffer
     }
 }
