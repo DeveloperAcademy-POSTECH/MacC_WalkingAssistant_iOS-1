@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F148C4F291D16CF0088B351 /* yolov5x6.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 2F148C4E291D16CF0088B351 /* yolov5x6.mlmodel */; };
 		420E3D352913B85000E16D16 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420E3D342913B85000E16D16 /* SoundManager.swift */; };
 		420E3D382913B85600E16D16 /* defaultBeep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 420E3D372913B85600E16D16 /* defaultBeep.mp3 */; };
 		4296A68928F7EAEB00E769AE /* HealthkitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4296A68828F7EAEB00E769AE /* HealthkitManager.swift */; };
@@ -17,7 +18,6 @@
 		4D5D87F2291BBA8E0024C16D /* LabelsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5D87EF291BBA8E0024C16D /* LabelsTableViewCell.swift */; };
 		4D5D87F3291BBA8E0024C16D /* ObjectDetectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5D87F0291BBA8E0024C16D /* ObjectDetectionViewController.swift */; };
 		4D5D87F4291BBA8E0024C16D /* BoundingBoxDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5D87F1291BBA8E0024C16D /* BoundingBoxDisplayView.swift */; };
-		4D5D87F8291BBB5D0024C16D /* yolov5x6.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4D5D87F7291BBB5D0024C16D /* yolov5x6.mlmodel */; };
 		4DB71CAA28EF7D4900A0E21A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB71CA928EF7D4900A0E21A /* AppDelegate.swift */; };
 		4DB71CAC28EF7D4900A0E21A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB71CAB28EF7D4900A0E21A /* SceneDelegate.swift */; };
 		4DB71CAE28EF7D4900A0E21A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB71CAD28EF7D4900A0E21A /* MainViewController.swift */; };
@@ -33,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2F148C4E291D16CF0088B351 /* yolov5x6.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = yolov5x6.mlmodel; sourceTree = "<group>"; };
 		420E3D342913B85000E16D16 /* SoundManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		420E3D372913B85600E16D16 /* defaultBeep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = defaultBeep.mp3; sourceTree = "<group>"; };
 		4296A68828F7EAEB00E769AE /* HealthkitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthkitManager.swift; sourceTree = "<group>"; };
@@ -44,7 +45,6 @@
 		4D5D87EF291BBA8E0024C16D /* LabelsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelsTableViewCell.swift; sourceTree = "<group>"; };
 		4D5D87F0291BBA8E0024C16D /* ObjectDetectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectDetectionViewController.swift; sourceTree = "<group>"; };
 		4D5D87F1291BBA8E0024C16D /* BoundingBoxDisplayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundingBoxDisplayView.swift; sourceTree = "<group>"; };
-		4D5D87F7291BBB5D0024C16D /* yolov5x6.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = yolov5x6.mlmodel; sourceTree = "<group>"; };
 		4DB71CA628EF7D4900A0E21A /* Oculo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Oculo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DB71CA928EF7D4900A0E21A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4DB71CAB28EF7D4900A0E21A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,7 +84,7 @@
 		4D41E06C2913C34A00A05726 /* AIModels */ = {
 			isa = PBXGroup;
 			children = (
-				4D5D87F7291BBB5D0024C16D /* yolov5x6.mlmodel */,
+				2F148C4E291D16CF0088B351 /* yolov5x6.mlmodel */,
 			);
 			path = AIModels;
 			sourceTree = "<group>";
@@ -235,7 +235,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D5D87F8291BBB5D0024C16D /* yolov5x6.mlmodel in Sources */,
+				2F148C4F291D16CF0088B351 /* yolov5x6.mlmodel in Sources */,
 				4D5D87ED291BB98B0024C16D /* UIImage_CVPixelBufferTool.swift in Sources */,
 				4D5D87F3291BBA8E0024C16D /* ObjectDetectionViewController.swift in Sources */,
 				FE1997F1290A77C2001DA2CF /* SettingViewController.swift in Sources */,
@@ -424,7 +424,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -464,7 +464,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
