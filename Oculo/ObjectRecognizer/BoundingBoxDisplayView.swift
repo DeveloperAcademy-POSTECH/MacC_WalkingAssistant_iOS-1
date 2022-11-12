@@ -1,6 +1,6 @@
 //
 //  BoundingBoxDisplayView.swift
-//  objDetectorTest
+//  Oculo
 //
 //  Created by Kim, Raymond on 2022/11/08.
 //  Copyright © 2022 IntelligentATLAS. All rights reserved.

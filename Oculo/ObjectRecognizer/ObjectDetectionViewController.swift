@@ -1,6 +1,6 @@
 //
 //  ObjectDetectionViewController.swift
-//  objDetectorTest
+//  Oculo
 //
 //  Created by Kim, Raymond on 2022/11/04.
 //
