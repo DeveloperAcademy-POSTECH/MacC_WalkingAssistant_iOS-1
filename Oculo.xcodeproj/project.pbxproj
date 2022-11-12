@@ -7,13 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2F148C4F291D16CF0088B351 /* yolov5x6.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 2F148C4E291D16CF0088B351 /* yolov5x6.mlmodel */; };
+		2FE00C75291E408B000DE586 /* yolov5x6.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 2FE00C74291E408B000DE586 /* yolov5x6.mlmodel */; };
 		420E3D352913B85000E16D16 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420E3D342913B85000E16D16 /* SoundManager.swift */; };
 		420E3D382913B85600E16D16 /* defaultBeep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 420E3D372913B85600E16D16 /* defaultBeep.mp3 */; };
 		4296A68928F7EAEB00E769AE /* HealthkitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4296A68828F7EAEB00E769AE /* HealthkitManager.swift */; };
 		4D4006C1291C83D70084450B /* AreaRateChangeTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4006C0291C83D70084450B /* AreaRateChangeTracker.swift */; };
 		4D5D87EB291BB98B0024C16D /* MeasurementsTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5D87E8291BB98B0024C16D /* MeasurementsTool.swift */; };
-		4D5D87EC291BB98B0024C16D /* VideoCaptureTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5D87E9291BB98B0024C16D /* VideoCaptureTool.swift */; };
 		4D5D87ED291BB98B0024C16D /* UIImage_CVPixelBufferTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5D87EA291BB98B0024C16D /* UIImage_CVPixelBufferTool.swift */; };
 		4D5D87F2291BBA8E0024C16D /* LabelsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5D87EF291BBA8E0024C16D /* LabelsTableViewCell.swift */; };
 		4D5D87F3291BBA8E0024C16D /* ObjectDetectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5D87F0291BBA8E0024C16D /* ObjectDetectionViewController.swift */; };
@@ -34,14 +33,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2F148C4E291D16CF0088B351 /* yolov5x6.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = yolov5x6.mlmodel; sourceTree = "<group>"; };
+		2FE00C74291E408B000DE586 /* yolov5x6.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = yolov5x6.mlmodel; sourceTree = "<group>"; };
 		420E3D342913B85000E16D16 /* SoundManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		420E3D372913B85600E16D16 /* defaultBeep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = defaultBeep.mp3; sourceTree = "<group>"; };
 		4296A68828F7EAEB00E769AE /* HealthkitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthkitManager.swift; sourceTree = "<group>"; };
 		4296A68A28F7EB2200E769AE /* Oculo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Oculo.entitlements; sourceTree = "<group>"; };
 		4D4006C0291C83D70084450B /* AreaRateChangeTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaRateChangeTracker.swift; sourceTree = "<group>"; };
 		4D5D87E8291BB98B0024C16D /* MeasurementsTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementsTool.swift; sourceTree = "<group>"; };
-		4D5D87E9291BB98B0024C16D /* VideoCaptureTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCaptureTool.swift; sourceTree = "<group>"; };
 		4D5D87EA291BB98B0024C16D /* UIImage_CVPixelBufferTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage_CVPixelBufferTool.swift; sourceTree = "<group>"; };
 		4D5D87EF291BBA8E0024C16D /* LabelsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelsTableViewCell.swift; sourceTree = "<group>"; };
 		4D5D87F0291BBA8E0024C16D /* ObjectDetectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectDetectionViewController.swift; sourceTree = "<group>"; };
@@ -86,7 +84,7 @@
 		4D41E06C2913C34A00A05726 /* AIModels */ = {
 			isa = PBXGroup;
 			children = (
-				2F148C4E291D16CF0088B351 /* yolov5x6.mlmodel */,
+				2FE00C74291E408B000DE586 /* yolov5x6.mlmodel */,
 			);
 			path = AIModels;
 			sourceTree = "<group>";
@@ -96,7 +94,6 @@
 			children = (
 				4D5D87E8291BB98B0024C16D /* MeasurementsTool.swift */,
 				4D5D87EA291BB98B0024C16D /* UIImage_CVPixelBufferTool.swift */,
-				4D5D87E9291BB98B0024C16D /* VideoCaptureTool.swift */,
 				4D4006C0291C83D70084450B /* AreaRateChangeTracker.swift */,
 				794FC9A6291D36B700F9B6C2 /* StringExtension.swift */,
 				FED8C3C6291E2E7E0028F659 /* TTSTool.swift */,
@@ -247,7 +244,6 @@
 				4DB71CAE28EF7D4900A0E21A /* MainViewController.swift in Sources */,
 				FED8C3C1291CFB990028F659 /* Utilities.swift in Sources */,
 				4DB71CAA28EF7D4900A0E21A /* AppDelegate.swift in Sources */,
-				4D5D87EC291BB98B0024C16D /* VideoCaptureTool.swift in Sources */,
 				FED8C3BD291CFB880028F659 /* EnvironmentReaderViewController.swift in Sources */,
 				4296A68928F7EAEB00E769AE /* HealthkitManager.swift in Sources */,
 				FE1997F5291A1CDD001DA2CF /* TextReaderViewController.swift in Sources */,
