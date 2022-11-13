@@ -18,7 +18,7 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
         let videoPreview = ARSCNView(frame: self.view.frame)
         videoPreview.clipsToBounds = true
         videoPreview.translatesAutoresizingMaskIntoConstraints = false
-        
+
         return videoPreview
     }()
 
@@ -118,7 +118,7 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
             fatalError("Fail to create vision model")
         }
     }
-    
+
 // MARK: ARSession 시작 정지 함수 정의
     func startARSession() {
         guard ARWorldTrackingConfiguration.supportsFrameSemantics([.sceneDepth]) else { return }
@@ -127,44 +127,44 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
         config.frameSemantics = [.sceneDepth]
         videoPreview.session.run(config)
     }
-    
+
     func pauseARSession() {
         videoPreview.session.pause()
     }
-    
+
 // MARK: ARSession의 기능 정의
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
         guard let depth = frame.sceneDepth?.depthMap else { return }
         guard let confidence = frame.sceneDepth?.confidenceMap else { return }
         let depthWidth = CVPixelBufferGetWidth(depth)   // 256
         let depthHeight = CVPixelBufferGetHeight(depth)     // 192
-        
+
         CVPixelBufferLockBaseAddress(depth, .readOnly)
         CVPixelBufferLockBaseAddress(confidence, .readOnly)
-        
+
         guard let depthBaseAddress = CVPixelBufferGetBaseAddress(depth) else { return }
         guard let confidecneBaseAddress = CVPixelBufferGetBaseAddress(confidence) else { return }
-        
-        // UnsafeMutabelRawPointer -> UnsafeBufferPointer
+
+        // UnsafeMutableRawPointer -> UnsafeBufferPointer
         let bindDepthPtr = depthBaseAddress.bindMemory(to: Float32.self, capacity: depthWidth * depthHeight)
         let bindConfidencePtr = confidecneBaseAddress.bindMemory(to: Int8.self, capacity: depthWidth * depthHeight)
-        
+
         //UnsafeMutablePointer -> UnsafeBufferPointer
         let depthBufPtr = UnsafeBufferPointer(start: bindDepthPtr, count: depthWidth * depthHeight)
         let confidenceBufPtr = UnsafeBufferPointer(start: bindConfidencePtr, count: depthWidth * depthHeight)
-        
+
         let depthArray = Array(depthBufPtr)
         let confidenceArray = Array(confidenceBufPtr)
-        
+
 //        print(depthArray[0])
 //        print(confidenceArray[0])
 
         CVPixelBufferUnlockBaseAddress(depth, .readOnly)
         CVPixelBufferUnlockBaseAddress(confidence, .readOnly)
-        
+
         // MARK: ARSCNView의 이미지 캡쳐 및 CVPixelBuffer로 변환 후 인공지능 예측
         guard let image = videoPreview.snapshot().convertToBuffer() else { return }
-        
+
         if !self.didInference {
             self.didInference = true
 
@@ -175,20 +175,17 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
             self.predictUsingVision(pixelBuffer: image)
         }
     }
-    
+
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
-        
     }
-    
+
     func sessionWasInterrupted(_ session: ARSession) {
         // Inform the user that the session has been interrupted, for example, by presenting an overlay
-        // 15 14
     }
-    
+
     func sessionInterruptionEnded(_ session: ARSession) {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -209,7 +206,7 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
     override func viewDidLoad() {
         super.viewDidLoad()
         let screenWidth = self.view.frame.width
-        
+
         /// ARSession 델리게이트 호출
         videoPreview.delegate = self
         videoPreview.session.delegate = self
@@ -294,7 +291,6 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
         labelsTableView.delegate = self
         labelsTableView.dataSource = self
     }
-
 }
 
 extension ObjectDetectionViewController {
@@ -347,14 +343,14 @@ extension ObjectDetectionViewController: UITableViewDelegate, UITableViewDataSou
             return UITableViewCell()
         } else {
             let cell = labelsTableView.dequeueReusableCell(withIdentifier: "InformationCell", for: indexPath) as! LabelsTableViewCell
-            
+
             let rectString = predictions[indexPath.row].boundingBox.toString(digit: 3)
-                    let confidence = predictions[indexPath.row].labels.first?.confidence ?? -1
-                    let confidenceString = String(format: "%.3f", confidence)  // MARK: confidence: Math.sigmoid(confidence)
-            
-                    cell.predictedLabel.text = predictions[indexPath.row].label ?? "N/A"
-                    cell.informationLabel.text = "\(rectString), \(confidenceString)"
-            
+            let confidence = predictions[indexPath.row].labels.first?.confidence ?? -1
+            let confidenceString = String(format: "%.3f", confidence)  // MARK: confidence: Math.sigmoid(confidence)
+
+            cell.predictedLabel.text = predictions[indexPath.row].label ?? "N/A"
+            cell.informationLabel.text = "\(rectString), \(confidenceString)"
+
             return cell
         }
     }
@@ -399,30 +395,30 @@ class MovingAverageFilter {
 
 extension UIImage {
     func convertToBuffer() -> CVPixelBuffer? {
-        
+
         let attributes = [
             kCVPixelBufferCGImageCompatibilityKey: kCFBooleanTrue,
             kCVPixelBufferCGBitmapContextCompatibilityKey: kCFBooleanTrue
         ] as CFDictionary
-        
+
         var pixelBuffer: CVPixelBuffer?
-        
+
         let status = CVPixelBufferCreate(
             kCFAllocatorDefault, Int(self.size.width),
             Int(self.size.height),
             kCVPixelFormatType_32ARGB,
             attributes,
             &pixelBuffer)
-        
+
         guard (status == kCVReturnSuccess) else {
             return nil
         }
-        
+
         CVPixelBufferLockBaseAddress(pixelBuffer!, CVPixelBufferLockFlags(rawValue: 0))
-        
+
         let pixelData = CVPixelBufferGetBaseAddress(pixelBuffer!)
         let rgbColorSpace = CGColorSpaceCreateDeviceRGB()
-        
+
         let context = CGContext(
             data: pixelData,
             width: Int(self.size.width),
@@ -431,16 +427,16 @@ extension UIImage {
             bytesPerRow: CVPixelBufferGetBytesPerRow(pixelBuffer!),
             space: rgbColorSpace,
             bitmapInfo: CGImageAlphaInfo.noneSkipFirst.rawValue)
-        
+
         context?.translateBy(x: 0, y: self.size.height)
         context?.scaleBy(x: 1.0, y: -1.0)
-        
+
         UIGraphicsPushContext(context!)
         self.draw(in: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
         UIGraphicsPopContext()
-        
+
         CVPixelBufferUnlockBaseAddress(pixelBuffer!, CVPixelBufferLockFlags(rawValue: 0))
-        
+
         return pixelBuffer
     }
 }
