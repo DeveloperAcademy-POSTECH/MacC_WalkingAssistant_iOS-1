@@ -17,7 +17,7 @@ class SoundManager {
     let audioPlayerNode = AVAudioPlayerNode()
     let environmentNode = AVAudioEnvironmentNode()  /// 오디오 환경 노드 선언
     init() {
-        /// 오디오 세션 선언 (앱에서 오디오를 사용하는 방식을 시스템에 전잘하는 객체) , 여기서는 공유된 오디오 세션 인스턴스로 설정
+        /// 오디오 세션 선언 (앱에서 오디오를 사용하는 방식을 시스템에 전잘하는 객체), 여기서는 공유된 오디오 세션 인스턴스로 설정
         let audioSession = AVAudioSession.sharedInstance()
 
         /// 소리 재생 모드. 블루투스 기기와의 연결을 허용하는 오디오 세션 설정
@@ -54,7 +54,7 @@ class SoundManager {
         /// 위에서 생성한 environmentNode에 audioPlayerNode 연결
         self.audioEngine.connect(self.audioPlayerNode, to: self.environmentNode, format: monoFormat)
 
-        // TODO: defaultBeep.mp3 이 아닐경우 TTS로 읽어주는 기능 작성 필요
+        // TODO: defaultBeep.mp3 이 아닐 경우 TTS로 읽어주는 기능 작성 필요
         let url = Bundle.main.url(forResource: TTS, withExtension: nil)  /// defaultBeep의 URL
         let f = try! AVAudioFile(forReading: url!)  /// defaultBeep 의 음원 파일을 읽어 와서
 

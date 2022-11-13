@@ -7,11 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2FE00C75291E408B000DE586 /* yolov5x6.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 2FE00C74291E408B000DE586 /* yolov5x6.mlmodel */; };
+		26F3C9BB9CC4608968E87089 /* Pods_Oculo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F677C8EEAD28CE1BCF0A5CD2 /* Pods_Oculo.framework */; };
 		420E3D352913B85000E16D16 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420E3D342913B85000E16D16 /* SoundManager.swift */; };
 		420E3D382913B85600E16D16 /* defaultBeep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 420E3D372913B85600E16D16 /* defaultBeep.mp3 */; };
 		4296A68928F7EAEB00E769AE /* HealthkitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4296A68828F7EAEB00E769AE /* HealthkitManager.swift */; };
-		4D4006C1291C83D70084450B /* AreaRateChangeTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4006C0291C83D70084450B /* AreaRateChangeTracker.swift */; };
 		4D5D87EB291BB98B0024C16D /* MeasurementsTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5D87E8291BB98B0024C16D /* MeasurementsTool.swift */; };
 		4D5D87ED291BB98B0024C16D /* UIImage_CVPixelBufferTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5D87EA291BB98B0024C16D /* UIImage_CVPixelBufferTool.swift */; };
 		4D5D87F2291BBA8E0024C16D /* LabelsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5D87EF291BBA8E0024C16D /* LabelsTableViewCell.swift */; };
@@ -21,6 +20,11 @@
 		4DB71CAC28EF7D4900A0E21A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB71CAB28EF7D4900A0E21A /* SceneDelegate.swift */; };
 		4DB71CAE28EF7D4900A0E21A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB71CAD28EF7D4900A0E21A /* MainViewController.swift */; };
 		4DB71CB328EF7D4A00A0E21A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DB71CB228EF7D4A00A0E21A /* Assets.xcassets */; };
+		4DCA1C37291FDD6500B70068 /* KalmanFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCA1C33291FDD6500B70068 /* KalmanFilter.swift */; };
+		4DCA1C38291FDD6500B70068 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCA1C34291FDD6500B70068 /* DoubleExtension.swift */; };
+		4DCA1C39291FDD6500B70068 /* KalmanMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCA1C35291FDD6500B70068 /* KalmanMatrix.swift */; };
+		4DCA1C3A291FDD6500B70068 /* KalmanFilterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCA1C36291FDD6500B70068 /* KalmanFilterType.swift */; };
+		4DCA1C3C291FDDD900B70068 /* yolov5x6.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4DCA1C3B291FDDD900B70068 /* yolov5x6.mlmodel */; };
 		794FC9A2291D364200F9B6C2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 794FC9A4291D364200F9B6C2 /* Localizable.strings */; };
 		794FC9A7291D36B700F9B6C2 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794FC9A6291D36B700F9B6C2 /* StringExtension.swift */; };
 		FE1997F1290A77C2001DA2CF /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1997F0290A77C2001DA2CF /* SettingViewController.swift */; };
@@ -33,12 +37,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2FE00C74291E408B000DE586 /* yolov5x6.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = yolov5x6.mlmodel; sourceTree = "<group>"; };
+		296AA837E094B9368F3DE318 /* Pods-Oculo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Oculo.release.xcconfig"; path = "Target Support Files/Pods-Oculo/Pods-Oculo.release.xcconfig"; sourceTree = "<group>"; };
 		420E3D342913B85000E16D16 /* SoundManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		420E3D372913B85600E16D16 /* defaultBeep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = defaultBeep.mp3; sourceTree = "<group>"; };
 		4296A68828F7EAEB00E769AE /* HealthkitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthkitManager.swift; sourceTree = "<group>"; };
 		4296A68A28F7EB2200E769AE /* Oculo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Oculo.entitlements; sourceTree = "<group>"; };
-		4D4006C0291C83D70084450B /* AreaRateChangeTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaRateChangeTracker.swift; sourceTree = "<group>"; };
 		4D5D87E8291BB98B0024C16D /* MeasurementsTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementsTool.swift; sourceTree = "<group>"; };
 		4D5D87EA291BB98B0024C16D /* UIImage_CVPixelBufferTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage_CVPixelBufferTool.swift; sourceTree = "<group>"; };
 		4D5D87EF291BBA8E0024C16D /* LabelsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelsTableViewCell.swift; sourceTree = "<group>"; };
@@ -50,9 +53,16 @@
 		4DB71CAD28EF7D4900A0E21A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		4DB71CB228EF7D4A00A0E21A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4DB71CB728EF7D4A00A0E21A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4DCA1C33291FDD6500B70068 /* KalmanFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KalmanFilter.swift; sourceTree = "<group>"; };
+		4DCA1C34291FDD6500B70068 /* DoubleExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
+		4DCA1C35291FDD6500B70068 /* KalmanMatrix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KalmanMatrix.swift; sourceTree = "<group>"; };
+		4DCA1C36291FDD6500B70068 /* KalmanFilterType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KalmanFilterType.swift; sourceTree = "<group>"; };
+		4DCA1C3B291FDDD900B70068 /* yolov5x6.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = yolov5x6.mlmodel; sourceTree = "<group>"; };
 		794FC9A3291D364200F9B6C2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		794FC9A5291D364B00F9B6C2 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		794FC9A6291D36B700F9B6C2 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		8C7DE7C2EF48EB303E8A3581 /* Pods-Oculo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Oculo.debug.xcconfig"; path = "Target Support Files/Pods-Oculo/Pods-Oculo.debug.xcconfig"; sourceTree = "<group>"; };
+		F677C8EEAD28CE1BCF0A5CD2 /* Pods_Oculo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Oculo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE1997F0290A77C2001DA2CF /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		FE1997F4291A1CDD001DA2CF /* TextReaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextReaderViewController.swift; sourceTree = "<group>"; };
 		FED8C3BC291CFB880028F659 /* EnvironmentReaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentReaderViewController.swift; sourceTree = "<group>"; };
@@ -67,12 +77,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26F3C9BB9CC4608968E87089 /* Pods_Oculo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		36A2926DE117A80792CD9FD8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8C7DE7C2EF48EB303E8A3581 /* Pods-Oculo.debug.xcconfig */,
+				296AA837E094B9368F3DE318 /* Pods-Oculo.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		420E3D362913B85600E16D16 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -84,7 +104,7 @@
 		4D41E06C2913C34A00A05726 /* AIModels */ = {
 			isa = PBXGroup;
 			children = (
-				2FE00C74291E408B000DE586 /* yolov5x6.mlmodel */,
+				4DCA1C3B291FDDD900B70068 /* yolov5x6.mlmodel */,
 			);
 			path = AIModels;
 			sourceTree = "<group>";
@@ -94,7 +114,6 @@
 			children = (
 				4D5D87E8291BB98B0024C16D /* MeasurementsTool.swift */,
 				4D5D87EA291BB98B0024C16D /* UIImage_CVPixelBufferTool.swift */,
-				4D4006C0291C83D70084450B /* AreaRateChangeTracker.swift */,
 				794FC9A6291D36B700F9B6C2 /* StringExtension.swift */,
 				FED8C3C6291E2E7E0028F659 /* TTSTool.swift */,
 				794FC9A4291D364200F9B6C2 /* Localizable.strings */,
@@ -117,6 +136,8 @@
 			children = (
 				4DB71CA828EF7D4900A0E21A /* Oculo */,
 				4DB71CA728EF7D4900A0E21A /* Products */,
+				36A2926DE117A80792CD9FD8 /* Pods */,
+				FE800D972245D105F41637DB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -131,6 +152,7 @@
 		4DB71CA828EF7D4900A0E21A /* Oculo */ = {
 			isa = PBXGroup;
 			children = (
+				4DCA1C32291FD84500B70068 /* KalmanFilter */,
 				FED8C3BB291CFB000028F659 /* EnvironmentReader */,
 				4D5D87EE291BBA680024C16D /* ObjectRecognizer */,
 				4D5D87E7291BB9590024C16D /* Utilities */,
@@ -151,6 +173,25 @@
 			path = Oculo;
 			sourceTree = "<group>";
 		};
+		4DCA1C32291FD84500B70068 /* KalmanFilter */ = {
+			isa = PBXGroup;
+			children = (
+				4DCA1C34291FDD6500B70068 /* DoubleExtension.swift */,
+				4DCA1C33291FDD6500B70068 /* KalmanFilter.swift */,
+				4DCA1C36291FDD6500B70068 /* KalmanFilterType.swift */,
+				4DCA1C35291FDD6500B70068 /* KalmanMatrix.swift */,
+			);
+			path = KalmanFilter;
+			sourceTree = "<group>";
+		};
+		FE800D972245D105F41637DB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F677C8EEAD28CE1BCF0A5CD2 /* Pods_Oculo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FED8C3BB291CFB000028F659 /* EnvironmentReader */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,9 +209,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4DB71CBA28EF7D4A00A0E21A /* Build configuration list for PBXNativeTarget "Oculo" */;
 			buildPhases = (
+				533578E75EB4F0A179CF8448 /* [CP] Check Pods Manifest.lock */,
 				4DB71CA228EF7D4900A0E21A /* Sources */,
 				4DB71CA328EF7D4900A0E21A /* Frameworks */,
 				4DB71CA428EF7D4900A0E21A /* Resources */,
+				EBF2B1F313F794D2232B5880 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -230,12 +273,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		533578E75EB4F0A179CF8448 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Oculo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EBF2B1F313F794D2232B5880 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Oculo/Pods-Oculo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Oculo/Pods-Oculo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Oculo/Pods-Oculo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4DB71CA228EF7D4900A0E21A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F148C4F291D16CF0088B351 /* yolov5x6.mlmodel in Sources */,
+				4DCA1C38291FDD6500B70068 /* DoubleExtension.swift in Sources */,
 				FED8C3C7291E2E7E0028F659 /* TTSTool.swift in Sources */,
 				4D5D87ED291BB98B0024C16D /* UIImage_CVPixelBufferTool.swift in Sources */,
 				4D5D87F3291BBA8E0024C16D /* ObjectDetectionViewController.swift in Sources */,
@@ -244,14 +329,17 @@
 				4DB71CAE28EF7D4900A0E21A /* MainViewController.swift in Sources */,
 				FED8C3C1291CFB990028F659 /* Utilities.swift in Sources */,
 				4DB71CAA28EF7D4900A0E21A /* AppDelegate.swift in Sources */,
+				4DCA1C3A291FDD6500B70068 /* KalmanFilterType.swift in Sources */,
 				FED8C3BD291CFB880028F659 /* EnvironmentReaderViewController.swift in Sources */,
 				4296A68928F7EAEB00E769AE /* HealthkitManager.swift in Sources */,
 				FE1997F5291A1CDD001DA2CF /* TextReaderViewController.swift in Sources */,
 				4DB71CAC28EF7D4900A0E21A /* SceneDelegate.swift in Sources */,
+				4DCA1C37291FDD6500B70068 /* KalmanFilter.swift in Sources */,
 				420E3D352913B85000E16D16 /* SoundManager.swift in Sources */,
 				4D5D87F4291BBA8E0024C16D /* BoundingBoxDisplayView.swift in Sources */,
-				4D4006C1291C83D70084450B /* AreaRateChangeTracker.swift in Sources */,
 				794FC9A7291D36B700F9B6C2 /* StringExtension.swift in Sources */,
+				4DCA1C39291FDD6500B70068 /* KalmanMatrix.swift in Sources */,
+				4DCA1C3C291FDDD900B70068 /* yolov5x6.mlmodel in Sources */,
 				4D5D87F2291BBA8E0024C16D /* LabelsTableViewCell.swift in Sources */,
 				4D5D87EB291BB98B0024C16D /* MeasurementsTool.swift in Sources */,
 			);
@@ -390,6 +478,7 @@
 		};
 		4DB71CBB28EF7D4A00A0E21A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8C7DE7C2EF48EB303E8A3581 /* Pods-Oculo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -430,6 +519,7 @@
 		};
 		4DB71CBC28EF7D4A00A0E21A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 296AA837E094B9368F3DE318 /* Pods-Oculo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

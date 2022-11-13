@@ -1,6 +1,6 @@
 //
 //  LabelsTableViewCell.swift
-//  objDetectorTest
+//  Oculo
 //
 //  Created by Jinsan Kim on 2022/11/08.
 //  Copyright © 2022 IntelligentATLAS. All rights reserved.
