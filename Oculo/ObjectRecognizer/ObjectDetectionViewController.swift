@@ -76,13 +76,13 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
         return boundingBoxView
     }()
 
-    var objectRecognitionModel: yolov5x6 {
+    var objectRecognitionModel: yolov5s {
         do {
             let config = MLModelConfiguration()
-            return try yolov5x6(configuration: config)
+            return try yolov5s(configuration: config)
         } catch {
             print(error)
-            fatalError("Cannot create YOLOv5x6")
+            fatalError("Cannot create YOLOv5s")
         }
     }
 
