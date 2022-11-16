@@ -11,11 +11,16 @@ import AVFoundation
 public class TTSTool {
     /// TTS 기능의 소리 제어
     let synthesizer = AVSpeechSynthesizer()
+    
+    var speakingRate = AVSpeechUtteranceDefaultSpeechRate
+    var speakingVolume = Float(1.0)
 
     /// String을 입력 받아 TTS 수행
     func speak(_ string: String) {
         let utterance = AVSpeechUtterance(string: string)
         utterance.voice = AVSpeechSynthesisVoice(language: "ko-KR")
+        utterance.rate = speakingRate
+        utterance.volume = speakingVolume
 
         /// synthesizer에서 현재 말하는 중인 경우 즉시 중단한다. (소리가 겹쳐서 들리는 현상 방지)
         stopSpeak()
