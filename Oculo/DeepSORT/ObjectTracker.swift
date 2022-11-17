@@ -205,6 +205,57 @@ public class ObjectTracker {
         lastId = 0
     }
 
+    /**
+     상태 업데이트 메서드.
+
+     dets: Int형 자료의 어레이. 디텍션 값([x1, y1, x2, y2] 형태)들이 담겨 있음
+     ※ dets: [[x1, y1, x2, y2], [x1, y1, x2, y2], ...] 형태
+
+     각 프레임에서 **반드시** 한 번 호출되어야 함
+     리턴 값의 가장 마지막 열은 추적하는 객체의 ID이다.
+
+     **주의**: 반환되는 객체 수는 제공된 탐지 수와 다를 수 있음. 이상한 거 아니니 걱정 ㄴㄴ
+     */
+    public func update(dets: Array<Array<Double>>) -> Array<Array<Double>> {
+        var ret: Array<Array<Double>> = []
+        self.frame_count += 1
+
+        let trks = self.trackers.map({ $0.predict() })
+        let (matched, unmatched_dets, _) = associate_detections_to_trackers(detections: dets, trackers: trks)
+//        print("matches", matched)
+
+        for m in matched {
+            self.trackers[m.1].update(bbox: dets[m.0])  // MARK: 바운딩 박스 업데이트
+        }
+
+        for i in unmatched_dets { self.trackers.append(KalmanBoxTracker(bbox: dets[i])) }
+
+        var i = self.trackers.count
+
+        for trk in self.trackers.reversed() {
+            let d = trk.get_state()
+            if trk.time_since_update < 1 && (trk.hit_streak >= self.min_hits || self.frame_count <= self.min_hits) {
+                ret.append(d+[Double(trk.id+1)])
+            }
+
+            i-=1
+
+            // MARK: 트랙 제거 - 추적기가 오랫동안 업데이트 되지 않으면 삭제
+            /// self.max_age: 트래커가 업데이트할 수 없는 최대 프레임 수. 즉, 데드 프레임의 수.
+            /// 트래커는 매 프레임마다 업데이트되기 때문에 최대 프레임 수는 1로 설정
+            if trk.time_since_update > self.max_age {
+                self.trackers.remove(at: i)
+            }
+        }
+//        print("trackers", self.trackers.count)
+
+        if ret.count > 0 {
+            return ret
+        }
+
+        return []
+    }
+
 }
 
 
