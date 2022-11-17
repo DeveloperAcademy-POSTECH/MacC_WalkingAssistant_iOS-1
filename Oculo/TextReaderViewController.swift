@@ -40,12 +40,15 @@ class TextReaderViewController: UIViewController, ImageAnalysisInteractionDelega
         addConstraints()
 
         addGestures()
+        let homeButtonRotor = self.homeButtonRotor()
+        self.accessibilityCustomRotors = [homeButtonRotor]
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.textReadetTTS.stopSpeak()
         arView.session.pause()
+        
     }
 
     /// hideView의 배경색 지정
@@ -100,6 +103,27 @@ class TextReaderViewController: UIViewController, ImageAnalysisInteractionDelega
         self.view.addGestureRecognizer(tapGesture)
     }
 
+    
+    private func homeButtonRotor () -> UIAccessibilityCustomRotor {
+        // Create a custor Rotor option, it has a name that will be read by voice over, and
+        // a action that is a action called when this rotor option is interacted with.
+        // The predicate gives you info about the state of this interaction
+        let propertyRotor = UIAccessibilityCustomRotor.init(name: "홈 화면") { (predicate) -> UIAccessibilityCustomRotorItemResult? in
+            
+            // Get the direction of the movement when this rotor option is enablade
+            let forwardTO = predicate.searchDirection == UIAccessibilityCustomRotor.Direction.next
+            
+            // You can do any kind of business logic processing here
+            if forwardTO {
+                print("it works")
+                // 홈 화면으로 돌아올수 있게끔 로직을 짜야함
+            }
+            // Return the selection of voice over to the element rotorPropertyValueLabel
+            // Use this return to select the desired selection that fills the purpose of its logic
+            return UIAccessibilityCustomRotorItemResult.init()
+        }
+        return propertyRotor
+    }
     /// ARView에 그려진 영상을 LiveText로 분석 후 TTS 수행
     @objc func analyzeCurrentImageAndSpeak() {
         if let imgBuffer = self.arView.session.currentFrame?.capturedImage {
