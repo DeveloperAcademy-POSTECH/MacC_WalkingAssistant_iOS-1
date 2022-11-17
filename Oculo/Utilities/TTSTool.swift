@@ -22,7 +22,7 @@ public class TTSTool {
         if UIAccessibility.isVoiceOverRunning {
             UIAccessibility.post(notification: .announcement, argument: string)
         } else {
-            // 일반적으로 디버깅 용은 TTS가 읽음.
+            // VoiceOver를 사용하지 않는 경우, TTS가 문장을 읽음.
             let utterance = AVSpeechUtterance(string: string)
             utterance.voice = AVSpeechSynthesisVoice(language: "ko-KR")
             utterance.rate = speakingRate
