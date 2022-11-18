@@ -14,10 +14,10 @@ import Foundation
 // MARK: 바운딩 박스 간 IOU 계산
 /// [x1, y1, x2, y2] 형태
 public func iou_batch(bb_test: Array<Double>, bb_gt: Array<Double>) -> Double {
-    let xx1 = max(bb_test[0], bb_gt[0])
-    let yy1 = max(bb_test[1], bb_gt[1])
-    let xx2 = min(bb_test[2], bb_gt[2])
-    let yy2 = min(bb_test[3], bb_gt[3])
+    let xx1 = max(bb_test[0], bb_gt[0])  /// IOU의 좌하단 좌표
+    let yy1 = max(bb_test[1], bb_gt[1])  /// IOU의 우하단 좌표
+    let xx2 = min(bb_test[2], bb_gt[2])  /// IOU의 좌상단 좌표
+    let yy2 = min(bb_test[3], bb_gt[3])  /// IOU의 우상단 좌표
 
     let w = max(0, xx2 - xx1)
     let h = max(0, yy2 - yy1)
@@ -32,18 +32,18 @@ public func iou_batch(bb_test: Array<Double>, bb_gt: Array<Double>) -> Double {
 }
 
 // MARK: convert_bbox_to_z
-/// [x1, y1, x2, y2] 형태의 바운딩 박스를 [x,y,s,r] 형태의 z 값으로 반환
+/// [x1, y1, x2, y2] 형태의 바운딩 박스를 [x, y, s, r] 형태의 z 값으로 반환
 /// x, y: 바운딩 박스 중앙 좌표
 /// s: 타겟 바운딩 박스의 면적(scale/area)
 /// r: 타겟 바운딩 박스의 종횡비(aspect ratio)
-public func convert_bbox_to_z(bbox_int:Array<Double>)->Array<Double>{
+public func convert_bbox_to_z(bbox_int: Array<Double>) -> Array<Double> {
   let bbox = bbox_int.map({ Double($0) })
   let w = bbox[2] - bbox[0]
   let h = bbox[3] - bbox[1]
   let x = bbox[0] + w/2
   let y = bbox[1] + h/2
-  let s = w * h  // scale = area
-  let r = w / h  // aspect ratio
+  let s = w * h  /// scale = area
+  let r = w / h  /// aspect ratio
     return [x, y, s, r]
 }
 
@@ -51,7 +51,7 @@ public func convert_bbox_to_z(bbox_int:Array<Double>)->Array<Double>{
 /// [x, y, s, r] 형 자료로부터 바운딩 박스 가운데 지점의 좌표를 받아 와서 [x1, y1, x2, y2] 형 자료로 반환
 /// x1, y1: 바운딩 박스 좌상단 지점
 /// x2, y2: 바운딩 박스 우하단 지점
-public func convert_x_to_bbox(x:Array<Double>)->Array<Double>{
+public func convert_x_to_bbox(x:Array<Double>) -> Array<Double> {
     let w = sqrt(Double(x[2] * x[3]))
     let h = x[2] / w
     return [x[0] - w/2, x[1] - h/2, x[0] + w/2, x[1] + h/2]
@@ -144,7 +144,7 @@ public class KalmanBoxTracker {
 /// 3종류의 리스트를 반환함: matches, unmatched_detections, unmatched_trackers
 public func associate_detections_to_trackers(detections: Array<Array<Double>>, trackers: Array<Array<Double>>, iou_threshold: Double = 0.3) -> ([(Int, Int)], [Int], [Int]) {
     if trackers.count == 0 {
-        return ([], Array(0..<detections.count), [])
+        return ([], Array(0 ..< detections.count), [])
     }
 
     var iou_matrix: [[Double]] = Array(repeating: Array(repeating: 0, count: trackers.count), count: detections.count)
@@ -195,7 +195,7 @@ public class ObjectTracker {
     public var iou_threshold: Double
 
     /// SORT 알고리즘 주요 파라미터 설정
-    public init(max_age: Int=1, min_hits: Int=3, iou_threshold: Double = 0.3){
+    public init(max_age: Int=1, min_hits: Int=3, iou_threshold: Double = 0.3) {
         self.trackers = []  /// SORT를 호출하는 위치에 따라 다름
         self.min_hits = min_hits
         self.max_age = max_age
@@ -238,7 +238,7 @@ public class ObjectTracker {
                 ret.append(d+[Double(trk.id+1)])
             }
 
-            i-=1
+            i -= 1
 
             // MARK: 트랙 제거 - 추적기가 오랫동안 업데이트 되지 않으면 삭제
             /// self.max_age: 트래커가 업데이트할 수 없는 최대 프레임 수. 즉, 데드 프레임의 수.
