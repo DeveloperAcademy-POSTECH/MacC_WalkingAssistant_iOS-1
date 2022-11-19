@@ -11,8 +11,6 @@
 		420E3D382913B85600E16D16 /* defaultBeep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 420E3D372913B85600E16D16 /* defaultBeep.mp3 */; };
 		4296A68928F7EAEB00E769AE /* HealthkitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4296A68828F7EAEB00E769AE /* HealthkitManager.swift */; };
 		4D2D1206292610E3007A4C60 /* ObjectTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2D1205292610E3007A4C60 /* ObjectTracker.swift */; };
-		4D2D1208292612EA007A4C60 /* KalmanMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2D1207292612EA007A4C60 /* KalmanMatrix.swift */; };
-		4D2D120A292614C4007A4C60 /* KalmanFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2D1209292614C4007A4C60 /* KalmanFilter.swift */; };
 		4D3AD8A6292364BE00B57E0F /* yolov5s.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4D3AD8A5292364BE00B57E0F /* yolov5s.mlmodel */; };
 		4D5D87EB291BB98B0024C16D /* MeasurementsTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5D87E8291BB98B0024C16D /* MeasurementsTool.swift */; };
 		4D5D87ED291BB98B0024C16D /* UIImage_CVPixelBufferTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5D87EA291BB98B0024C16D /* UIImage_CVPixelBufferTool.swift */; };
@@ -40,8 +38,6 @@
 		4296A68828F7EAEB00E769AE /* HealthkitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthkitManager.swift; sourceTree = "<group>"; };
 		4296A68A28F7EB2200E769AE /* Oculo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Oculo.entitlements; sourceTree = "<group>"; };
 		4D2D1205292610E3007A4C60 /* ObjectTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectTracker.swift; sourceTree = "<group>"; };
-		4D2D1207292612EA007A4C60 /* KalmanMatrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KalmanMatrix.swift; sourceTree = "<group>"; };
-		4D2D1209292614C4007A4C60 /* KalmanFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KalmanFilter.swift; sourceTree = "<group>"; };
 		4D3AD8A5292364BE00B57E0F /* yolov5s.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = yolov5s.mlmodel; sourceTree = "<group>"; };
 		4D3AD8A82923678900B57E0F /* Oculo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Oculo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D5D87E8291BB98B0024C16D /* MeasurementsTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementsTool.swift; sourceTree = "<group>"; };
@@ -151,8 +147,6 @@
 			isa = PBXGroup;
 			children = (
 				4D2D1205292610E3007A4C60 /* ObjectTracker.swift */,
-				4D2D1207292612EA007A4C60 /* KalmanMatrix.swift */,
-				4D2D1209292614C4007A4C60 /* KalmanFilter.swift */,
 			);
 			path = DeepSORT;
 			sourceTree = "<group>";
@@ -241,7 +235,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D2D120A292614C4007A4C60 /* KalmanFilter.swift in Sources */,
 				FED8C3C7291E2E7E0028F659 /* TTSTool.swift in Sources */,
 				4D5D87ED291BB98B0024C16D /* UIImage_CVPixelBufferTool.swift in Sources */,
 				4D5D87F3291BBA8E0024C16D /* ObjectDetectionViewController.swift in Sources */,
@@ -252,7 +245,6 @@
 				4DB71CAA28EF7D4900A0E21A /* AppDelegate.swift in Sources */,
 				FED8C3BD291CFB880028F659 /* EnvironmentReaderViewController.swift in Sources */,
 				4296A68928F7EAEB00E769AE /* HealthkitManager.swift in Sources */,
-				4D2D1208292612EA007A4C60 /* KalmanMatrix.swift in Sources */,
 				FE1997F5291A1CDD001DA2CF /* TextReaderViewController.swift in Sources */,
 				4D3AD8A6292364BE00B57E0F /* yolov5s.mlmodel in Sources */,
 				4DB71CAC28EF7D4900A0E21A /* SceneDelegate.swift in Sources */,
