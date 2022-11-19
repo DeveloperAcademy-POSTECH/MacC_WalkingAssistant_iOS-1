@@ -156,13 +156,11 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
         let depthArray = Array(depthBufPtr)
         let confidenceArray = Array(confidenceBufPtr)
 
-//        print(depthArray[0])
-//        print(confidenceArray[0])
+        // 이차원 배열로 변환
+        let patternArray: [[Float32]] = Array(repeating: Array(repeating: 0, count: depthWidth), count: depthHeight)
+        var iter = depthArray.makeIterator()
+        let newDepthArray = patternArray.map { $0.compactMap { _ in iter.next() }}
 
-        CVPixelBufferUnlockBaseAddress(depth, .readOnly)
-        CVPixelBufferUnlockBaseAddress(confidence, .readOnly)
-
-        // MARK: ARSCNView의 이미지 캡쳐 및 CVPixelBuffer로 변환 후 인공지능 예측
         guard let image = videoPreview.snapshot().convertToBuffer() else { return }
 
         if !self.didInference {
@@ -174,6 +172,49 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
             // predict!
             self.predictUsingVision(pixelBuffer: image)
         }
+
+        // 최소값 넣을 딕셔너리 생성
+        var minValueDictionary: [String: Float32] = [:]
+
+        for prediction in predictions {
+            let detectedBoundingBox = prediction.boundingBox
+            let depthBounds = VNImageRectForNormalizedRect(detectedBoundingBox, depthHeight, depthWidth)    // 1 * 1 의 박스 좌표를 256 * 192 로 변환
+            var boundingBoxCoordinate: Array<Int> = []
+
+            boundingBoxCoordinate += [Int(round(depthBounds.minX)), Int(round(depthBounds.minY)), Int(round(depthBounds.maxX)), Int(round(depthBounds.maxY))]
+            boundingBoxCoordinate = boundingBoxCoordinate.map{ $0 < 0 ? 0 : $0 }    // 이상치 수정
+
+            var convertedDepth = convertToDepthCoordinate(coordinate: boundingBoxCoordinate)    // YOLO 좌표 -> depthMap 좌표 변환
+
+            convertedDepth = convertedDepth.map{ $0 < 0 ? 0 : $0 }
+            var minDepth: Float32 = 10.0
+            var minDepthCoordinate: String = ""
+
+            for y in convertedDepth[1]...convertedDepth[3] {
+                let slice = newDepthArray[y][convertedDepth[0]...convertedDepth[2]]
+                guard let minData = slice.min() else { return }
+                if minData < minDepth {
+                    minDepth = minData
+                    minDepthCoordinate = "\(String(slice.firstIndex(of: minData)!)), \(String(y))"  //  최솟값이 새로 생길때마다 좌표정보 업데이트
+                }
+            }
+            minValueDictionary[minDepthCoordinate] = minDepth   // depth 최소값을 좌표: 깊이 쌍으로 딕셔너리에 추가
+        }
+
+        print(minValueDictionary)
+
+        CVPixelBufferUnlockBaseAddress(depth, .readOnly)
+        CVPixelBufferUnlockBaseAddress(confidence, .readOnly)
+    }
+
+    private func convertToDepthCoordinate(coordinate: Array<Int>) -> Array<Int> {
+        var convertedCoordinate: Array<Int> = []
+        convertedCoordinate.append(255 - coordinate[3])
+        convertedCoordinate.append(191 - coordinate[2])
+        convertedCoordinate.append(255 - coordinate[1])
+        convertedCoordinate.append(191 - coordinate[0])
+
+        return convertedCoordinate
     }
 
     func session(_ session: ARSession, didFailWithError error: Error) {
