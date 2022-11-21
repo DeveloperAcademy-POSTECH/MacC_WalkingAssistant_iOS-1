@@ -19,7 +19,7 @@ class Plane: SCNNode {
     
     let meshNode: SCNNode
     let extentNode: SCNNode
-    var classificationNode: SCNNode?
+    var distanceNode: SCNNode?
     
     /// - Tag: VisualizePlane
     init(anchor: ARPlaneAnchor, in sceneView: ARSCNView) {
@@ -52,16 +52,14 @@ class Plane: SCNNode {
         addChildNode(meshNode)
         addChildNode(extentNode)
         
-        // Display the plane's classification, if supported on the device
-        if #available(iOS 12.0, *), ARPlaneAnchor.isClassificationSupported {
-            let classification = anchor.classification.description
-            let textNode = self.makeTextNode(classification)
-            classificationNode = textNode
-            // Change the pivot of the text node to its center
-            textNode.centerAlign()
-            // Add the classification node as a child node so that it displays the classification
-            extentNode.addChildNode(textNode)
-        }
+        // Display the plane's distance from camera
+        let distance = String(simd_distance(meshNode.simdTransform.columns.3, (sceneView.session.currentFrame?.camera.transform.columns.3)!))
+        let textNode = self.makeTextNode(distance)
+        distanceNode = textNode
+        // Change the pivot of the text node to its center
+        textNode.centerAlign()
+        // Add the distance node as a child node so that it displays the classification
+        extentNode.addChildNode(textNode)
         #endif
     }
     

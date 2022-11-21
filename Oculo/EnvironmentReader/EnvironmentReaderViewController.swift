@@ -16,6 +16,7 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
     // MARK: - IBOutlets
     
     var sceneView = ARSCNView()
+    var ttsTool = TTSTool()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,17 +109,16 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
             plane.extentNode.simdPosition = planeAnchor.center
         }
         
-        // Update the plane's classification and the text position
-        if #available(iOS 12.0, *),
-            let classificationNode = plane.classificationNode,
-            let classificationGeometry = classificationNode.geometry as? SCNText {
-            let currentClassification = planeAnchor.classification.description
-            if let oldClassification = classificationGeometry.string as? String, oldClassification != currentClassification {
-                classificationGeometry.string = currentClassification
-                classificationNode.centerAlign()
+        // Update the plane's distance and the text position
+        if let distanceNode = plane.distanceNode,
+           let distanceGeometry = distanceNode.geometry as? SCNText {
+            let currentDistance = String(simd_distance(node.simdTransform.columns.3, (sceneView.session.currentFrame?.camera.transform.columns.3)!))
+            // print(currentDistance)
+            if let oldDistance = distanceGeometry.string as? String, oldDistance != currentDistance {
+                distanceGeometry.string = currentDistance
+                distanceNode.centerAlign()
             }
         }
-        
     }
 
     // MARK: - ARSessionDelegate
@@ -185,19 +185,19 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
         switch trackingState {
         case .normal where frame.anchors.isEmpty:
             // No planes detected; provide instructions for this app's AR interactions.
-            message = "Move the device around to detect horizontal and vertical surfaces."
+            message = "스마트폰을 좌우, 위아래로 천천히 흔들어주세요."
             
         case .notAvailable:
-            message = "Tracking unavailable."
+            message = "환경 인식 기능에 문제가 발생했습니다."
             
         case .limited(.excessiveMotion):
-            message = "Tracking limited - Move the device more slowly."
+            message = "디바이스를 천천히 움직여주세요."
             
         case .limited(.insufficientFeatures):
-            message = "Tracking limited - Point the device at an area with visible surface detail, or improve lighting conditions."
+            message = "환경 인식을 할 수 없습니다."
             
         case .limited(.initializing):
-            message = "Initializing AR session."
+            message = "환경 인식 기능을 초기화 중입니다."
             
         default:
             // No feedback needed when tracking is normal and planes are visible.
@@ -206,7 +206,7 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
 
         }
         if message != "" {
-            print(message)
+            ttsTool.speak(message)
         }
     }
 
