@@ -72,7 +72,7 @@
 
 ### ④ Footer(옵셔널; optional)
 - 푸터도 바디와 마찬가지로 옵션입니다.<br>The footer section is another optional section to write<br><br>
-- 푸터의 경우 일반적으로 트래킹하는 이슈가 있는 경우 트래커 ID를 표기할 때 사용합니다.<br>Typically, the footer is to display the current tracking issue if there is one<br><br>
+- 푸터의 경우 일반적으로 트래킹하는 이슈가 있는 경우 추적기(트래커) ID를 표기할 때 사용합니다.<br>Typically, the footer is to display the current tracking issue if there is one<br><br>
 - '#' 를 누르면 이슈 번호나 커밋 번호를 확인할 수 있습니다.<br>You can see the issue number or commit number when you put a '**#**' character<br><br>
 - 필요한 경우 푸터를 남겨주세요!<br>Write the footer if it is required to do so<br>
 <br><br><br>
