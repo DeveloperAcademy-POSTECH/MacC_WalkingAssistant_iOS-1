@@ -159,7 +159,7 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
         let depthArray = Array(depthBufPtr)
         let confidenceArray = Array(confidenceBufPtr)
 
-        // 이차원 배열로 변환
+        /// 이차원 배열로 변환
         let patternArray: [[Float32]] = Array(repeating: Array(repeating: 0, count: depthWidth), count: depthHeight)
         var iter = depthArray.makeIterator()
         let newDepthArray = patternArray.map { $0.compactMap { _ in iter.next() }}
