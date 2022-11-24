@@ -112,10 +112,25 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
         // Update the plane's distance and the text position
         if let distanceNode = plane.distanceNode,
            let distanceGeometry = distanceNode.geometry as? SCNText {
-            let currentDistance = String(simd_distance(node.simdTransform.columns.3, (sceneView.session.currentFrame?.camera.transform.columns.3)!))
+            let currentDistance = simd_distance(node.simdTransform.columns.3, (sceneView.session.currentFrame?.camera.transform.columns.3)!)
+            let currentSteps = healthKitManager.calToStepCount(meter: Double(currentDistance))
             // print(currentDistance)
-            if let oldDistance = distanceGeometry.string as? String, oldDistance != currentDistance {
-                distanceGeometry.string = currentDistance
+            if let oldSteps = distanceGeometry.string as? String, oldSteps != String(currentSteps) {
+                distanceGeometry.string = String(currentSteps)
+                
+                if let pointOfView = sceneView.pointOfView {
+                    // 현재는 문이 보이지 않는 경우 TTS를 출력하지 않습니다.
+                    let isMaybeVisible = renderer.isNode(plane.presentation, insideFrustumOf: pointOfView)
+                    if(isMaybeVisible) {
+                        switch currentSteps
+                        {
+                        case 0:
+                            ttsTool.speak("근처에 문이 있습니다")
+                        default:
+                            ttsTool.speak("문으로 부터 약 \(currentSteps) 걸음 떨어져 있습니다")
+                        }
+                    }
+                }
                 distanceNode.centerAlign()
             }
         }
@@ -185,7 +200,7 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
         switch trackingState {
         case .normal where frame.anchors.isEmpty:
             // No planes detected; provide instructions for this app's AR interactions.
-            message = "스마트폰을 좌우, 위아래로 천천히 흔들어주세요."
+            message = "스마트폰을 좌우, 위아래로 천천히 움직여주세요."
             
         case .notAvailable:
             message = "환경 인식 기능에 문제가 발생했습니다."

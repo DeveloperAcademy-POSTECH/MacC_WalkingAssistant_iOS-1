@@ -35,6 +35,8 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         super.viewWillAppear(animated)
         // set
         UIDevice.current.isProximityMonitoringEnabled = true
+        // 처음 앱을 작동시켰을때 healthKit Manager에서 사용자의 보폭 정보를 불러오기 위한 시험 코드입니다.
+        print(healthKitManager.calToStepCount(meter: 10))
     }
 
     override func viewWillDisappear(_ animated: Bool) {

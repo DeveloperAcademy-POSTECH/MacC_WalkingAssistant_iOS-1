@@ -53,8 +53,9 @@ class Plane: SCNNode {
         addChildNode(extentNode)
         
         // Display the plane's distance from camera
-        let distance = String(simd_distance(meshNode.simdTransform.columns.3, (sceneView.session.currentFrame?.camera.transform.columns.3)!))
-        let textNode = self.makeTextNode(distance)
+        let distance = simd_distance(meshNode.simdTransform.columns.3, (sceneView.session.currentFrame?.camera.transform.columns.3)!)
+        let steps = String(healthKitManager.calToStepCount(meter: Double(distance)))
+        let textNode = self.makeTextNode(steps)
         distanceNode = textNode
         // Change the pivot of the text node to its center
         textNode.centerAlign()
