@@ -8,6 +8,7 @@
 
 import Foundation
 import AVFoundation
+import UIKit
 
 class SoundManager {
     /// 출처  https://stackoverflow.com/questions/66145794/avaudioengine-positional-audio-not-working-with-playandrecord-audio-session-cat
@@ -16,7 +17,15 @@ class SoundManager {
     let defaultBeep = "defaultBeep.mp3"  /// 출처 https://www.soundjay.com/censor-beep-sound-effect.html
     let audioPlayerNode = AVAudioPlayerNode() /// 오디오 플레어어 노드 선언
     let environmentNode = AVAudioEnvironmentNode()  /// 오디오 환경 노드 선언
+    
+    let synthesizer = AVSpeechSynthesizer()
+    var speakingRate = AVSpeechUtteranceDefaultSpeechRate
+    var speakingVolume = Float(1.0)
+    
     ///대략적인 오디오 엔진 구조 : AVAudioEnvironmentNode -> AVAudioPlayerNode -> 재생 의 과정을 거친다. 여기선 AVAudioEnvironmentNode노드는 사용자의 위치를, AVAudioPlayerNode는 플레이어의 위치를 설정한다고 생각하면 편하다
+    
+
+    /// String을 입력 받아 TTS 수행
     
     init() {
         // MARK: AVAudioSession 설정
@@ -49,12 +58,34 @@ class SoundManager {
 
     // TODO: 블루투스 재생 뿐 아니라 스피커로 재생하는 방법 필요
     func play(x:Float, y:Float, z:Float, TTS:String = "defaultBeep.mp3") {
-        let defaultBeepUrl = Bundle.main.url(forResource: self.defaultBeep, withExtension: nil)  /// defaultBeep의 URL
+        let defaultBeepUrl = Bundle.main.url(forResource: TTS, withExtension: nil)  /// defaultBeep의 URL
         let defaultBeepFile = try! AVAudioFile(forReading: defaultBeepUrl!)  /// defaultBeep 의 음원 파일을 읽어 와서
         self.audioPlayerNode.scheduleFile(defaultBeepFile, at: nil, completionHandler: nil)  /// audioPlayerNode에 등록
         
         self.audioPlayerNode.position = AVAudio3DPoint(x: x, y: y, z: z)  /// 소리가 나는 위치 포지셔닝
         self.audioPlayerNode.play()  /// 음원 재생 시작
     }
+    
+    func speak(_ string: String) {
+        // VoiceOver와 충돌을 방지하기 위해 VoiceOver가 문장을 읽어 주는 것으로 변경하였습니다.
+        if UIAccessibility.isVoiceOverRunning {
+            UIAccessibility.post(notification: .announcement, argument: string)
+        } else {
+            // VoiceOver를 사용하지 않는 경우, TTS가 문장을 읽음.
+            let utterance = AVSpeechUtterance(string: string)
+            utterance.voice = AVSpeechSynthesisVoice(language: "ko-KR")
+            utterance.rate = speakingRate
+            utterance.volume = speakingVolume
 
+            /// synthesizer에서 현재 말하는 중인 경우 즉시 중단한다. (소리가 겹쳐서 들리는 현상 방지)
+            stopSpeak()
+            synthesizer.speak(utterance)
+        }
+    }
+
+    func stopSpeak() {
+        if (synthesizer.isSpeaking) {
+            synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
+        }
+    }
 }
