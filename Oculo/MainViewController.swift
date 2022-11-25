@@ -12,7 +12,8 @@ import AVFoundation
 import Vision
 
 class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
-
+    var healthKitManager = HealthKitManager()
+    
     /// Variable for UI changing
     var selected = 0
 

@@ -22,7 +22,7 @@ class TextReaderViewController: UIViewController, ImageAnalysisInteractionDelega
     let analyzer = ImageAnalyzer()
     let interaction = ImageAnalysisInteraction()
     
-    let ttsTool = TTSTool()
+    let soundManager = SoundManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +37,7 @@ class TextReaderViewController: UIViewController, ImageAnalysisInteractionDelega
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.ttsTool.stopSpeak()
+        self.soundManager.stopSpeak()
         arView.session.pause()
     }
 
@@ -90,9 +90,9 @@ class TextReaderViewController: UIViewController, ImageAnalysisInteractionDelega
                         
                         if (analysis.hasResults(for: .text)) {
                             print(analysis.transcript)
-                            self.ttsTool.speak(analysis.transcript)
+                            self.soundManager.speak(analysis.transcript)
                         } else {
-                            self.ttsTool.speak("글자가 인식되지 않았습니다.")
+                            self.soundManager.speak("글자가 인식되지 않았습니다.")
                         }
                     }
                 }
