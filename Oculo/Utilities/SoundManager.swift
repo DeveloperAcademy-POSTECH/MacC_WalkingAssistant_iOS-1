@@ -57,8 +57,8 @@ class SoundManager {
     }
 
     // TODO: 블루투스 재생 뿐 아니라 스피커로 재생하는 방법 필요
-    func play(x:Float, y:Float, z:Float, TTS:String = "defaultBeep.mp3") {
-        let defaultBeepUrl = Bundle.main.url(forResource: TTS, withExtension: nil)  /// defaultBeep의 URL
+    func beepPlay(x:Float, y:Float, z:Float,beepSource:String = "defaultBeep.mp3") {
+        let defaultBeepUrl = Bundle.main.url(forResource: beepSource, withExtension: nil)  /// defaultBeep의 URL
         let defaultBeepFile = try! AVAudioFile(forReading: defaultBeepUrl!)  /// defaultBeep 의 음원 파일을 읽어 와서
         self.audioPlayerNode.scheduleFile(defaultBeepFile, at: nil, completionHandler: nil)  /// audioPlayerNode에 등록
         
