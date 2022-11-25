@@ -199,3 +199,6 @@ class HealthKitManager {
 //        healthStore.execute(query)
 //    }
 }
+
+// HealthKitManager를 다양한 곳에서 사용하기 때문에 전역 변수로 따로 빼두었습니다.
+var healthKitManager = HealthKitManager()
