@@ -98,6 +98,16 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
             return
         }
         
+        // 화면 상에서 문이 보이지 않는 경우 TTS를 출력하지 않습니다.
+        var isMaybeVisible = false
+        if let pointOfView = sceneView.pointOfView {
+            isMaybeVisible = renderer.isNode(plane.presentation, insideFrustumOf: pointOfView)
+            if !isMaybeVisible {
+                sceneView.session.remove(anchor: anchor)
+                return
+            }
+        }
+        
         // Update ARSCNPlaneGeometry to the anchor's new estimated shape.
         if let planeGeometry = plane.meshNode.geometry as? ARSCNPlaneGeometry {
             planeGeometry.update(from: planeAnchor.geometry)
@@ -135,6 +145,10 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
                 distanceNode.centerAlign()
             }
         }
+    }
+    
+    func renderer(_ renderer: SCNSceneRenderer, didRemove node: SCNNode, for anchor: ARAnchor) {
+        
     }
 
     // MARK: - ARSessionDelegate
