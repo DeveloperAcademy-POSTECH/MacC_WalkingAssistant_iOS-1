@@ -16,7 +16,8 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
     // MARK: - IBOutlets
     
     var sceneView = ARSCNView()
-    var ttsTool = TTSTool()
+    var soundManager = SoundManager()
+    var healthKitManager = HealthKitManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,9 +126,9 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
                         switch currentSteps
                         {
                         case 0:
-                            ttsTool.speak("근처에 문이 있습니다")
+                            soundManager.speak("근처에 문이 있습니다")
                         default:
-                            ttsTool.speak("문으로 부터 약 \(currentSteps) 걸음 떨어져 있습니다")
+                            soundManager.speak("문으로 부터 약 \(currentSteps) 걸음 떨어져 있습니다")
                         }
                     }
                 }
@@ -221,7 +222,7 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
 
         }
         if message != "" {
-            ttsTool.speak(message)
+            soundManager.speak(message)
         }
     }
 

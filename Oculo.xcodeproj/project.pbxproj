@@ -11,6 +11,7 @@
 		420E3D382913B85600E16D16 /* defaultBeep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 420E3D372913B85600E16D16 /* defaultBeep.mp3 */; };
 		4282691B2930BAD800A1D6F2 /* yolov5s.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4282691A2930BAD800A1D6F2 /* yolov5s.mlmodel */; };
 		4296A68928F7EAEB00E769AE /* HealthkitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4296A68828F7EAEB00E769AE /* HealthkitManager.swift */; };
+		42E2C0292930900B008E62AA /* yolov5s.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 42E2C0282930900B008E62AA /* yolov5s.mlmodel */; };
 		4D2D1206292610E3007A4C60 /* ObjectTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2D1205292610E3007A4C60 /* ObjectTracker.swift */; };
 		4D5D87EB291BB98B0024C16D /* MeasurementsTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5D87E8291BB98B0024C16D /* MeasurementsTool.swift */; };
 		4D5D87ED291BB98B0024C16D /* UIImage_CVPixelBufferTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5D87EA291BB98B0024C16D /* UIImage_CVPixelBufferTool.swift */; };
@@ -29,7 +30,6 @@
 		FED8C3BF291CFB930028F659 /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED8C3BE291CFB930028F659 /* Plane.swift */; };
 		FED8C3C1291CFB990028F659 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED8C3C0291CFB990028F659 /* Utilities.swift */; };
 		FED8C3C5291CFF310028F659 /* Assets.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = FED8C3C4291CFF310028F659 /* Assets.scnassets */; };
-		FED8C3C7291E2E7E0028F659 /* TTSTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED8C3C6291E2E7E0028F659 /* TTSTool.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +38,7 @@
 		4282691A2930BAD800A1D6F2 /* yolov5s.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = yolov5s.mlmodel; sourceTree = "<group>"; };
 		4296A68828F7EAEB00E769AE /* HealthkitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthkitManager.swift; sourceTree = "<group>"; };
 		4296A68A28F7EB2200E769AE /* Oculo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Oculo.entitlements; sourceTree = "<group>"; };
+		42E2C0282930900B008E62AA /* yolov5s.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = yolov5s.mlmodel; path = ../../../../../../Downloads/yolov5s.mlmodel; sourceTree = "<group>"; };
 		4D2D1205292610E3007A4C60 /* ObjectTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectTracker.swift; sourceTree = "<group>"; };
 		4D3AD8A82923678900B57E0F /* Oculo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Oculo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D5D87E8291BB98B0024C16D /* MeasurementsTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementsTool.swift; sourceTree = "<group>"; };
@@ -59,7 +60,6 @@
 		FED8C3BE291CFB930028F659 /* Plane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
 		FED8C3C0291CFB990028F659 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		FED8C3C4291CFF310028F659 /* Assets.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Assets.scnassets; sourceTree = "<group>"; };
-		FED8C3C6291E2E7E0028F659 /* TTSTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTSTool.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +95,8 @@
 				4D5D87E8291BB98B0024C16D /* MeasurementsTool.swift */,
 				4D5D87EA291BB98B0024C16D /* UIImage_CVPixelBufferTool.swift */,
 				794FC9A6291D36B700F9B6C2 /* StringExtension.swift */,
-				FED8C3C6291E2E7E0028F659 /* TTSTool.swift */,
+				4296A68828F7EAEB00E769AE /* HealthkitManager.swift */,
+				420E3D342913B85000E16D16 /* SoundManager.swift */,
 				794FC9A4291D364200F9B6C2 /* Localizable.strings */,
 			);
 			path = Utilities;
@@ -134,8 +135,6 @@
 				4DB71CAB28EF7D4900A0E21A /* SceneDelegate.swift */,
 				4DB71CAD28EF7D4900A0E21A /* MainViewController.swift */,
 				FE1997F0290A77C2001DA2CF /* SettingViewController.swift */,
-				4296A68828F7EAEB00E769AE /* HealthkitManager.swift */,
-				420E3D342913B85000E16D16 /* SoundManager.swift */,
 				4DB71CB228EF7D4A00A0E21A /* Assets.xcassets */,
 				FED8C3C4291CFF310028F659 /* Assets.scnassets */,
 				4DB71CB728EF7D4A00A0E21A /* Info.plist */,
@@ -235,13 +234,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FED8C3C7291E2E7E0028F659 /* TTSTool.swift in Sources */,
 				4D5D87ED291BB98B0024C16D /* UIImage_CVPixelBufferTool.swift in Sources */,
 				4D5D87F3291BBA8E0024C16D /* ObjectDetectionViewController.swift in Sources */,
 				FE1997F1290A77C2001DA2CF /* SettingViewController.swift in Sources */,
 				4282691B2930BAD800A1D6F2 /* yolov5s.mlmodel in Sources */,
 				FED8C3BF291CFB930028F659 /* Plane.swift in Sources */,
 				4DB71CAE28EF7D4900A0E21A /* MainViewController.swift in Sources */,
+				42E2C0292930900B008E62AA /* yolov5s.mlmodel in Sources */,
 				FED8C3C1291CFB990028F659 /* Utilities.swift in Sources */,
 				4DB71CAA28EF7D4900A0E21A /* AppDelegate.swift in Sources */,
 				FED8C3BD291CFB880028F659 /* EnvironmentReaderViewController.swift in Sources */,

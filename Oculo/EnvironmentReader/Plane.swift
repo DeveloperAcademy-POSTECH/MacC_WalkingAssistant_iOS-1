@@ -20,7 +20,7 @@ class Plane: SCNNode {
     let meshNode: SCNNode
     let extentNode: SCNNode
     var distanceNode: SCNNode?
-    
+    var healthKitManager = HealthKitManager()
     /// - Tag: VisualizePlane
     init(anchor: ARPlaneAnchor, in sceneView: ARSCNView) {
         
