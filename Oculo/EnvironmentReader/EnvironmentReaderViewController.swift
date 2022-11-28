@@ -20,6 +20,13 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
     var soundManager = SoundManager()
     var healthKitManager = HealthKitManager()
     
+    // Node의 위치를 구분하기 위해 화면의 크기를 가져옵니다.
+    var sceneWidth:CGFloat = 0
+    
+    // 방향에 대한 안내를 할 경우, TTS 출돌 현상을 방지하기 위해 Flag를 만들었습니다.
+    var alreadySpoke = false
+    
+    // 하나의 문만 인식하고 안내하기 위해 plane과 anchor를 담는 array
     private var planes = [UUID: Plane]()
     private var anchors = [UUID: ARAnchor]()
     
@@ -56,6 +63,8 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
         
         // Show debug UI to view performance metrics (e.g. frames per second).
         self.sceneView.showsStatistics = true
+        
+        self.sceneWidth = self.sceneView.frame.width
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -95,7 +104,7 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         // Update only anchors and nodes set up by `renderer(_:didAdd:for:)`.
         guard let planeAnchor = anchor as? ARPlaneAnchor,
-            let plane = node.childNodes.first as? Plane
+              let plane = node.childNodes.first as? Plane
             else { return }
         
         if planeAnchor.classification.description != ARPlaneAnchor.Classification.door.description
@@ -113,6 +122,20 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
             plane.extentNode.simdPosition = planeAnchor.center
         }
         
+        if let pointOfView = sceneView.pointOfView {
+            // 화면상에 문이 보이지 않는 경우 방향을 안내압니다.
+            let isMaybeVisible = renderer.isNode(plane.presentation, insideFrustumOf: pointOfView)
+            if (!isMaybeVisible) {
+                getIfHeIsLookingNew(sceneWidth: sceneWidth, nodePosition: self.sceneView.projectPoint(plane.position))
+                return
+            } else {
+                if alreadySpoke {
+                    soundManager.speak("문이 다시 감지되었습니다")
+                    alreadySpoke = false
+                }
+            }
+        }
+        
         // Update the plane's distance and the text position
         if let distanceNode = plane.distanceNode,
            let distanceGeometry = distanceNode.geometry as? SCNText {
@@ -125,7 +148,7 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
                 if let pointOfView = sceneView.pointOfView {
                     // 화면상에 문이 보이지 않는 경우 TTS를 출력하지 않습니다.
                     let isMaybeVisible = renderer.isNode(plane.presentation, insideFrustumOf: pointOfView)
-                    if(isMaybeVisible) {
+                    if (isMaybeVisible) {
                         switch currentSteps
                         {
                         case 0:
@@ -228,20 +251,10 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
             soundManager.speak(message)
         }
     }
-/*
-    private func resetTracking() {
-        let configuration = ARWorldTrackingConfiguration()
-        configuration.planeDetection = [.vertical]
-        self.planes.removeAll()
-        self.anchors.removeAll()
-        self.sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
-    }
- */
     
     func createInitializeButton() {
         initializeButton.addTarget(self, action: #selector(resetTracking), for: .touchUpInside)
         initializeButton.setTitle("문 인식 초기화", for: .normal)
-        initializeButton.setTitle("", for: .selected)
     }
     
     func addConstraints() {
@@ -270,5 +283,24 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
         self.planes.removeAll()
         self.anchors.removeAll()
         self.sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+    }
+    
+    // source: https://stackoverflow.com/questions/41579755/how-to-determine-if-an-scnnode-is-left-or-right-of-the-view-direction-of-a-camer
+    func getIfHeIsLookingNew(sceneWidth: CGFloat, nodePosition: SCNVector3) {
+        if alreadySpoke {
+            return
+        }
+        if (nodePosition.z < 1) {
+            if ( nodePosition.x > (Float(sceneWidth)) ) {
+                soundManager.speak("문이 오른쪽에 있습니다")
+            } else if (nodePosition.x < 0) {
+                soundManager.speak("문이 왼쪽에 있습니다")
+            }
+        } else if (nodePosition.x < 0) {
+            soundManager.speak("문이 오른쪽에 있습니다")
+        } else {
+            soundManager.speak("문이 왼쪽에 있습니다")
+        }
+        alreadySpoke = true
     }
 }
