@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		420E3D352913B85000E16D16 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420E3D342913B85000E16D16 /* SoundManager.swift */; };
 		420E3D382913B85600E16D16 /* defaultBeep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 420E3D372913B85600E16D16 /* defaultBeep.mp3 */; };
+		4282691B2930BAD800A1D6F2 /* yolov5s.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4282691A2930BAD800A1D6F2 /* yolov5s.mlmodel */; };
 		4296A68928F7EAEB00E769AE /* HealthkitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4296A68828F7EAEB00E769AE /* HealthkitManager.swift */; };
 		42E2C0292930900B008E62AA /* yolov5s.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 42E2C0282930900B008E62AA /* yolov5s.mlmodel */; };
 		4D2D1206292610E3007A4C60 /* ObjectTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2D1205292610E3007A4C60 /* ObjectTracker.swift */; };
@@ -34,6 +35,7 @@
 /* Begin PBXFileReference section */
 		420E3D342913B85000E16D16 /* SoundManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		420E3D372913B85600E16D16 /* defaultBeep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = defaultBeep.mp3; sourceTree = "<group>"; };
+		4282691A2930BAD800A1D6F2 /* yolov5s.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = yolov5s.mlmodel; sourceTree = "<group>"; };
 		4296A68828F7EAEB00E769AE /* HealthkitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthkitManager.swift; sourceTree = "<group>"; };
 		4296A68A28F7EB2200E769AE /* Oculo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Oculo.entitlements; sourceTree = "<group>"; };
 		42E2C0282930900B008E62AA /* yolov5s.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = yolov5s.mlmodel; path = ../../../../../../Downloads/yolov5s.mlmodel; sourceTree = "<group>"; };
@@ -82,7 +84,7 @@
 		4D41E06C2913C34A00A05726 /* AIModels */ = {
 			isa = PBXGroup;
 			children = (
-				42E2C0282930900B008E62AA /* yolov5s.mlmodel */,
+				4282691A2930BAD800A1D6F2 /* yolov5s.mlmodel */,
 			);
 			path = AIModels;
 			sourceTree = "<group>";
@@ -235,6 +237,7 @@
 				4D5D87ED291BB98B0024C16D /* UIImage_CVPixelBufferTool.swift in Sources */,
 				4D5D87F3291BBA8E0024C16D /* ObjectDetectionViewController.swift in Sources */,
 				FE1997F1290A77C2001DA2CF /* SettingViewController.swift in Sources */,
+				4282691B2930BAD800A1D6F2 /* yolov5s.mlmodel in Sources */,
 				FED8C3BF291CFB930028F659 /* Plane.swift in Sources */,
 				4DB71CAE28EF7D4900A0E21A /* MainViewController.swift in Sources */,
 				42E2C0292930900B008E62AA /* yolov5s.mlmodel in Sources */,
