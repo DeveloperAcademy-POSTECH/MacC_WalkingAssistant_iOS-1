@@ -140,8 +140,8 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
         if let distanceNode = plane.distanceNode,
            let distanceGeometry = distanceNode.geometry as? SCNText {
             let currentDistance = simd_distance(node.simdTransform.columns.3, (sceneView.session.currentFrame?.camera.transform.columns.3)!)
-            let currentSteps = healthKitManager.calToStepCount(meter: Double(currentDistance))
-            // print(currentDistance)
+            var currentSteps = healthKitManager.calToStepCount(meter: Double(currentDistance))
+            if (currentSteps > 10) { currentSteps = 10 }
             if let oldSteps = distanceGeometry.string as? String, oldSteps != String(currentSteps) {
                 distanceGeometry.string = String(currentSteps)
                 
@@ -153,8 +153,26 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
                         {
                         case 0:
                             soundManager.speak("근처에 문이 있습니다")
+                        case 1:
+                            soundManager.speak("문으로 부터 약 한 걸음 떨어져 있습니다")
+                        case 2:
+                            soundManager.speak("문으로 부터 약 두 걸음 떨어져 있습니다")
+                        case 3:
+                            soundManager.speak("문으로 부터 약 세 걸음 떨어져 있습니다")
+                        case 4:
+                            soundManager.speak("문으로 부터 약 네 걸음 떨어져 있습니다")
+                        case 5:
+                            soundManager.speak("문으로 부터 약 다섯 걸음 떨어져 있습니다")
+                        case 6:
+                            soundManager.speak("문으로 부터 약 여섯 걸음 떨어져 있습니다")
+                        case 7:
+                            soundManager.speak("문으로 부터 약 일곱 걸음 떨어져 있습니다")
+                        case 8:
+                            soundManager.speak("문으로 부터 약 여덟 걸음 떨어져 있습니다")
+                        case 9:
+                            soundManager.speak("문으로 부터 약 아홉 걸음 떨어져 있습니다")
                         default:
-                            soundManager.speak("문으로 부터 약 \(currentSteps) 걸음 떨어져 있습니다")
+                            soundManager.speak("문으로 부터 멀리 떨어져 있습니다. 화면을 눌러 인식을 초기화 해주세요")
                         }
                     }
                 }
