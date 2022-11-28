@@ -43,7 +43,7 @@ class TextReaderViewController: UIViewController, ImageAnalysisInteractionDelega
 
     /// hideView의 배경색 지정
     func createTextReadButton() {
-        textReadButton.backgroundColor = .blue
+        textReadButton.setTitle("글자 인식", for: .normal)
         textReadButton.addTarget(self, action: #selector(analyzeCurrentImageAndSpeak), for: .touchUpInside)
     }
 
