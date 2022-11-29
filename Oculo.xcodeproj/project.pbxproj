@@ -11,9 +11,6 @@
 		420E3D382913B85600E16D16 /* defaultBeep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 420E3D372913B85600E16D16 /* defaultBeep.mp3 */; };
 		4282691B2930BAD800A1D6F2 /* yolov5s.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4282691A2930BAD800A1D6F2 /* yolov5s.mlmodel */; };
 		4296A68928F7EAEB00E769AE /* HealthkitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4296A68828F7EAEB00E769AE /* HealthkitManager.swift */; };
-		4D1DC2472930B9830059D80F /* DeepSORT in Resources */ = {isa = PBXBuildFile; fileRef = 4D1DC2462930B9830059D80F /* DeepSORT */; };
-		42E2C0292930900B008E62AA /* yolov5s.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 42E2C0282930900B008E62AA /* yolov5s.mlmodel */; };
-		4D2D1206292610E3007A4C60 /* ObjectTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2D1205292610E3007A4C60 /* ObjectTracker.swift */; };
 		4D5D87EB291BB98B0024C16D /* MeasurementsTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5D87E8291BB98B0024C16D /* MeasurementsTool.swift */; };
 		4D5D87ED291BB98B0024C16D /* UIImage_CVPixelBufferTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5D87EA291BB98B0024C16D /* UIImage_CVPixelBufferTool.swift */; };
 		4D5D87F2291BBA8E0024C16D /* LabelsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5D87EF291BBA8E0024C16D /* LabelsTableViewCell.swift */; };
@@ -23,6 +20,7 @@
 		4DB71CAC28EF7D4900A0E21A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB71CAB28EF7D4900A0E21A /* SceneDelegate.swift */; };
 		4DB71CAE28EF7D4900A0E21A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB71CAD28EF7D4900A0E21A /* MainViewController.swift */; };
 		4DB71CB328EF7D4A00A0E21A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DB71CB228EF7D4A00A0E21A /* Assets.xcassets */; };
+		4DD509532935B13600AE2766 /* DeepSORT in Resources */ = {isa = PBXBuildFile; fileRef = 4DD509522935B13600AE2766 /* DeepSORT */; };
 		794FC9A2291D364200F9B6C2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 794FC9A4291D364200F9B6C2 /* Localizable.strings */; };
 		794FC9A7291D36B700F9B6C2 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794FC9A6291D36B700F9B6C2 /* StringExtension.swift */; };
 		FE1997F1290A77C2001DA2CF /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1997F0290A77C2001DA2CF /* SettingViewController.swift */; };
@@ -39,10 +37,7 @@
 		4282691A2930BAD800A1D6F2 /* yolov5s.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = yolov5s.mlmodel; sourceTree = "<group>"; };
 		4296A68828F7EAEB00E769AE /* HealthkitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthkitManager.swift; sourceTree = "<group>"; };
 		4296A68A28F7EB2200E769AE /* Oculo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Oculo.entitlements; sourceTree = "<group>"; };
-		4D1DC2462930B9830059D80F /* DeepSORT */ = {isa = PBXFileReference; lastKnownFileType = folder; path = DeepSORT; sourceTree = "<group>"; };
-		42E2C0282930900B008E62AA /* yolov5s.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = yolov5s.mlmodel; path = ../../../../../../Downloads/yolov5s.mlmodel; sourceTree = "<group>"; };
 		42AB17A629347A58004C19B8 /* yolov5s.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = yolov5s.mlmodel; sourceTree = "<group>"; };
-		4D2D1205292610E3007A4C60 /* ObjectTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectTracker.swift; sourceTree = "<group>"; };
 		4D3AD8A82923678900B57E0F /* Oculo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Oculo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D5D87E8291BB98B0024C16D /* MeasurementsTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementsTool.swift; sourceTree = "<group>"; };
 		4D5D87EA291BB98B0024C16D /* UIImage_CVPixelBufferTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage_CVPixelBufferTool.swift; sourceTree = "<group>"; };
@@ -54,6 +49,7 @@
 		4DB71CAD28EF7D4900A0E21A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		4DB71CB228EF7D4A00A0E21A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4DB71CB728EF7D4A00A0E21A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4DD509522935B13600AE2766 /* DeepSORT */ = {isa = PBXFileReference; lastKnownFileType = folder; path = DeepSORT; sourceTree = "<group>"; };
 		794FC9A3291D364200F9B6C2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		794FC9A5291D364B00F9B6C2 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		794FC9A6291D36B700F9B6C2 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
@@ -135,7 +131,7 @@
 		4DB71CA828EF7D4900A0E21A /* Oculo */ = {
 			isa = PBXGroup;
 			children = (
-				4D1DC2462930B9830059D80F /* DeepSORT */,
+				4DD509522935B13600AE2766 /* DeepSORT */,
 				FED8C3BB291CFB000028F659 /* EnvironmentReader */,
 				4D5D87EE291BBA680024C16D /* ObjectRecognizer */,
 				4D5D87E7291BB9590024C16D /* Utilities */,
@@ -224,7 +220,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D1DC2472930B9830059D80F /* DeepSORT in Resources */,
+				4DD509532935B13600AE2766 /* DeepSORT in Resources */,
 				FED8C3C5291CFF310028F659 /* Assets.scnassets in Resources */,
 				794FC9A2291D364200F9B6C2 /* Localizable.strings in Resources */,
 				420E3D382913B85600E16D16 /* defaultBeep.mp3 in Resources */,

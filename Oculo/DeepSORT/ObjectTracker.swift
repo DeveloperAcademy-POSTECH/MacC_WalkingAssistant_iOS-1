@@ -76,7 +76,7 @@
 //    public let F: KalmanMatrix  /// 상태 천이(state transition) 행렬: 시간 변화에 따라 상태 변화를 야기시킴.
 //    public let H: KalmanMatrix  /// 측정함수(measurement function)
 //    public var R: KalmanMatrix  /// 불확실성(uncertainty) 측정. 상태 불확실성(state uncertainty)
-//    public let Q: KalmanMatrix  /// process의 불확실성. 여기서 프로세스는 시스템의 모델, 즉 시간이 지남에 따라 상태가 어떻게 변화하는지를 뜻하며,  Q는 모델의 불확실성을 저장함.
+//    public let Q: KalmanMatrix  /// process의 불확실성. 여기서 프로세스는 시스템의 모델, 즉 시간이 지남에 따라 상태가 어떻게 변화하는지를 뜻하며, Q는 모델의 불확실성을 저장함.
 //    public lazy var kalmanFilter = KalmanFilter(stateEstimatePrior: x, errorCovariancePrior: P)
 //
 //    /// 초기 바운딩 박스로 오브젝트 추적기(트래커) 초기화
@@ -116,7 +116,7 @@
 //        self.hit_streak += 1
 //
 //        /// z: kalman_filter.py의 update 메서드의 파라미터. 새 측정값을 칼만 필터에 더해주기 위한 파라미터이다.
-//        /// z 값이 0일 때는 아무 것도 계산되지 않지만, x_post 및 P_post는 이전 (x_prior, P_prior)로 업데이트 되고, self.z는 None으로 설정됨.
+//        /// z 값이 0일 때는 아무 것도 계산되지 않지만, x_post 및 P_post는 이전 스텝 값(x_prior, P_prior)으로 업데이트 되고, self.z는 None으로 설정됨.
 //        /// 자세한 내용은 KalmanFilter.swift 파일에서 설명
 //        let z = KalmanMatrix(grid: convert_bbox_to_z(bbox_int: bbox), rows: 4, columns: 1)
 //        self.kalmanFilter = self.kalmanFilter.update(measurement: z, observationModel: H, covarienceOfObservationNoise: R)
@@ -157,7 +157,7 @@
 //    // TODO: 헝가리안 알고리즘 추가
 //    let h = HungarianSolver(matrix: iou_matrix, maxim: true)
 //
-//    guard let matched_indices = h?.solve() else {
+//    guard let matched_indices = h?.solve() else {  /// matched_indices: 헝가리안 알고리즘으로 계산된 매칭 결과
 //        return ([], Array(0 ..< detections.count), Array(0 ..< trackers.count))
 //    }
 //
