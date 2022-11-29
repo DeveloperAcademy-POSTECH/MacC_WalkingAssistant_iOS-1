@@ -33,12 +33,17 @@ class TextReaderViewController: UIViewController, ImageAnalysisInteractionDelega
         createTextReadButton()
 
         addConstraints()
+
+        addGestures()
+        let textReaderRotor = self.textReaderRotor()
+        self.accessibilityCustomRotors = [textReaderRotor]
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.soundManager.stopSpeak()
         arView.session.pause()
+        
     }
 
     /// hideView의 배경색 지정
@@ -70,6 +75,35 @@ class TextReaderViewController: UIViewController, ImageAnalysisInteractionDelega
         NSLayoutConstraint.activate(hideViewConstraints)
     }
 
+    /// 화면을 탭할 경우 수행할 동작 추가
+    func addGestures() {
+        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(analyzeCurrentImageAndSpeak))
+        self.view.addGestureRecognizer(tapGesture)
+    }
+
+    
+    private func textReaderRotor () -> UIAccessibilityCustomRotor {
+        // Create a custor Rotor option, it has a name that will be read by voice over, and
+        // a action that is a action called when this rotor option is interacted with.
+        // The predicate gives you info about the state of this interaction
+        let propertyRotor = UIAccessibilityCustomRotor.init(name: "메인 화면으로") { (predicate) -> UIAccessibilityCustomRotorItemResult? in
+            
+            // Get the direction of the movement when this rotor option is enablade
+            let forward = predicate.searchDirection == UIAccessibilityCustomRotor.Direction.next
+            
+            // You can do any kind of business logic processing here
+            if forward {
+                // 홈 화면으로 돌아감
+                self.dismiss(animated: true)
+               // self.present(TextReaderViewController(), animated: true)
+            }
+            // Return the selection of voice over to the element rotorPropertyValueLabel
+            // Use this return to select the desired selection that fills the purpose of its logic
+            return UIAccessibilityCustomRotorItemResult.init()
+        }
+        return propertyRotor
+    }
+    
     /// ARView에 그려진 영상을 LiveText로 분석 후 TTS 수행
     @objc func analyzeCurrentImageAndSpeak() {
         if let imgBuffer = self.arView.session.currentFrame?.capturedImage {

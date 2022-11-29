@@ -297,6 +297,8 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
         setLablesTableViewConstraints()
 
         registerTableView()
+        let navigationRotor = self.navigationRotor()
+        self.accessibilityCustomRotors = [navigationRotor]
     }
 
     override func viewDidLayoutSubviews() {
@@ -393,7 +395,31 @@ extension ObjectDetectionViewController {
         }
         self.semaphore.signal()
     }
+    
+    private func navigationRotor () -> UIAccessibilityCustomRotor {
+        // Create a custor Rotor option, it has a name that will be read by voice over, and
+        // a action that is a action called when this rotor option is interacted with.
+        // The predicate gives you info about the state of this interaction
+        let propertyRotor = UIAccessibilityCustomRotor.init(name: "메인 화면으로") { (predicate) -> UIAccessibilityCustomRotorItemResult? in
+            
+            // Get the direction of the movement when this rotor option is enablade
+            let forward = predicate.searchDirection == UIAccessibilityCustomRotor.Direction.next
+            
+            // You can do any kind of business logic processing here
+            if forward {
+                // 홈 화면으로 돌아감
+                self.dismiss(animated: true)
+                // self.present(ObjectDetectionViewController(), animated: true)
+            }
+            // Return the selection of voice over to the element rotorPropertyValueLabel
+            // Use this return to select the desired selection that fills the purpose of its logic
+            return UIAccessibilityCustomRotorItemResult.init()
+        }
+        return propertyRotor
+    }
 }
+
+
 
 extension ObjectDetectionViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

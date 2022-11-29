@@ -150,7 +150,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     }
 
     // MARK: Switching Button Custom Rotor
-       private func navigationButtonRotor() -> UIAccessibilityCustomRotor {
+    public func navigationButtonRotor() -> UIAccessibilityCustomRotor {
            
            // Create a custor Rotor option, it has a name that will be read by voice over, and
            // a action that is a action called when this rotor option is interacted with.
@@ -173,7 +173,8 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
            
            return propertyRotorOption
        }
-    private func environmentReaderButtonRotor() -> UIAccessibilityCustomRotor {
+    
+    public func environmentReaderButtonRotor() -> UIAccessibilityCustomRotor {
         
         // Create a custor Rotor option, it has a name that will be read by voice over, and
         // a action that is a action called when this rotor option is interacted with.
@@ -196,7 +197,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         
         return propertyRotorOption
     }
-    private func textReaderButtonRotor() -> UIAccessibilityCustomRotor {
+    public func textReaderButtonRotor() -> UIAccessibilityCustomRotor {
         
         // Create a custor Rotor option, it has a name that will be read by voice over, and
         // a action that is a action called when this rotor option is interacted with.
