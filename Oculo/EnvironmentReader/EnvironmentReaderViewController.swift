@@ -31,8 +31,9 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
         sceneView.subviews.forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
-        
         sceneView.delegate = self
+        let environmentReaderRotor = self.environmentReaderRotor()
+        self.accessibilityCustomRotors = [environmentReaderRotor]
     }
     
     // MARK: - View Life Cycle
@@ -176,6 +177,26 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
         }
     }
 
+    private func environmentReaderRotor () -> UIAccessibilityCustomRotor {
+        // Create a custor Rotor option, it has a name that will be read by voice over, and
+        // a action that is a action called when this rotor option is interacted with.
+        // The predicate gives you info about the state of this interaction
+        let propertyRotor = UIAccessibilityCustomRotor.init(name: "메인 화면으로") { (predicate) -> UIAccessibilityCustomRotorItemResult? in
+            
+            // Get the direction of the movement when this rotor option is enablade
+            let forward = predicate.searchDirection == UIAccessibilityCustomRotor.Direction.next
+            
+            // You can do any kind of business logic processing here
+            if forward {
+                // 홈 화면으로 돌아감
+                self.dismiss(animated: true)
+            }
+            // Return the selection of voice over to the element rotorPropertyValueLabel
+            // Use this return to select the desired selection that fills the purpose of its logic
+            return UIAccessibilityCustomRotorItemResult.init()
+        }
+        return propertyRotor
+    }
     // MARK: - Private methods
 
     private func updateSessionInfoLabel(for frame: ARFrame, trackingState: ARCamera.TrackingState) {
