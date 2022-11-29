@@ -13,6 +13,7 @@ import SceneKit
 
 class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNViewDelegate {
     var soundManger = SoundManager()
+    var healthKitManager = HealthKitManager()
     // MARK: UI 프로퍼티
     lazy var videoPreview: ARSCNView = {
         let videoPreview = ARSCNView(frame: self.view.frame)
