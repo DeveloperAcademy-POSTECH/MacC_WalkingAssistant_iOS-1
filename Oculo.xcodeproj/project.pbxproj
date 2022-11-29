@@ -37,7 +37,6 @@
 		4282691A2930BAD800A1D6F2 /* yolov5s.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = yolov5s.mlmodel; sourceTree = "<group>"; };
 		4296A68828F7EAEB00E769AE /* HealthkitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthkitManager.swift; sourceTree = "<group>"; };
 		4296A68A28F7EB2200E769AE /* Oculo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Oculo.entitlements; sourceTree = "<group>"; };
-		42AB17A629347A58004C19B8 /* yolov5s.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = yolov5s.mlmodel; sourceTree = "<group>"; };
 		4D3AD8A82923678900B57E0F /* Oculo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Oculo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D5D87E8291BB98B0024C16D /* MeasurementsTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementsTool.swift; sourceTree = "<group>"; };
 		4D5D87EA291BB98B0024C16D /* UIImage_CVPixelBufferTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage_CVPixelBufferTool.swift; sourceTree = "<group>"; };
@@ -80,14 +79,6 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
-		42AB17A529347A26004C19B8 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				42AB17A629347A58004C19B8 /* yolov5s.mlmodel */,
-			);
-			name = "Recovered References";
-			sourceTree = "<group>";
-		};
 		4D41E06C2913C34A00A05726 /* AIModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -124,7 +115,6 @@
 			children = (
 				4DB71CA828EF7D4900A0E21A /* Oculo */,
 				4D3AD8A82923678900B57E0F /* Oculo.app */,
-				42AB17A529347A26004C19B8 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
