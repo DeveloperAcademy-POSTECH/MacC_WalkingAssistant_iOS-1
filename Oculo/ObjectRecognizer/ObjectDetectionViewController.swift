@@ -12,7 +12,7 @@ import ARKit
 import SceneKit
 
 class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNViewDelegate {
-
+    var soundManger = SoundManager()
     // MARK: UI 프로퍼티
     lazy var videoPreview: ARSCNView = {
         let videoPreview = ARSCNView(frame: self.view.frame)
@@ -196,7 +196,7 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
         }
 
         /// 최솟값 넣을 딕셔너리 생성
-        var minValueDictionary: [String: Float32] = [:]
+        var minValueDictionary: [Float32 : [String]] = [:]
 
         for prediction in predictions {
             let detectedBoundingBox = prediction.boundingBox
@@ -220,10 +220,17 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
                     minDepthCoordinate = "\(String(slice.firstIndex(of: minData)!)), \(String(y))"  /// 최솟값이 새로 생길 때마다 좌표 정보 업데이트
                 }
             }
-            minValueDictionary[minDepthCoordinate] = minDepth  /// depth 최솟값을 좌표:깊이 쌍으로 딕셔너리에 추가
+            minValueDictionary[minDepth] = [minDepthCoordinate, String(prediction.label!)]  /// depth 최솟값을 좌표:깊이 쌍으로 딕셔너리에 추가
         }
 
-        print(minValueDictionary)
+        if !minValueDictionary.isEmpty && !soundManger.synthesizer.isSpeaking {
+            var sorted = minValueDictionary.keys.sorted()
+            var firstItem = minValueDictionary[sorted[0]]
+            var TTS = "\(firstItem![0])에 \(firstItem![1])있습니다"
+            soundManger.speak(TTS)
+            print(TTS)
+            
+        }
 
         CVPixelBufferUnlockBaseAddress(depth, .readOnly)
         CVPixelBufferUnlockBaseAddress(confidence, .readOnly)
