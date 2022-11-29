@@ -25,8 +25,8 @@
 //    let wh = w * h
 //
 //    /// 교집합 면적 ÷ 합집합 면적
-//    let o = Double(wh) / Double(((bb_test[2]-bb_test[0]) * (bb_test[3]-bb_test[1])
-//      + (bb_gt[2]-bb_gt[0]) * (bb_gt[3]-bb_gt[1]) - wh))
+//    let o = Double(wh) / Double(((bb_test[2] - bb_test[0]) * (bb_test[3] - bb_test[1])
+//      + (bb_gt[2] - bb_gt[0]) * (bb_gt[3] - bb_gt[1]) - wh))
 //
 //    return(o)
 //}
@@ -34,7 +34,7 @@
 //// MARK: convert_bbox_to_z
 ///// [x1, y1, x2, y2] 형태의 바운딩 박스를 [x, y, s, r] 형태의 z 값으로 반환
 ///// x, y: 바운딩 박스 중앙 좌표
-///// s: 타겟 바운딩 박스의 면적(scale/area)
+///// s: 타겟 바운딩 박스의 면적(scale ÷ area)
 ///// r: 타겟 바운딩 박스의 종횡비(aspect ratio)
 //public func convert_bbox_to_z(bbox_int: Array<Double>) -> Array<Double> {
 //  let bbox = bbox_int.map({ Double($0) })
@@ -51,7 +51,7 @@
 ///// [x, y, s, r] 형 자료로부터 바운딩 박스 가운데 지점의 좌표를 받아 와서 [x1, y1, x2, y2] 형 자료로 반환
 ///// x1, y1: 바운딩 박스 좌상단 지점
 ///// x2, y2: 바운딩 박스 우하단 지점
-//public func convert_x_to_bbox(x:Array<Double>) -> Array<Double> {
+//public func convert_x_to_bbox(x: Array<Double>) -> Array<Double> {
 //    let w = sqrt(Double(x[2] * x[3]))
 //    let h = x[2] / w
 //    return [x[0] - w/2, x[1] - h/2, x[0] + w/2, x[1] + h/2]
@@ -63,7 +63,7 @@
 ///// 바운딩 박스로 관찰된, 추적하고 있는 개별 개체의 내부 상태를 나타냄
 //public class KalmanBoxTracker {
 //    public var id: Int
-//    public var hits: Int  /// 첫 번째 detection을 포함한 총 히트 수. "히트"는 트래커가 업데이트된 횟수를 뜻함.
+//    public var hits: Int  /// 첫 번째 detection을 포함한 총 히트 수. "히트"는 추적기(트래커)가 업데이트된 횟수를 뜻함.
 //    public var hit_streak: Int  /// 연속 히트 수. 추적기를 삭제해야 하는지 여부를 결정하는 데 사용됨.
 //    public var age: Int  /// 첫번째 detection 이후 경과된 프레임 수
 //    public var time_since_update: Int  /// 마지막 업데이트 이후 경과된 시간
@@ -76,10 +76,10 @@
 //    public let F: KalmanMatrix  /// 상태 천이(state transition) 행렬: 시간 변화에 따라 상태 변화를 야기시킴.
 //    public let H: KalmanMatrix  /// 측정함수(measurement function)
 //    public var R: KalmanMatrix  /// 불확실성(uncertainty) 측정. 상태 불확실성(state uncertainty)
-//    public let Q: KalmanMatrix  /// process의 불확실성. 여기서 프로세스는 시스템의 모델, 즉 시간이 지남에 따라 상태가 어떻게 변화하는지를 뜻하며,  Q는 모델의 불확실성을 저장함.
+//    public let Q: KalmanMatrix  /// process의 불확실성. 여기서 프로세스는 시스템의 모델, 즉 시간이 지남에 따라 상태가 어떻게 변화하는지를 뜻하며, Q는 모델의 불확실성을 저장함.
 //    public lazy var kalmanFilter = KalmanFilter(stateEstimatePrior: x, errorCovariancePrior: P)
 //
-//    /// 초기 바운딩 박스로 오브젝트 트래커 초기화
+//    /// 초기 바운딩 박스로 오브젝트 추적기(트래커) 초기화
 //    /// Python 코드의  __init__ 메서드 내부를 따로 구현함
 //    public init(bbox: Array<Double>) {
 //        self.F = KalmanMatrix(grid: [1,0,0,0,1,0,0, 0,1,0,0,0,1,0, 0,0,1,0,0,0,1, 0,0,0,1,0,0,0, 0,0,0,0,1,0,0, 0,0,0,0,0,1,0, 0,0,0,0,0,0,1], rows: 7, columns: 7)
@@ -87,7 +87,6 @@
 //        self.P = KalmanMatrix(grid: [10,0,0,0,0,0,0, 0,10,0,0,0,0,0, 0,0,10,0,0,0,0, 0,0,0,10,0,0,0, 0,0,0,0,10000,0,0, 0,0,0,0,0,10000,0, 0,0,0,0,0,0,10000], rows: 7, columns: 7)  /// 7 * 7 단위행렬 -> 4행 4열부터 1000 곱하라고 돼 있는데 10000 곱함
 //        self.B = KalmanMatrix(identityOfSize: 7)
 //        self.u = KalmanMatrix(vector: [0, 0, 0, 0, 0, 0, 0])
-//
 //        self.H = KalmanMatrix(grid: [1,0,0,0,0,0,0, 0,1,0,0,0,0,0, 0,0,1,0,0,0,0, 0,0,0,1,0,0,0], rows: 4, columns: 7)  /// dim_z * dim_x 사이즈: 4행 7열
 //        self.R = KalmanMatrix(grid: [1,0,0,0, 0,1,0,0, 0,0,10,0, 0,0,0,10], rows: 4, columns: 4)
 //        self.Q = KalmanMatrix(grid: [1,0,0,0,0,0,0, 0,1,0,0,0,0,0, 0,0,1,0,0,0,0, 0,0,0,1,0,0,0, 0,0,0,0,0.01,0,0, 0,0,0,0,0,0.01,0, 0,0,0,0,0,0,0.0001], rows: 7, columns: 7)  /// 4행 4열부터 0.01을 곱하고, 맨 마지막 행 맨 마지막 열에는 다시 0.01을 더 곱해줌
@@ -117,7 +116,7 @@
 //        self.hit_streak += 1
 //
 //        /// z: kalman_filter.py의 update 메서드의 파라미터. 새 측정값을 칼만 필터에 더해주기 위한 파라미터이다.
-//        /// z 값이 0일 때는 아무 것도 계산되지 않지만, x_post 및 P_post는 이전 (x_prior, P_prior)로 업데이트 되고, self.z는 None으로 설정됨.
+//        /// z 값이 0일 때는 아무 것도 계산되지 않지만, x_post 및 P_post는 이전 스텝 값(x_prior, P_prior)으로 업데이트 되고, self.z는 None으로 설정됨.
 //        /// 자세한 내용은 KalmanFilter.swift 파일에서 설명
 //        let z = KalmanMatrix(grid: convert_bbox_to_z(bbox_int: bbox), rows: 4, columns: 1)
 //        self.kalmanFilter = self.kalmanFilter.update(measurement: z, observationModel: H, covarienceOfObservationNoise: R)
@@ -156,10 +155,10 @@
 //    }
 //
 //    // TODO: 헝가리안 알고리즘 추가
-//    let h = HunSolver(matrix: iou_matrix, maxim: true)
+//    let h = HungarianSolver(matrix: iou_matrix, maxim: true)
 //
-//    guard let matched_indices = h?.solve() else {
-//        return ([], Array(0..<detections.count), Array(0..<trackers.count))
+//    guard let matched_indices = h?.solve() else {  /// matched_indices: 헝가리안 알고리즘으로 계산된 매칭 결과
+//        return ([], Array(0 ..< detections.count), Array(0 ..< trackers.count))
 //    }
 //
 //    var unmatched_detections: [Int] = []
@@ -194,8 +193,8 @@
 //    public var creationTime: Date
 //    public var iou_threshold: Double
 //
-//    /// SORT 알고리즘 주요 파라미터 설정
-//    public init(max_age: Int=1, min_hits: Int=3, iou_threshold: Double = 0.3) {
+//    // MARK: SORT 알고리즘 주요 파라미터 설정
+//    public init(max_age: Int = 1, min_hits: Int = 3, iou_threshold: Double = 0.3) {
 //        self.trackers = []  /// SORT를 호출하는 위치에 따라 다름
 //        self.min_hits = min_hits
 //        self.max_age = max_age
@@ -235,14 +234,14 @@
 //        for trk in self.trackers.reversed() {
 //            let d = trk.get_state()
 //            if trk.time_since_update < 1 && (trk.hit_streak >= self.min_hits || self.frame_count <= self.min_hits) {
-//                ret.append(d+[Double(trk.id+1)])
+//                ret.append(d + [Double(trk.id + 1)])
 //            }
 //
 //            i -= 1
 //
 //            // MARK: 트랙 제거 - 추적기가 오랫동안 업데이트 되지 않으면 삭제
-//            /// self.max_age: 트래커가 업데이트할 수 없는 최대 프레임 수. 즉, 데드 프레임의 수.
-//            /// 트래커는 매 프레임마다 업데이트되기 때문에 최대 프레임 수는 1로 설정
+//            /// self.max_age: 추적기(트래커)가 업데이트할 수 없는 최대 프레임 수. 즉, 데드 프레임의 수.
+//            /// 추적기(트래커)는 매 프레임마다 업데이트되기 때문에 최대 프레임 수는 1로 설정
 //            if trk.time_since_update > self.max_age {
 //                self.trackers.remove(at: i)
 //            }
@@ -257,6 +256,3 @@
 //    }
 //
 //}
-//
-//
-//
