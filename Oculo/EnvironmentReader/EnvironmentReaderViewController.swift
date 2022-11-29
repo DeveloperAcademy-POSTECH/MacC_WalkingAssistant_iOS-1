@@ -38,14 +38,6 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
         createInitializeButton()
         addConstraints()
         
-        sceneView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        sceneView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        sceneView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        sceneView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        
-        sceneView.subviews.forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
         sceneView.delegate = self
         let environmentReaderRotor = self.environmentReaderRotor()
         self.accessibilityCustomRotors = [environmentReaderRotor]
