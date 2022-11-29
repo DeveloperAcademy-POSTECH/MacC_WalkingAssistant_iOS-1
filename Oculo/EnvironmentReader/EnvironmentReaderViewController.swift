@@ -16,23 +16,20 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
     // MARK: - IBOutlets
     
     var sceneView = ARSCNView()
+    var initializeButton = UIButton()
     var soundManager = SoundManager()
     var healthKitManager = HealthKitManager()
+    
+    private var planes = [UUID: Plane]()
+    private var anchors = [UUID: ARAnchor]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(sceneView)
+        self.view.addSubview(initializeButton)
         
-        sceneView.translatesAutoresizingMaskIntoConstraints = false
-        
-        sceneView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        sceneView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        sceneView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        sceneView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        
-        sceneView.subviews.forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
+        createInitializeButton()
+        addConstraints()
         
         sceneView.delegate = self
     }
@@ -66,6 +63,8 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
 
         // Pause the view's AR session.
         self.sceneView.session.pause()
+        self.anchors.removeAll()
+        self.planes.removeAll()
     }
 
     // MARK: - ARSCNViewDelegate
@@ -79,8 +78,13 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
             return
         }
         
+        if !self.planes.isEmpty || !self.anchors.isEmpty { return }
+        
         // Create a custom object to visualize the plane geometry and extent.
         let plane = Plane(anchor: planeAnchor, in: self.sceneView)
+        
+        self.planes[anchor.identifier] = plane
+        self.anchors[anchor.identifier] = anchor
         
         // Add the visualization to the ARKit-managed node so that it tracks
         // changes in the plane anchor as plane estimation continues.
@@ -94,9 +98,8 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
             let plane = node.childNodes.first as? Plane
             else { return }
         
-        if planeAnchor.classification.description != ARPlaneAnchor.Classification.door.description {
-            return
-        }
+        if planeAnchor.classification.description != ARPlaneAnchor.Classification.door.description
+        { return }
         
         // Update ARSCNPlaneGeometry to the anchor's new estimated shape.
         if let planeGeometry = plane.meshNode.geometry as? ARSCNPlaneGeometry {
@@ -120,7 +123,7 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
                 distanceGeometry.string = String(currentSteps)
                 
                 if let pointOfView = sceneView.pointOfView {
-                    // 현재는 문이 보이지 않는 경우 TTS를 출력하지 않습니다.
+                    // 화면상에 문이 보이지 않는 경우 TTS를 출력하지 않습니다.
                     let isMaybeVisible = renderer.isNode(plane.presentation, insideFrustumOf: pointOfView)
                     if(isMaybeVisible) {
                         switch currentSteps
@@ -141,16 +144,16 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
 
     func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
         guard let frame = session.currentFrame else { return }
-        updateSessionInfoLabel(for: frame, trackingState: frame.camera.trackingState)
+        updateSessionInfoAndSpeak(for: frame, trackingState: frame.camera.trackingState)
     }
 
     func session(_ session: ARSession, didRemove anchors: [ARAnchor]) {
         guard let frame = session.currentFrame else { return }
-        updateSessionInfoLabel(for: frame, trackingState: frame.camera.trackingState)
+        updateSessionInfoAndSpeak(for: frame, trackingState: frame.camera.trackingState)
     }
 
     func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
-        updateSessionInfoLabel(for: session.currentFrame!, trackingState: camera.trackingState)
+        updateSessionInfoAndSpeak(for: session.currentFrame!, trackingState: camera.trackingState)
     }
 
     // MARK: - ARSessionObserver
@@ -194,7 +197,7 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
 
     // MARK: - Private methods
 
-    private func updateSessionInfoLabel(for frame: ARFrame, trackingState: ARCamera.TrackingState) {
+    private func updateSessionInfoAndSpeak(for frame: ARFrame, trackingState: ARCamera.TrackingState) {
         // Update the UI to provide feedback on the state of the AR experience.
         let message: String
 
@@ -225,10 +228,47 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
             soundManager.speak(message)
         }
     }
-
+/*
     private func resetTracking() {
         let configuration = ARWorldTrackingConfiguration()
         configuration.planeDetection = [.vertical]
+        self.planes.removeAll()
+        self.anchors.removeAll()
+        self.sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+    }
+ */
+    
+    func createInitializeButton() {
+        initializeButton.addTarget(self, action: #selector(resetTracking), for: .touchUpInside)
+        initializeButton.setTitle("문 인식 초기화", for: .normal)
+        initializeButton.setTitle("", for: .selected)
+    }
+    
+    func addConstraints() {
+        
+        sceneView.translatesAutoresizingMaskIntoConstraints = false
+        initializeButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        sceneView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        sceneView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        sceneView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        sceneView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
+        initializeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        initializeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        initializeButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        initializeButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
+        sceneView.subviews.forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+    }
+    
+    @objc private func resetTracking() {
+        let configuration = ARWorldTrackingConfiguration()
+        configuration.planeDetection = [.vertical]
+        self.planes.removeAll()
+        self.anchors.removeAll()
         self.sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
     }
 }
