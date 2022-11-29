@@ -54,6 +54,7 @@
 |**[Refactor]**|코드 리팩토링|
 |**[Rename]**|파일명 또는 디렉토리명을 단순히 변경만 한 경우|
 |**[Delete]**|파일 또는 디렉토리를 단순히 삭제만 한 경우|
+|**[Help]**|타인에게 새로운 기능의 추가나 현재 기능의 버그가 아닌 변화를 요구할 경우|
 
 예시) [Type] #이슈번호 커밋메세지 `git commit -m "[Feat] #12 로그인 기능 추가"`<br><br>
 
@@ -72,7 +73,7 @@
 
 ### ④ Footer(옵셔널; optional)
 - 푸터도 바디와 마찬가지로 옵션입니다.<br>The footer section is another optional section to write<br><br>
-- 푸터의 경우 일반적으로 트래킹하는 이슈가 있는 경우 트래커 ID를 표기할 때 사용합니다.<br>Typically, the footer is to display the current tracking issue if there is one<br><br>
+- 푸터의 경우 일반적으로 트래킹하는 이슈가 있는 경우 추적기(트래커) ID를 표기할 때 사용합니다.<br>Typically, the footer is to display the current tracking issue if there is one<br><br>
 - '#' 를 누르면 이슈 번호나 커밋 번호를 확인할 수 있습니다.<br>You can see the issue number or commit number when you put a '**#**' character<br><br>
 - 필요한 경우 푸터를 남겨주세요!<br>Write the footer if it is required to do so<br>
 <br><br><br>

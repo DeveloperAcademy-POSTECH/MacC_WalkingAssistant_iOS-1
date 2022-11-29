@@ -79,6 +79,7 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
     var objectRecognitionModel: yolov5s {
         do {
             let config = MLModelConfiguration()
+            config.computeUnits = .all
             return try yolov5s(configuration: config)
         } catch {
             print(error)
@@ -119,11 +120,13 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
         }
     }
 
-// MARK: ARSession 시작 정지 함수 정의
+    // MARK: ARSession 시작 정지 함수 정의
     func startARSession() {
         guard ARWorldTrackingConfiguration.supportsFrameSemantics([.sceneDepth]) else { return }
-        // Enable both the `sceneDepth` and `smoothedSceneDepth` frame semantics.
+
+        /// Enable both the `sceneDepth` and `smoothedSceneDepth` frame semantics.
         let config = ARWorldTrackingConfiguration()
+
         config.frameSemantics = [.sceneDepth]
         videoPreview.session.run(config)
     }
@@ -132,7 +135,7 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
         videoPreview.session.pause()
     }
 
-// MARK: ARSession의 기능 정의
+    // MARK: ARSession 기능 정의
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
         guard let depth = frame.sceneDepth?.depthMap else { return }
         guard let confidence = frame.sceneDepth?.confidenceMap else { return }
@@ -143,37 +146,97 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
         CVPixelBufferLockBaseAddress(confidence, .readOnly)
 
         guard let depthBaseAddress = CVPixelBufferGetBaseAddress(depth) else { return }
-        guard let confidecneBaseAddress = CVPixelBufferGetBaseAddress(confidence) else { return }
+        guard let confidenceBaseAddress = CVPixelBufferGetBaseAddress(confidence) else { return }
 
-        // UnsafeMutableRawPointer -> UnsafeBufferPointer
+        /// UnsafeMutableRawPointer -> UnsafeBufferPointer
         let bindDepthPtr = depthBaseAddress.bindMemory(to: Float32.self, capacity: depthWidth * depthHeight)
-        let bindConfidencePtr = confidecneBaseAddress.bindMemory(to: Int8.self, capacity: depthWidth * depthHeight)
+        let bindConfidencePtr = confidenceBaseAddress.bindMemory(to: Int8.self, capacity: depthWidth * depthHeight)
 
-        //UnsafeMutablePointer -> UnsafeBufferPointer
+        /// UnsafeMutablePointer -> UnsafeBufferPointer
         let depthBufPtr = UnsafeBufferPointer(start: bindDepthPtr, count: depthWidth * depthHeight)
         let confidenceBufPtr = UnsafeBufferPointer(start: bindConfidencePtr, count: depthWidth * depthHeight)
 
         let depthArray = Array(depthBufPtr)
         let confidenceArray = Array(confidenceBufPtr)
 
-//        print(depthArray[0])
-//        print(confidenceArray[0])
-
-        CVPixelBufferUnlockBaseAddress(depth, .readOnly)
-        CVPixelBufferUnlockBaseAddress(confidence, .readOnly)
+        /// 이차원 배열로 변환
+        let patternArray: [[Float32]] = Array(repeating: Array(repeating: 0, count: depthWidth), count: depthHeight)
+        var iter = depthArray.makeIterator()
+        let newDepthArray = patternArray.map { $0.compactMap { _ in iter.next() }}
 
         // MARK: ARSCNView의 이미지 캡쳐 및 CVPixelBuffer로 변환 후 인공지능 예측
-        guard let image = videoPreview.snapshot().convertToBuffer() else { return }
+        guard let frame = session.currentFrame else { return }
+        let imageBuffer = frame.capturedImage
+
+        let imageSize = CGSize(width: CVPixelBufferGetWidth(imageBuffer), height: CVPixelBufferGetHeight(imageBuffer))
+        let viewPort = videoPreview.bounds
+        let viewPortSize = videoPreview.bounds.size
+        let interfaceOrientation = self.videoPreview.window!.windowScene!.interfaceOrientation
+        let image = CIImage(cvImageBuffer: imageBuffer)
+        let normalizeTransform = CGAffineTransform(scaleX: 1.0/imageSize.width, y: 1.0/imageSize.height)
+
+        /// 세로 모드시 Y축 변환 필요
+        let flipTransform = (interfaceOrientation.isPortrait) ? CGAffineTransform(scaleX: -1, y: -1).translatedBy(x: -1, y: -1) : .identity
+
+        /// 렌더링에 적합한 좌표 설정
+        let displayTransform = frame.displayTransform(for: interfaceOrientation, viewportSize: viewPortSize)
+        let toViewPortTransform = CGAffineTransform(scaleX: viewPortSize.width, y: viewPortSize.height)
+        let transformedImage = image.transformed(by: normalizeTransform.concatenating(flipTransform).concatenating(displayTransform).concatenating(toViewPortTransform)).cropped(to: viewPort)
+
+        guard let img = UIImage(ciImage: transformedImage).convertToBuffer() else { return }
 
         if !self.didInference {
             self.didInference = true
 
-            // start of measure
+            // MARK: 측정 시작
             self.performanceMeasurement.didStartNumericMeasurement()
 
-            // predict!
-            self.predictUsingVision(pixelBuffer: image)
+            // MARK: 예측
+            self.predictUsingVision(pixelBuffer: img)
         }
+
+        /// 최솟값 넣을 딕셔너리 생성
+        var minValueDictionary: [String: Float32] = [:]
+
+        for prediction in predictions {
+            let detectedBoundingBox = prediction.boundingBox
+            let depthBounds = VNImageRectForNormalizedRect(detectedBoundingBox, depthHeight, depthWidth)  /// 1 * 1 의 박스 좌표를 256 * 192 로 변환
+            var boundingBoxCoordinate: Array<Int> = []
+
+            boundingBoxCoordinate += [Int(round(depthBounds.minX)), Int(round(depthBounds.minY)), Int(round(depthBounds.maxX)), Int(round(depthBounds.maxY))]
+            boundingBoxCoordinate = boundingBoxCoordinate.map{ $0 < 0 ? 0 : $0 }  /// 이상치 수정
+
+            var convertedDepth = convertToDepthCoordinate(coordinate: boundingBoxCoordinate)  /// YOLO 좌표 -> depthMap 좌표 변환
+
+            convertedDepth = convertedDepth.map{ $0 < 0 ? 0 : $0 }
+            var minDepth: Float32 = 10.0
+            var minDepthCoordinate: String = ""
+
+            for y in convertedDepth[1]...convertedDepth[3] {
+                let slice = newDepthArray[y][convertedDepth[0]...convertedDepth[2]]
+                guard let minData = slice.min() else { return }
+                if minData < minDepth {
+                    minDepth = minData
+                    minDepthCoordinate = "\(String(slice.firstIndex(of: minData)!)), \(String(y))"  /// 최솟값이 새로 생길 때마다 좌표 정보 업데이트
+                }
+            }
+            minValueDictionary[minDepthCoordinate] = minDepth  /// depth 최솟값을 좌표:깊이 쌍으로 딕셔너리에 추가
+        }
+
+        print(minValueDictionary)
+
+        CVPixelBufferUnlockBaseAddress(depth, .readOnly)
+        CVPixelBufferUnlockBaseAddress(confidence, .readOnly)
+    }
+
+    private func convertToDepthCoordinate(coordinate: Array<Int>) -> Array<Int> {
+        var convertedCoordinate: Array<Int> = []
+        convertedCoordinate.append(255 - coordinate[3])
+        convertedCoordinate.append(191 - coordinate[2])
+        convertedCoordinate.append(255 - coordinate[1])
+        convertedCoordinate.append(191 - coordinate[0])
+
+        return convertedCoordinate
     }
 
     func session(_ session: ARSession, didFailWithError error: Error) {
@@ -300,8 +363,8 @@ extension ObjectDetectionViewController {
         guard let request = request else { fatalError() }
 
         /// 참고: 모델의 입력 구성에 따라 비전 프레임워크가 이미지의 입력 크기를 자동으로 구성함.
-        self.semaphore.wait()  // wait(): -1, signal(): +1 반환
-        let handler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer)
+        self.semaphore.wait()  /// wait(): -1, signal(): +1 반환
+        let handler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .up)
         try? handler.perform([request])
     }
 
@@ -363,7 +426,7 @@ extension ObjectDetectionViewController: UITableViewDelegate, UITableViewDataSou
         return predictions.count
     }
 
-    /// predcition의 정보가 업데이트 되기전에 indexPath에서 호출하는 문제를 해결하기위해 조건을 걸어 빈 셀을 호출
+    /// prediction 정보가 업데이트 되기 전에 indexPath에서 호출하는 문제를 해결하기 위해 조건을 걸어 빈 셀을 호출
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if(indexPath.row > predictions.count-1) {
             return UITableViewCell()
