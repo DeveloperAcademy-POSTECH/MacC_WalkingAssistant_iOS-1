@@ -250,7 +250,7 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
             
             if yRatio < 33 {
                 coordinatorString += "상단"
-            } else if xRatio < 67 {
+            } else if yRatio < 67 {
                 if !(coordinatorString == "정면") {
                     coordinatorString += "가운데"
                 }
