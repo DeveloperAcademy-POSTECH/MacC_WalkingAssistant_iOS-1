@@ -15,7 +15,7 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
     var soundManager = SoundManager()
     var healthKitManager = HealthKitManager()
     let maxWidth:Double = 191.0
-    let maxHeight = 255.0
+    let maxHeight:Double = 255.0
     // MARK: UI 프로퍼티
     lazy var videoPreview: ARSCNView = {
         let videoPreview = ARSCNView(frame: self.view.frame)
