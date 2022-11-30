@@ -67,13 +67,18 @@ class SoundManager {
     }
     
     func speak(_ string: String) {
-        // VoiceOver와 충돌을 방지하기 위해 VoiceOver가 문장을 읽어 주는 것으로 변경하였습니다.
+        /// VoiceOver와 충돌을 방지하기 위해 VoiceOver가 문장을 읽어 주는 것으로 변경하였습니다.
         if UIAccessibility.isVoiceOverRunning {
             UIAccessibility.post(notification: .announcement, argument: string)
         } else {
-            // VoiceOver를 사용하지 않는 경우, TTS가 문장을 읽음.
+            /// VoiceOver를 사용하지 않는 경우, TTS가 문장을 읽음.
             let utterance = AVSpeechUtterance(string: string)
-            utterance.voice = AVSpeechSynthesisVoice(language: "ko-KR")
+            if languageSetting == "ko" {
+                utterance.voice = AVSpeechSynthesisVoice(language: "ko-KR")
+            } else {
+                utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+            }
+
             utterance.rate = speakingRate
             utterance.volume = speakingVolume
 

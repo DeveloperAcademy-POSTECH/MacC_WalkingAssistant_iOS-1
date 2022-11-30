@@ -21,3 +21,8 @@
 "Privacy" = "Privacy";
 "License" = "License";
 "Contact Us" = "Contact Us";
+
+// Button Text
+"문 인식 초기화" = "Reset door recognition";
+"글자 인식" = "Text recognition";
+"메인 화면으로" = "Go to home screen";

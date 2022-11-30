@@ -142,8 +142,8 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
         guard let depth = frame.sceneDepth?.depthMap else { return }
         guard let confidence = frame.sceneDepth?.confidenceMap else { return }
-        let depthWidth = CVPixelBufferGetWidth(depth)   // 256
-        let depthHeight = CVPixelBufferGetHeight(depth)     // 192
+        let depthWidth = CVPixelBufferGetWidth(depth)  // MARK: width = 256
+        let depthHeight = CVPixelBufferGetHeight(depth)  // MARK: height = 192
 
         CVPixelBufferLockBaseAddress(depth, .readOnly)
         CVPixelBufferLockBaseAddress(confidence, .readOnly)
@@ -165,7 +165,7 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
         /// 이차원 배열로 변환
         let patternArray: [[Float32]] = Array(repeating: Array(repeating: 0, count: depthWidth), count: depthHeight)
         var iter = depthArray.makeIterator()
-        let newDepthArray = patternArray.map { $0.compactMap { _ in iter.next() }}
+        let newDepthArray = patternArray.map { $0.compactMap {_ in iter.next() }}
 
         // MARK: ARSCNView의 이미지 캡쳐 및 CVPixelBuffer로 변환 후 인공지능 예측
         guard let frame = session.currentFrame else { return }
@@ -215,8 +215,8 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
             var minDepth: Float32 = 10.0
             var minDepthCoordinate: String = ""
 
-            for y in convertedDepth[1]...convertedDepth[3] {
-                let slice = newDepthArray[y][convertedDepth[0]...convertedDepth[2]]
+            for y in convertedDepth[1] ... convertedDepth[3] {
+                let slice = newDepthArray[y][convertedDepth[0] ... convertedDepth[2]]
                 guard let minData = slice.min() else { return }
                 if minData < minDepth {
                     minDepth = minData
@@ -232,63 +232,70 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
             let firstKey = sorted[0]
             let firstItem = minValueDictionary[firstKey]
             let splited = firstItem![0].split(separator: ", ")
-            
+
             let y = Int(String(splited[0]))!
             let x = Int(String(splited[1]))!
-            
+
             let xRatio = Int((Double(x) / maxWidth * 100.0 ))
             let yRatio = Int((Double(y) / maxHeight * 100.0 ))
-            
+
             var coordinatorString = ""
+
             if xRatio < 33 {
-                coordinatorString += "우측"
+                coordinatorString += translate("우측")
             } else if xRatio < 67 {
-                coordinatorString += "정면"
+                coordinatorString += translate("정면")
             } else {
-                coordinatorString += "좌측"
+                coordinatorString += translate("좌측")
             }
-            
+
             if yRatio < 33 {
-                coordinatorString += "상단"
+                coordinatorString += translate(" 상단")
             } else if yRatio < 67 {
-                if !(coordinatorString == "정면") {
-                    coordinatorString += "가운데"
+                if !(coordinatorString == translate("정면")) {
+                    coordinatorString += translate(" 가운데")
                 }
             } else {
-                coordinatorString += "하단"
+                coordinatorString += translate(" 하단")
             }
-                    
-            var steps = healthKitManager.calToStepCount(meter: Double(firstKey))
+
+            let steps = healthKitManager.calToStepCount(meter: Double(firstKey))
             var stepsString = ""
             switch steps
             {
             case 0:
-                stepsString = "근처에 있습니다"
+                stepsString = translate("에 ")
             case 1:
-                stepsString = "약 한 걸음 떨어져 있습니다"
+                stepsString = translate(" 약 한 걸음 거리에 ")
             case 2:
-                stepsString = "약 두 걸음 떨어져 있습니다"
+                stepsString = translate(" 약 두 걸음 거리에 ")
             case 3:
-                stepsString = "약 세 걸음 떨어져 있습니다"
+                stepsString = translate(" 약 세 걸음 거리에 ")
             case 4:
-                stepsString = "약 네 걸음 떨어져 있습니다"
+                stepsString = translate(" 약 네 걸음 거리에 ")
             case 5:
-                stepsString = "약 다섯 걸음 떨어져 있습니다"
+                stepsString = translate(" 약 다섯 걸음 거리에 ")
             case 6:
-                stepsString = "약 여섯 걸음 떨어져 있습니다"
+                stepsString = translate(" 약 여섯 걸음 거리에 ")
             case 7:
-                stepsString = "약 일곱 걸음 떨어져 있습니다"
+                stepsString = translate(" 약 일곱 걸음 거리에 ")
             case 8:
-                stepsString = "약 여덟 걸음 떨어져 있습니다"
+                stepsString = translate(" 약 여덟 걸음 거리에 ")
             case 9:
-                stepsString = "약 아홉 걸음 떨어져 있습니다"
+                stepsString = translate(" 약 아홉 걸음 거리에 ")
             default:
-                stepsString = "멀리 떨어져 있습니다."
+                stepsString = translate(" 멀리 떨어진 곳에 ")
             }
-            let TTS = "\(coordinatorString)에 \(firstItem![1])가 " + stepsString
-            soundManager.speak(TTS)
-            print(TTS)
-            
+            if languageSetting == "ko" {
+                let TTS = coordinatorString + stepsString + translate(firstItem![1]) + " 있습니다."
+                soundManager.speak(TTS)
+                print(TTS)
+            } else {
+                let TTS = translate(firstItem![1]) + stepsString + coordinatorString
+                soundManager.speak(TTS)
+                print(TTS)
+            }
+
         }
 
         CVPixelBufferUnlockBaseAddress(depth, .readOnly)
@@ -461,9 +468,9 @@ extension ObjectDetectionViewController {
         }
         self.semaphore.signal()
     }
-    
+
     private func navigationRotor () -> UIAccessibilityCustomRotor {
-        // Create a custor Rotor option, it has a name that will be read by voice over, and
+        // Create a custom Rotor option, it has a name that will be read by voice over, and
         // a action that is a action called when this rotor option is interacted with.
         // The predicate gives you info about the state of this interaction
         let propertyRotor = UIAccessibilityCustomRotor.init(name: "메인 화면으로") { (predicate) -> UIAccessibilityCustomRotorItemResult? in
