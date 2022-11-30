@@ -12,7 +12,10 @@ import ARKit
 import SceneKit
 
 class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNViewDelegate {
-    var soundManger = SoundManager()
+    var soundManager = SoundManager()
+    var healthKitManager = HealthKitManager()
+    let maxWidth: Double = 191.0
+    let maxHeight: Double = 255.0
     // MARK: UI 프로퍼티
     lazy var videoPreview: ARSCNView = {
         let videoPreview = ARSCNView(frame: self.view.frame)
@@ -223,11 +226,67 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
             minValueDictionary[minDepth] = [minDepthCoordinate, String(prediction.label!)]  /// depth 최솟값을 좌표:깊이 쌍으로 딕셔너리에 추가
         }
 
-        if !minValueDictionary.isEmpty && !soundManger.synthesizer.isSpeaking {
-            var sorted = minValueDictionary.keys.sorted()
-            var firstItem = minValueDictionary[sorted[0]]
-            var TTS = "\(firstItem![0])에 \(firstItem![1])있습니다"
-            soundManger.speak(TTS)
+        if !minValueDictionary.isEmpty && !soundManager.synthesizer.isSpeaking {
+
+            let sorted = minValueDictionary.keys.sorted()
+            let firstKey = sorted[0]
+            let firstItem = minValueDictionary[firstKey]
+            let splited = firstItem![0].split(separator: ", ")
+            
+            let y = Int(String(splited[0]))!
+            let x = Int(String(splited[1]))!
+            
+            let xRatio = Int((Double(x) / maxWidth * 100.0 ))
+            let yRatio = Int((Double(y) / maxHeight * 100.0 ))
+            
+            var coordinatorString = ""
+            if xRatio < 33 {
+                coordinatorString += "우측"
+            } else if xRatio < 67 {
+                coordinatorString += "정면"
+            } else {
+                coordinatorString += "좌측"
+            }
+            
+            if yRatio < 33 {
+                coordinatorString += "상단"
+            } else if yRatio < 67 {
+                if !(coordinatorString == "정면") {
+                    coordinatorString += "가운데"
+                }
+            } else {
+                coordinatorString += "하단"
+            }
+                    
+            var steps = healthKitManager.calToStepCount(meter: Double(firstKey))
+            var stepsString = ""
+            switch steps
+            {
+            case 0:
+                stepsString = "근처에 있습니다"
+            case 1:
+                stepsString = "약 한 걸음 떨어져 있습니다"
+            case 2:
+                stepsString = "약 두 걸음 떨어져 있습니다"
+            case 3:
+                stepsString = "약 세 걸음 떨어져 있습니다"
+            case 4:
+                stepsString = "약 네 걸음 떨어져 있습니다"
+            case 5:
+                stepsString = "약 다섯 걸음 떨어져 있습니다"
+            case 6:
+                stepsString = "약 여섯 걸음 떨어져 있습니다"
+            case 7:
+                stepsString = "약 일곱 걸음 떨어져 있습니다"
+            case 8:
+                stepsString = "약 여덟 걸음 떨어져 있습니다"
+            case 9:
+                stepsString = "약 아홉 걸음 떨어져 있습니다"
+            default:
+                stepsString = "멀리 떨어져 있습니다."
+            }
+            let TTS = "\(coordinatorString)에 \(firstItem![1])가 " + stepsString
+            soundManager.speak(TTS)
             print(TTS)
             
         }
