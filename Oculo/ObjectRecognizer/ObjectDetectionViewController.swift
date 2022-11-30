@@ -241,11 +241,11 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
             
             var coordinatorString = ""
             if xRatio < 33 {
-                coordinatorString += "좌측"
+                coordinatorString += "우측"
             } else if xRatio < 67 {
                 coordinatorString += "정면"
             } else {
-                coordinatorString += "우측"
+                coordinatorString += "좌측"
             }
             
             if yRatio < 33 {
