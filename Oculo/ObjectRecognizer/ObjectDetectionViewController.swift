@@ -14,6 +14,8 @@ import SceneKit
 class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNViewDelegate {
     var soundManger = SoundManager()
     var healthKitManager = HealthKitManager()
+    let maxWidth:Double = 191.0
+    let maxHeight = 255.0
     // MARK: UI 프로퍼티
     lazy var videoPreview: ARSCNView = {
         let videoPreview = ARSCNView(frame: self.view.frame)
@@ -225,9 +227,37 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
         }
 
         if !minValueDictionary.isEmpty && !soundManger.synthesizer.isSpeaking {
-            var sorted = minValueDictionary.keys.sorted()
-            var firstItem = minValueDictionary[sorted[0]]
-            var TTS = "\(firstItem![0])에 \(firstItem![1])있습니다"
+
+            let sorted = minValueDictionary.keys.sorted()
+            let firstKey = sorted[0]
+            let firstItem = minValueDictionary[firstKey]
+            let splited = firstItem![0].split(separator: ", ")
+            
+            let y = Int(String(splited[0]))!
+            let x = Int(String(splited[1]))!
+            
+            let xRatio = Int((Double(x) / maxWidth * 100.0 ))
+            let yRatio = Int((Double(y) / maxHeight * 100.0 ))
+            
+            var coordinatorString = ""
+            if xRatio < 33 {
+                coordinatorString += "좌측"
+            } else if xRatio < 67 {
+                coordinatorString += "정면"
+            } else {
+                coordinatorString += "우측"
+            }
+            
+            if yRatio < 33 {
+                coordinatorString += "상단"
+            } else if xRatio < 67 {
+                coordinatorString += "중단"
+            } else {
+                coordinatorString += "하단"
+            }
+                    
+            let steps = healthKitManager.calToStepCount(meter: Double(firstKey))
+            let TTS = "\(coordinatorString)에 \(firstItem![1])가 \(steps)걸음 떨어져 있습니다"
             soundManger.speak(TTS)
             print(TTS)
             
