@@ -127,7 +127,7 @@ class TextReaderViewController: UIViewController, ImageAnalysisInteractionDelega
                             print(analysis.transcript)
                             self.soundManager.speak(analysis.transcript)
                         } else {
-                            self.soundManager.speak("글자가 인식되지 않았습니다.")
+                            self.soundManager.speak(translate("글자가 인식되지 않았습니다."))
                         }
                     }
                 }

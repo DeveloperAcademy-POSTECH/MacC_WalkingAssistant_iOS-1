@@ -11,6 +11,8 @@ import Foundation
 import AVFoundation
 import Vision
 
+public let languageSetting = Locale.current.language.languageCode!.identifier
+
 class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
     var healthKitManager = HealthKitManager()
     

@@ -132,7 +132,7 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
                 return
             } else {
                 if alreadySpoke {
-                    soundManager.speak("문이 다시 감지되었습니다")
+                    soundManager.speak(translate("문이 다시 감지되었습니다"))
                     alreadySpoke = false
                 }
             }
@@ -150,31 +150,36 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
                 if let pointOfView = sceneView.pointOfView {
                     // 화면상에 문이 보이지 않는 경우 TTS를 출력하지 않습니다.
                     let isMaybeVisible = renderer.isNode(plane.presentation, insideFrustumOf: pointOfView)
+
                     if (isMaybeVisible) {
+                        var stringToSpeak = ""
                         switch currentSteps
                         {
                         case 0:
-                            soundManager.speak("근처에 문이 있습니다")
+                            stringToSpeak = "근처에 문이 있습니다"
                         case 1:
-                            soundManager.speak("문으로 부터 약 한 걸음 떨어져 있습니다")
+                            stringToSpeak = "문으로부터 약 한 걸음 떨어져 있습니다"
                         case 2:
-                            soundManager.speak("문으로 부터 약 두 걸음 떨어져 있습니다")
+                            stringToSpeak = "문으로부터 약 두 걸음 떨어져 있습니다"
                         case 3:
-                            soundManager.speak("문으로 부터 약 세 걸음 떨어져 있습니다")
+                            stringToSpeak = "문으로부터 약 세 걸음 떨어져 있습니다"
                         case 4:
-                            soundManager.speak("문으로 부터 약 네 걸음 떨어져 있습니다")
+                            stringToSpeak = "문으로부터 약 네 걸음 떨어져 있습니다"
                         case 5:
-                            soundManager.speak("문으로 부터 약 다섯 걸음 떨어져 있습니다")
+                            stringToSpeak = "문으로부터 약 다섯 걸음 떨어져 있습니다"
                         case 6:
-                            soundManager.speak("문으로 부터 약 여섯 걸음 떨어져 있습니다")
+                            stringToSpeak = "문으로부터 약 여섯 걸음 떨어져 있습니다"
                         case 7:
-                            soundManager.speak("문으로 부터 약 일곱 걸음 떨어져 있습니다")
+                            stringToSpeak = "문으로부터 약 일곱 걸음 떨어져 있습니다"
                         case 8:
-                            soundManager.speak("문으로 부터 약 여덟 걸음 떨어져 있습니다")
+                            stringToSpeak = "문으로부터 약 여덟 걸음 떨어져 있습니다"
                         case 9:
-                            soundManager.speak("문으로 부터 약 아홉 걸음 떨어져 있습니다")
+                            stringToSpeak = "문으로부터 약 아홉 걸음 떨어져 있습니다"
                         default:
-                            soundManager.speak("문으로 부터 멀리 떨어져 있습니다. 화면을 눌러 인식을 초기화 해주세요")
+                            stringToSpeak = "문으로부터 멀리 떨어져 있습니다. 화면을 눌러 인식을 초기화 해주세요"
+                        }
+                        if stringToSpeak != "" {
+                            soundManager.speak(translate(stringToSpeak))
                         }
                     }
                 }
@@ -268,19 +273,19 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
         case .normal where frame.anchors.isEmpty:
             // No planes detected; provide instructions for this app's AR interactions.
             message = "스마트폰을 좌우, 위아래로 천천히 움직여주세요."
-            
+
         case .notAvailable:
             message = "환경 인식 기능에 문제가 발생했습니다."
-            
+
         case .limited(.excessiveMotion):
             message = "디바이스를 천천히 움직여주세요."
-            
+
         case .limited(.insufficientFeatures):
             message = "환경 인식을 할 수 없습니다."
-            
+
         case .limited(.initializing):
             message = "환경 인식 기능을 초기화 중입니다."
-            
+
         default:
             // No feedback needed when tracking is normal and planes are visible.
             // (Nor when in unreachable limited-tracking states.)
@@ -288,36 +293,35 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
 
         }
         if message != "" {
-            soundManager.speak(message)
+            soundManager.speak(translate(message))
         }
     }
-    
+
     func createInitializeButton() {
         initializeButton.addTarget(self, action: #selector(resetTracking), for: .touchUpInside)
         initializeButton.setTitle("문 인식 초기화", for: .normal)
         initializeButton.setTitle("", for: .selected)
     }
-    
+
     func addConstraints() {
-        
         sceneView.translatesAutoresizingMaskIntoConstraints = false
         initializeButton.translatesAutoresizingMaskIntoConstraints = false
-        
+
         sceneView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         sceneView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         sceneView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         sceneView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        
+
         initializeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         initializeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         initializeButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         initializeButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        
+
         sceneView.subviews.forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
     }
-    
+
     @objc private func resetTracking() {
         let configuration = ARWorldTrackingConfiguration()
         configuration.planeDetection = [.vertical]
@@ -325,7 +329,7 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
         self.anchors.removeAll()
         self.sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
     }
-    
+
     // source: https://stackoverflow.com/questions/41579755/how-to-determine-if-an-scnnode-is-left-or-right-of-the-view-direction-of-a-camer
     func getIfHeIsLookingNew(sceneWidth: CGFloat, nodePosition: SCNVector3) {
         if alreadySpoke {
@@ -333,14 +337,14 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
         }
         if (nodePosition.z < 1) {
             if ( nodePosition.x > (Float(sceneWidth)) ) {
-                soundManager.speak("문이 오른쪽에 있습니다")
+                soundManager.speak(translate("문이 오른쪽에 있습니다"))
             } else if (nodePosition.x < 0) {
-                soundManager.speak("문이 왼쪽에 있습니다")
+                soundManager.speak(translate("문이 왼쪽에 있습니다"))
             }
         } else if (nodePosition.x < 0) {
-            soundManager.speak("문이 오른쪽에 있습니다")
+            soundManager.speak(translate("문이 오른쪽에 있습니다"))
         } else {
-            soundManager.speak("문이 왼쪽에 있습니다")
+            soundManager.speak(translate("문이 왼쪽에 있습니다"))
         }
         alreadySpoke = true
     }
