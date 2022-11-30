@@ -285,7 +285,7 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
             default:
                 stepsString = "멀리 떨어져 있습니다."
             }
-            let TTS = "\(coordinatorString)에 \(firstItem![1])가 "+stepsString
+            let TTS = "\(coordinatorString)에 \(firstItem![1])가 " + stepsString
             soundManager.speak(TTS)
             print(TTS)
             
