@@ -173,6 +173,11 @@ let localizingDictionaryKorEng: [String: String] = [
     " 상단": " top",
     " 가운데": " center",
     " 하단": " bottom",
+
+    ///LaidarSensorAlert
+    "알림": "Alert",
+    "확인": "Understood",
+    "이 기기는 LiDAR 센서가 없어, 해당 기능을 사용 할 수 없습니다": "The device doesn't support this function for lack of LiDAR sensor"
 ]
 
 let labelsIndefiniteArticleDictionary: [String:String] = [

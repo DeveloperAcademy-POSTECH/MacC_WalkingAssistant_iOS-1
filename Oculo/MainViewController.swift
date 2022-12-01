@@ -10,8 +10,10 @@ import UIKit
 import Foundation
 import AVFoundation
 import Vision
+import ARKit
 
 public let languageSetting = Locale.current.language.languageCode!.identifier
+let supportLiDAR = ARWorldTrackingConfiguration.supportsSceneReconstruction(.mesh)
 
 class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
     var healthKitManager = HealthKitManager()
@@ -223,6 +225,11 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     @objc func onTouchButton(_ sender: UIButton) {
         self.selected = sender.tag
         if(selected == 1) {
+            guard supportLiDAR else {
+                showAlert()
+                return
+            }
+
             self.navigationButton.setTitleColor(.black, for: .normal)
             self.environmentReaderButton.setTitleColor(.white, for: .normal)
             self.textReaderButton.setTitleColor(.white, for: .normal)
@@ -231,6 +238,11 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             self.textReaderButton.backgroundColor = .black
             present(ObjectDetectionViewController(), animated: true)
         } else if (self.selected == 2) {
+            guard supportLiDAR else {
+                showAlert()
+                return
+            }
+
             self.navigationButton.setTitleColor(.white, for: .normal)
             self.environmentReaderButton.setTitleColor(.black, for: .normal)
             self.textReaderButton.setTitleColor(.white, for: .normal)
@@ -252,6 +264,13 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     @objc func openSettingView() {
         let mainVC = SettingViewController()
         present(mainVC, animated: true, completion: nil)
+    }
+
+    func showAlert() {
+        let alert = UIAlertController(title: translate("알림"), message: translate("이 기기는 LiDAR 센서가 없어, 해당 기능을 사용 할 수 없습니다"), preferredStyle: .alert)
+        let okAction = UIAlertAction(title: translate("확인"), style: .default)
+
+        alert.addAction(okAction)
     }
 }
 
