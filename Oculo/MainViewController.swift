@@ -37,25 +37,16 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // set
-        UIDevice.current.isProximityMonitoringEnabled = true
         // 처음 앱을 작동시켰을때 healthKit Manager에서 사용자의 보폭 정보를 불러오기 위한 시험 코드입니다.
         print(healthKitManager.calToStepCount(meter: 10))
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        UIDevice.current.isProximityMonitoringEnabled = false
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        UIDevice.current.isProximityMonitoringEnabled = true
-
-        if UIDevice.current.isProximityMonitoringEnabled {
-            NotificationCenter.default.addObserver(self, selector: #selector(proximityStateDidChange), name: UIDevice.proximityStateDidChangeNotification, object: nil)
-        }
 
         self.view.addSubview(navigationButton)
         self.view.addSubview(environmentReaderButton)
@@ -261,10 +252,6 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     @objc func openSettingView() {
         let mainVC = SettingViewController()
         present(mainVC, animated: true, completion: nil)
-    }
-
-    @objc func proximityStateDidChange() {
-        print("\(UIDevice.current.proximityState ? "디바이스가 정상입니다" : "디바이스를 뒤집어 주세요")");
     }
 }
 

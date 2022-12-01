@@ -19,7 +19,7 @@ class SoundManager {
     let environmentNode = AVAudioEnvironmentNode()  /// 오디오 환경 노드 선언
     
     let synthesizer = AVSpeechSynthesizer()
-    var speakingRate = AVSpeechUtteranceDefaultSpeechRate
+    var speakingRate = Float(0.8)
     var speakingVolume = Float(1.0)
     
     ///대략적인 오디오 엔진 구조 : AVAudioEnvironmentNode -> AVAudioPlayerNode -> 재생 의 과정을 거친다. 여기선 AVAudioEnvironmentNode노드는 사용자의 위치를, AVAudioPlayerNode는 플레이어의 위치를 설정한다고 생각하면 편하다

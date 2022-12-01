@@ -335,12 +335,21 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        UIDevice.current.isProximityMonitoringEnabled = false
         pauseARSession()
     }
 
     // MARK: 뷰 컨트롤러 라이프사이클 정의
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // 근접 센서 세팅
+        UIDevice.current.isProximityMonitoringEnabled = true
+
+        if UIDevice.current.isProximityMonitoringEnabled {
+            NotificationCenter.default.addObserver(self, selector: #selector(proximityStateDidChange), name: UIDevice.proximityStateDidChangeNotification, object: nil)
+        }
+
         let screenWidth = self.view.frame.width
 
         /// ARSession 델리게이트 호출
@@ -428,6 +437,10 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
         labelsTableView.register(LabelsTableViewCell.self, forCellReuseIdentifier: "InformationCell")
         labelsTableView.delegate = self
         labelsTableView.dataSource = self
+    }
+
+    @objc func proximityStateDidChange() {
+        soundManager.speak("\(UIDevice.current.proximityState ? "디바이스가 정상입니다" : "디바이스를 뒤집어 주세요")");
     }
 }
 
