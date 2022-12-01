@@ -24,7 +24,8 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     lazy var environmentReaderButton = UIButton()
     lazy var textReaderButton = UIButton()
     lazy var settingButton = UIButton()
-
+    var fontSize: CGFloat = 60
+    
     /// Variable for object detection camera view
     var bufferSize: CGSize = .zero
     var rootLayer: CALayer! = nil
@@ -77,34 +78,39 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     func createNavigateButton() {
         navigationButton.backgroundColor = UIColor.black
         navigationButton.setTitle(Language(rawValue: "Navigation")?.localized, for: .normal)
+        navigationButton.titleLabel?.font = .systemFont(ofSize: fontSize, weight: .bold)
         navigationButton.layer.cornerRadius = 10.0
         navigationButton.tag = 1
         navigationButton.addTarget(self, action: #selector(onTouchButton), for: .touchUpInside)
         navigationButton.layer.cornerRadius = 10.0
         navigationButton.layer.borderWidth = 10
-        navigationButton.layer.borderColor = UIColor.red.cgColor
+        navigationButton.layer.borderColor = UIColor.white.cgColor
     }
 
     func createEnvironmentReaderButton() {
         environmentReaderButton.backgroundColor = UIColor.black
         environmentReaderButton.setTitle(Language(rawValue: "Environment Reader")?.localized, for: .normal)
+        environmentReaderButton.titleLabel?.font = .systemFont(ofSize: fontSize, weight: .bold)
+        environmentReaderButton.titleLabel?.lineBreakMode = .byWordWrapping
+        environmentReaderButton.titleLabel?.textAlignment = .center
         environmentReaderButton.layer.cornerRadius = 10.0
         environmentReaderButton.tag = 2
         environmentReaderButton.addTarget(self, action: #selector(onTouchButton), for: .touchUpInside)
         environmentReaderButton.layer.cornerRadius = 10.0
         environmentReaderButton.layer.borderWidth = 10
-        environmentReaderButton.layer.borderColor = UIColor.yellow.cgColor
+        environmentReaderButton.layer.borderColor = UIColor.white.cgColor
     }
 
     func createTextReaderButton() {
         textReaderButton.backgroundColor = UIColor.black
         textReaderButton.setTitle(Language(rawValue: "Text Reader")?.localized, for: .normal)
+        textReaderButton.titleLabel?.font = .systemFont(ofSize: fontSize, weight: .bold)
         textReaderButton.layer.cornerRadius = 10.0
         textReaderButton.tag = 3
         textReaderButton.addTarget(self, action: #selector(onTouchButton), for: .touchUpInside)
         textReaderButton.layer.cornerRadius = 10.0
         textReaderButton.layer.borderWidth = 10
-        textReaderButton.layer.borderColor = UIColor.blue.cgColor
+        textReaderButton.layer.borderColor = UIColor.white.cgColor
     }
 
     func createSettingButton() {
@@ -226,19 +232,28 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     @objc func onTouchButton(_ sender: UIButton) {
         self.selected = sender.tag
         if(selected == 1) {
-            self.navigationButton.backgroundColor = .red
+            self.navigationButton.setTitleColor(.black, for: .normal)
+            self.environmentReaderButton.setTitleColor(.white, for: .normal)
+            self.textReaderButton.setTitleColor(.white, for: .normal)
+            self.navigationButton.backgroundColor = .white
             self.environmentReaderButton.backgroundColor = .black
             self.textReaderButton.backgroundColor = .black
             present(ObjectDetectionViewController(), animated: true)
         } else if (self.selected == 2) {
+            self.navigationButton.setTitleColor(.white, for: .normal)
+            self.environmentReaderButton.setTitleColor(.black, for: .normal)
+            self.textReaderButton.setTitleColor(.white, for: .normal)
             self.navigationButton.backgroundColor = .black
-            self.environmentReaderButton.backgroundColor = .yellow
+            self.environmentReaderButton.backgroundColor = .white
             self.textReaderButton.backgroundColor = .black
             present(EnvironmentReaderViewController(), animated: true)
         } else if (self.selected == 3) {
+            self.navigationButton.setTitleColor(.white, for: .normal)
+            self.environmentReaderButton.setTitleColor(.white, for: .normal)
+            self.textReaderButton.setTitleColor(.black, for: .normal)
             self.navigationButton.backgroundColor = .black
             self.environmentReaderButton.backgroundColor = .black
-            self.textReaderButton.backgroundColor = .blue
+            self.textReaderButton.backgroundColor = .white
             present(TextReaderViewController(), animated: true)
         }
     }
