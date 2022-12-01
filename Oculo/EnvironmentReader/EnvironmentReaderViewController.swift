@@ -299,7 +299,7 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
 
     func createInitializeButton() {
         initializeButton.addTarget(self, action: #selector(resetTracking), for: .touchUpInside)
-        initializeButton.setTitle("문 인식 초기화", for: .normal)
+        initializeButton.setTitle(Language(rawValue: "Reset door recognition")?.localized, for: .normal)
         initializeButton.setTitle("", for: .selected)
     }
 

@@ -37,6 +37,10 @@ enum Language: String, Localizable {
     case privacy = "Privacy"
     case license = "License"
     case contactUS = "Contact Us"
+    
+    // Contorller
+    case doorRecognition = "Reset door recognition"
+    case textRecognition = "Text recognition"
 }
 
 let localizingDictionaryEngKor: [String: String] = [

@@ -23,6 +23,6 @@
 "Contact Us" = "고객센터";
 
 // Button Text
-"문 인식 초기화" = "문 인식 초기화";
-"글자 인식" = "글자 인식";
+"Reset door recognition" = "문 인식 초기화";
+"Text recognition" = "글자 인식";
 "메인 화면으로" = "메인 화면으로";
