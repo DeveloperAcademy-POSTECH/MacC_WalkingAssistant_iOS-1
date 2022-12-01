@@ -267,7 +267,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     }
 
     func showAlert() {
-        let alert = UIAlertController(title: translate("알림"), message: translate("이 기기는 해당 기능을 지원하지 않습니다"), preferredStyle: .alert)
+        let alert = UIAlertController(title: translate("알림"), message: translate("이 기기는 LiDAR 센서가 없어, 해당 기능을 사용 할 수 없습니다"), preferredStyle: .alert)
         let okAction = UIAlertAction(title: translate("확인"), style: .default)
 
         alert.addAction(okAction)
