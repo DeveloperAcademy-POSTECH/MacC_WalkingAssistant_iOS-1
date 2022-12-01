@@ -177,7 +177,7 @@ let localizingDictionaryKorEng: [String: String] = [
     ///LaidarSensorAlert
     "알림": "Alert",
     "확인": "Understood",
-    "이 기기는 해당 기능을 지원하지 않습니다": "The device doesn't support this function"
+    "이 기기는 LiDAR 센서가 없어, 해당 기능을 사용 할 수 없습니다": "The device doesn't support this function for lack of LiDAR sensor"
 ]
 
 let labelsIndefiniteArticleDictionary: [String:String] = [
