@@ -92,6 +92,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         environmentReaderButton.setTitle(Language(rawValue: "Environment Reader")?.localized, for: .normal)
         environmentReaderButton.titleLabel?.font = .systemFont(ofSize: fontSize, weight: .bold)
         environmentReaderButton.titleLabel?.lineBreakMode = .byWordWrapping
+        environmentReaderButton.titleLabel?.textAlignment = .center
         environmentReaderButton.layer.cornerRadius = 10.0
         environmentReaderButton.tag = 2
         environmentReaderButton.addTarget(self, action: #selector(onTouchButton), for: .touchUpInside)
