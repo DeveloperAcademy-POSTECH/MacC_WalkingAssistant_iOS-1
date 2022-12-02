@@ -271,6 +271,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         let okAction = UIAlertAction(title: translate("확인"), style: .default)
 
         alert.addAction(okAction)
+        present(alert, animated: false, completion: nil)
     }
 }
 
