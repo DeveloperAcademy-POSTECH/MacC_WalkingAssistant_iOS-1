@@ -24,12 +24,27 @@ An AI-powered walking navigation application for visually impaired persons
 ## :framed_picture: Demo
 
 <!-- <a href="" target="_blank">Demonstration Video Clip</a><br> -->
+|  |  |  |
+|:---:|:---:|:---:|
+|![6 5 - 05](https://user-images.githubusercontent.com/16621556/205229241-dbc7099c-da57-47f5-8e43-9abe50feb3a7.jpg)|![6 5 - 06](https://user-images.githubusercontent.com/16621556/205229248-0fdaf962-5edf-43e9-8294-3b4c84cc3287.jpg)|![6 5 - 07](https://user-images.githubusercontent.com/16621556/205229251-d7b6999e-f432-4ceb-9b87-79e3bb81fcf5.jpg)|
+
+
+
+
+
 
 <br>
 
 ## :fireworks: Screenshots
 
-![]()
+| Main Menu | Navigation | Environment Reader | Text Reader |
+|:---:|:---:|:---:|:---:|
+|<img width="250" src="https://user-images.githubusercontent.com/16621556/205229219-17a80d84-bef3-4c24-852b-ffb392484e9e.jpg"/>|<img width="250" src="https://user-images.githubusercontent.com/16621556/205229170-ad593046-944d-4db3-b59b-f11db3220593.jpg"/>|<img width="250" src="https://user-images.githubusercontent.com/16621556/205229177-6b03920d-ce96-46a4-bc32-21c49e37b018.jpg"/>|<img width="250" src="https://user-images.githubusercontent.com/16621556/205229180-fe8f3192-011d-4e05-9876-b44653961324.jpg"/>|
+
+
+
+
+
 
 <br>
 
