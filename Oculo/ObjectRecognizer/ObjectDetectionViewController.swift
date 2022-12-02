@@ -331,11 +331,12 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         startARSession()
+        //UIDevice.current.isProximityMonitoringEnabled = true
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        UIDevice.current.isProximityMonitoringEnabled = false
+        //UIDevice.current.isProximityMonitoringEnabled = false
         pauseARSession()
     }
 
@@ -344,11 +345,13 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
         super.viewDidLoad()
 
         // 근접 센서 세팅
+        /*
         UIDevice.current.isProximityMonitoringEnabled = true
 
         if UIDevice.current.isProximityMonitoringEnabled {
             NotificationCenter.default.addObserver(self, selector: #selector(proximityStateDidChange), name: UIDevice.proximityStateDidChangeNotification, object: nil)
         }
+         */
 
         let screenWidth = self.view.frame.width
 
