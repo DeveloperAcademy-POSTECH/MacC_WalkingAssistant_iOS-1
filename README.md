@@ -17,7 +17,7 @@ An AI-powered walking navigation application for visually impaired persons
 
 ## :people_hugging: Authors
 
-[@Kim, Che Pill](https://www.github.com/garlicvread) | [@Kim, Jin San](https://github.com/realmountain1129) | [@Jeon, Dong Jin](https://github.com/hotsunnyday) | [@Heo, Jae Nyeong](https://github.com/mizz0224) | [Choi Yun Seok](https://github.com/YunSeok-Choi) | [@Cho, Hyun Min](https://github.com/Tempnixk)
+[@Kim, Che Pill](https://www.github.com/garlicvread) | [@Kim, Jin San](https://github.com/realmountain1129) | [@Jeon, Dong Jin](https://github.com/hotsunnyday) | [@Heo, Jae Nyeong](https://github.com/mizz0224) | [@Choi, Yun Seok](https://github.com/YunSeok-Choi) | [@Cho, Hyun Min](https://github.com/Tempnixk)
 
 <br>
 
