@@ -2,16 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIRequiredDeviceCapabilities</key>
-	<array>
-		<string>arkit</string>
-	</array>
-	<key>NSCameraUsageDescription</key>
-	<string>카메라를 통해 물체, 환경, 글자를 인식하기 위해 필요한 권한입니다.</string>
-	<key>NSHealthUpdateUsageDescription</key>
-	<string>사용자의 보폭을 통해 거리를 계산하기위해 필요한 권한입니다</string>
-	<key>NSHealthShareUsageDescription</key>
-	<string>사용자의 보폭을 통해 거리를 계산하기위해 필요한 권한입니다</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

@@ -391,13 +391,14 @@
 				INFOPLIST_FILE = Oculo/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Oculo;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.navigation";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "사용자의 보폭을 통해 거리를 계산하기위해 필요한 권한입니다";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "사용자의 보폭을 통해 거리를 계산하기위해 필요한 권한입니다";
+				INFOPLIST_KEY_NSCameraUsageDescription = "카메라를 통해 물체, 환경, 글자를 인식하기 위해 필요한 권한입니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -431,13 +432,14 @@
 				INFOPLIST_FILE = Oculo/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Oculo;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.navigation";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "사용자의 보폭을 통해 거리를 계산하기위해 필요한 권한입니다";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "사용자의 보폭을 통해 거리를 계산하기위해 필요한 권한입니다";
+				INFOPLIST_KEY_NSCameraUsageDescription = "카메라를 통해 물체, 환경, 글자를 인식하기 위해 필요한 권한입니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

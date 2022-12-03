@@ -18,7 +18,7 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
     var sceneView = ARSCNView()
     var initializeButton = UIButton()
     var soundManager = SoundManager()
-    var healthKitManager = HealthKitManager()
+    //var healthKitManager = HealthKitManager()
     
     // Node의 위치를 구분하기 위해 화면의 크기를 가져옵니다.
     var sceneWidth:CGFloat = 0
@@ -142,7 +142,8 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
         if let distanceNode = plane.distanceNode,
            let distanceGeometry = distanceNode.geometry as? SCNText {
             let currentDistance = simd_distance(node.simdTransform.columns.3, (sceneView.session.currentFrame?.camera.transform.columns.3)!)
-            var currentSteps = healthKitManager.calToStepCount(meter: Double(currentDistance))
+            //var currentSteps = healthKitManager.calToStepCount(meter: Double(currentDistance))
+            var currentSteps = Int(Double(currentDistance)/0.7)
             if (currentSteps > 10) { currentSteps = 10 }
             if let oldSteps = distanceGeometry.string as? String, oldSteps != String(currentSteps) {
                 distanceGeometry.string = String(currentSteps)

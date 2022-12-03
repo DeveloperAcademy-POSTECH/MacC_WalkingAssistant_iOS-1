@@ -20,7 +20,7 @@ class Plane: SCNNode {
     let meshNode: SCNNode
     let extentNode: SCNNode
     var distanceNode: SCNNode?
-    var healthKitManager = HealthKitManager()
+    //var healthKitManager = HealthKitManager()
     /// - Tag: VisualizePlane
     init(anchor: ARPlaneAnchor, in sceneView: ARSCNView) {
         
@@ -54,7 +54,8 @@ class Plane: SCNNode {
         
         // Display the plane's distance from camera
         let distance = simd_distance(meshNode.simdTransform.columns.3, (sceneView.session.currentFrame?.camera.transform.columns.3)!)
-        let steps = String(healthKitManager.calToStepCount(meter: Double(distance)))
+        // let steps = String(healthKitManager.calToStepCount(meter: Double(distance)))
+        let steps = String(Int(Double(distance)/0.7))
         let textNode = self.makeTextNode(steps)
         distanceNode = textNode
         // Change the pivot of the text node to its center
