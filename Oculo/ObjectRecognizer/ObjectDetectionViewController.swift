@@ -13,7 +13,7 @@ import SceneKit
 
 class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNViewDelegate {
     var soundManager = SoundManager()
-    var healthKitManager = HealthKitManager()
+    //var healthKitManager = HealthKitManager()
     let maxWidth: Double = 191.0
     let maxHeight: Double = 255.0
     // MARK: UI 프로퍼티
@@ -259,7 +259,8 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
                 coordinatorString += translate(" 하단")
             }
 
-            let steps = healthKitManager.calToStepCount(meter: Double(firstKey))
+            // let steps = healthKitManager.calToStepCount(meter: Double(firstKey))
+            let steps = Int(Double(firstKey)/0.7)
             var stepsString = ""
             switch steps
             {

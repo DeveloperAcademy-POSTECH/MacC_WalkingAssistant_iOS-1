@@ -6,6 +6,7 @@
 //  Copyright © 2022 Intelligent ATLAS. All rights reserved.
 //
 
+/*
 import Foundation
 import HealthKit
 
@@ -199,4 +200,5 @@ class HealthKitManager {
 //        healthStore.execute(query)
 //    }
 }
+ */
 

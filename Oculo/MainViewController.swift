@@ -16,7 +16,7 @@ public let languageSetting = Locale.current.language.languageCode!.identifier
 let supportLiDAR = ARWorldTrackingConfiguration.supportsSceneReconstruction(.mesh)
 
 class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
-    var healthKitManager = HealthKitManager()
+    //var healthKitManager = HealthKitManager()
     
     /// Variable for UI changing
     var selected = 0
@@ -40,7 +40,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // 처음 앱을 작동시켰을때 healthKit Manager에서 사용자의 보폭 정보를 불러오기 위한 시험 코드입니다.
-        print(healthKitManager.calToStepCount(meter: 10))
+        // print(healthKitManager.calToStepCount(meter: 10))
     }
 
     override func viewWillDisappear(_ animated: Bool) {
