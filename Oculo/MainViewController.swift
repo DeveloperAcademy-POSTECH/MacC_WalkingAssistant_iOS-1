@@ -108,7 +108,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
 
     func createSettingButton() {
         settingButton.backgroundColor = UIColor.black
-        settingButton.setTitle(Language(rawValue: "License")?.localized, for: .normal)
+        settingButton.setTitle(Language(rawValue: "Settings")?.localized, for: .normal)
         settingButton.addTarget(self, action: #selector(openSettingView), for: .touchUpInside)
     }
 
