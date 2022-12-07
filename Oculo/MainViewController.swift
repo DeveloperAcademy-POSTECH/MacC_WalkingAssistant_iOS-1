@@ -66,6 +66,11 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         createSettingButton()
 
         addConstraints()
+        
+        if !UserDefaults.standard.bool(forKey: "lanchedBefore") {  /// 앱이 최초로 실행될때
+            UserDefaults.standard.set(true, forKey: "lanchedBefore") /// 앱이 최초로 실행되지않았다고 저장하고
+            UserDefaults.standard.setValue(Float(0.8), forKey: "speakingRate") ///말하기 속도를 0.8로 저장
+        }
     }
 
     func createNavigateButton() {
