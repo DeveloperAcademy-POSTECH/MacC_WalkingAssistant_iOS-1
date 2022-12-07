@@ -289,13 +289,13 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
             }
             if languageSetting == "ko" {
                 let TTS = coordinatorString + stepsString + translate(firstItem![1]) + " 있습니다."
-                soundManager.speak(TTS)
-                print(TTS)
-                print(soundManager.speakingRate)
+                soundManager.speakByTTS(TTS)
+                //print(TTS)
+                //print(soundManager.speakingRate)
             } else {
                 let TTS = translate(firstItem![1]) + stepsString + coordinatorString
-                soundManager.speak(TTS)
-                print(TTS)
+                soundManager.speakByTTS(TTS)
+                //print(TTS)
             }
 
         }
