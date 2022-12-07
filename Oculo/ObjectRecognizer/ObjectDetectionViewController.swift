@@ -291,6 +291,7 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
                 let TTS = coordinatorString + stepsString + translate(firstItem![1]) + " 있습니다."
                 soundManager.speak(TTS)
                 print(TTS)
+                print(soundManager.speakingRate)
             } else {
                 let TTS = translate(firstItem![1]) + stepsString + coordinatorString
                 soundManager.speak(TTS)

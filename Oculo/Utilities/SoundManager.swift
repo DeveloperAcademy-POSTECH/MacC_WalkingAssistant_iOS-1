@@ -19,7 +19,7 @@ class SoundManager {
     let environmentNode = AVAudioEnvironmentNode()  /// 오디오 환경 노드 선언
     
     let synthesizer = AVSpeechSynthesizer()
-    var speakingRate = Float(0.8)
+    var speakingRate: Float
     var speakingVolume = Float(1.0)
     
     ///대략적인 오디오 엔진 구조 : AVAudioEnvironmentNode -> AVAudioPlayerNode -> 재생 의 과정을 거친다. 여기선 AVAudioEnvironmentNode노드는 사용자의 위치를, AVAudioPlayerNode는 플레이어의 위치를 설정한다고 생각하면 편하다
@@ -54,6 +54,12 @@ class SoundManager {
         /// 위에서 생성한 environmentNode에 audioPlayerNode 연결
         self.audioEngine.connect(self.audioPlayerNode, to: self.environmentNode, format: monoFormat)
         self.audioPlayerNode.renderingAlgorithm = .HRTFHQ  /// 가상으로 3dPositioning하는 알고리즘 설정
+        
+        if UserDefaults.standard.float(forKey: "speakingRate") != nil {  // 말하기 속도가 저장이 되어있을경우
+            speakingRate = UserDefaults.standard.float(forKey: "speakingRate")  // 유저디폴트에서 speakingRate값을 읽어와서 soundManager의 speakingRate에 저장
+        } else {  // 말하기 속도가 저장이 안되어있을경우(사실 없습니다) 
+            speakingRate = Float(0.5)  // speakingRate를 0.5로저장 (사실 이럴일은 없습니다)
+        }
     }
 
     // TODO: 블루투스 재생 뿐 아니라 스피커로 재생하는 방법 필요

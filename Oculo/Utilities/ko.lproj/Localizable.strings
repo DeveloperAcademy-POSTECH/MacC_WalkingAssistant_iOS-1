@@ -21,6 +21,8 @@
 "Privacy" = "개인정보 보호";
 "License" = "사용권 조항";
 "Contact Us" = "고객센터";
+"error" = "에러입니다";
+"SPEAKING RATE" = "말하기 속도";
 
 // Button Text
 "Reset door recognition" = "문 인식 초기화";

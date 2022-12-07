@@ -37,6 +37,8 @@ enum Language: String, Localizable {
     case privacy = "Privacy"
     case license = "License"
     case contactUS = "Contact Us"
+    case error = "error"
+    case speakingRate = "SPEAKING RATE"
     
     // Contorller
     case doorRecognition = "Reset door recognition"
