@@ -94,6 +94,23 @@ class SoundManager {
         }
     }
 
+    func speakByTTS(_ string: String) {
+        /// TTS가 문장을 읽음.
+        let utterance = AVSpeechUtterance(string: string)
+        if languageSetting == "ko" {
+            utterance.voice = AVSpeechSynthesisVoice(language: "ko-KR")
+        } else {
+            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        }
+
+        utterance.rate = speakingRate
+        utterance.volume = speakingVolume
+
+        /// synthesizer에서 현재 말하는 중인 경우 즉시 중단한다. (소리가 겹쳐서 들리는 현상 방지)
+        synthesizer.stopSpeaking(at: AVSpeechBoundary.word)
+        synthesizer.speak(utterance)
+    }
+
     func stopSpeak() {
         if (synthesizer.isSpeaking) {
             synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
