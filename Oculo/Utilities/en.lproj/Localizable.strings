@@ -21,6 +21,8 @@
 "Privacy" = "Privacy";
 "License" = "License";
 "Contact Us" = "Contact Us";
+"error" = "error";
+"SPEAKING RATE" = "SPEAKING RATE";
 
 // Button Text
 "Reset door recognition" = "Reset door recognition";
