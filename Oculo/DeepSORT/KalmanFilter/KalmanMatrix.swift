@@ -262,9 +262,9 @@ extension KalmanMatrix: KalmanInput {
 }
 
 /**
- Naive add matrices
+ 간단한 행렬 더하기 함수
 
- Complexity: O(n^2)
+ 시간복잡도: O(n^2)
  */
 public func + (lhs: KalmanMatrix, rhs: KalmanMatrix) -> KalmanMatrix {
     assert(lhs.rows == rhs.rows && lhs.columns == rhs.columns, "The matrices should have equal size")
@@ -274,9 +274,9 @@ public func + (lhs: KalmanMatrix, rhs: KalmanMatrix) -> KalmanMatrix {
 }
 
 /**
- Naive subtract matrices
+ 간단한 행렬 빼기 함수
 
- Complexity: O(n^2)
+ 시간복잡도: O(n^2)
  */
 public func - (lhs: KalmanMatrix, rhs: KalmanMatrix) -> KalmanMatrix {
     assert(lhs.rows == rhs.rows && lhs.columns == rhs.columns, "The matrices should have equal size")
@@ -287,9 +287,9 @@ public func - (lhs: KalmanMatrix, rhs: KalmanMatrix) -> KalmanMatrix {
 
 
 /**
- Naive matrices multiplication
+ 간단한 행렬곱 함수
 
- Complexity: O(n^3)
+ 시간복잡도: O(n^3)
  */
 public func * (lhs: KalmanMatrix, rhs: KalmanMatrix) -> KalmanMatrix {
     assert(lhs.columns == rhs.rows, "The number of left matrix columns should be the same with the right matrix's rows")
@@ -312,7 +312,7 @@ public func * (lhs: KalmanMatrix, rhs: KalmanMatrix) -> KalmanMatrix {
     return resultMatrix
 }
 
-// MARK: - Nice additional methods
+// MARK: 추가 메서드
 public func * (lhs: KalmanMatrix, rhs: Double) -> KalmanMatrix {
     return KMatrix(grid: lhs.grid.map({ $0 * rhs }), rows: lhs.rows, columns: lhs.columns)
 }
@@ -321,7 +321,7 @@ public func * (lhs: Double, rhs: KalmanMatrix) -> KalmanMatrix {
     return rhs * lhs
 }
 
-// MARK: - CustomStringConvertible for debug output
+// MARK: 아웃풋 디버깅용 CustomStringConvertible 익스텐션 정의
 extension KalmanMatrix: CustomStringConvertible {
     public var description: String {
         var description = ""
