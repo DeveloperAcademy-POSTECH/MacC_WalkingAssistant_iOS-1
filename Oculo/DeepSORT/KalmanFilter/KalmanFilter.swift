@@ -32,6 +32,8 @@ import Foundation
    ※ 칼만 이득은 다음 단계의 추정값 계산에 사용되는 가중치이다. 칼만 이득은 반복적으로 연산되고, 계속 업데이트된다.
  3. 추정값 계산
  4. 오차 공분산 계산 --> 1번으로 돌아감
+
+ 이와 같이 반복적인 recursive calculation이 이루어진다.
  */
 
 public struct KalmanFilter<Type: KalmanInput>: KalmanFilterType {
