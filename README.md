@@ -2,18 +2,21 @@
 
 ![Logo](https://github.com/ADA-1st-macro-walikngAssistant/WalkingAssistant_iOS/blob/dev/Oculo/Assets.xcassets/AppIcon.appiconset/180.png)
 
-시각장애인을 위한 인공지능 기반 보행용 내비게이션 앱<br>
-An AI-powered walking navigation application for visually impaired persons
+시각장애인의 자기 주도적이고 안전한 보행을 위한 애플리케이<br>
+A supplementary application for the SELF-DIRECTED and SAFER walking of visually impaired
+
+<br>
 
 
 ## :pushpin: Features
 
-- [ ] LiDAR access
-- [ ] Camera access
-- [ ] Speaker access
-- [ ] GPU access
-- [ ] GPS access
+- [x] LiDAR access
+- [x] Camera access
+- [x] Speaker access
+- [x] GPU access
+- [x] GPS access
 
+<br>
 
 ## :people_hugging: Authors
 
@@ -28,11 +31,6 @@ An AI-powered walking navigation application for visually impaired persons
 |:---:|:---:|:---:|
 |![6 5 - 05](https://user-images.githubusercontent.com/16621556/205229241-dbc7099c-da57-47f5-8e43-9abe50feb3a7.jpg)|![6 5 - 06](https://user-images.githubusercontent.com/16621556/205229248-0fdaf962-5edf-43e9-8294-3b4c84cc3287.jpg)|![6 5 - 07](https://user-images.githubusercontent.com/16621556/205229251-d7b6999e-f432-4ceb-9b87-79e3bb81fcf5.jpg)|
 
-
-
-
-
-
 <br>
 
 ## :fireworks: Screenshots
@@ -41,15 +39,10 @@ An AI-powered walking navigation application for visually impaired persons
 |:---:|:---:|:---:|:---:|
 |<img width="250" height="500" src="https://user-images.githubusercontent.com/16621556/205229219-17a80d84-bef3-4c24-852b-ffb392484e9e.jpg"/>|<img width="250" height="500" src="https://user-images.githubusercontent.com/16621556/205229170-ad593046-944d-4db3-b59b-f11db3220593.jpg"/>|<img width="250" height="500" src="https://user-images.githubusercontent.com/16621556/205229177-6b03920d-ce96-46a4-bc32-21c49e37b018.jpg"/>|<img width="250" height="500" src="https://user-images.githubusercontent.com/16621556/205229180-fe8f3192-011d-4e05-9876-b44653961324.jpg"/>|
 
-
-
-
-
-
 <br>
 
 ## :sparkles: Skills & Tech Stack
-UIKit, CocoaPods, Accelerate framework, METAL framework
+UIKit, Accelerate framework, METAL framework
 
 <!-- ## :books: Documentation
 
