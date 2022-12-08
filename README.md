@@ -2,11 +2,10 @@
 
 ![Logo](https://github.com/ADA-1st-macro-walikngAssistant/WalkingAssistant_iOS/blob/dev/Oculo/Assets.xcassets/AppIcon.appiconset/180.png)
 
-시각장애인의 자기 주도적이고 안전한 보행을 위한 애플리케이<br>
+시각장애인의 자기 주도적이고 안전한 보행을 위한 애플리케이션<br>
 A supplementary application for the SELF-DIRECTED and SAFER walking of visually impaired
 
 <br>
-
 
 ## :pushpin: Features
 
