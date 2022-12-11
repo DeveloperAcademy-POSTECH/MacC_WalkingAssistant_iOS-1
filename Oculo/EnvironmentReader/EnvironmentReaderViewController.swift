@@ -95,14 +95,13 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
         self.planes[anchor.identifier] = plane
         self.anchors[anchor.identifier] = anchor
 
-        /// Add the visualization to the ARKit-managed node so that it tracks
-        /// changes in the plane anchor as plane estimation continues.
+        /// Add the visualization to the ARKit-managed node so that it tracks changes in the plane anchor as plane estimation continues.
         node.addChildNode(plane)
     }
 
     /// - Tag: UpdateARContent
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
-        // Update only anchors and nodes set up by `renderer(_:didAdd:for:)`.
+        /// Update only anchors and nodes set up by `renderer(_:didAdd:for:)`.
         guard let planeAnchor = anchor as? ARPlaneAnchor,
               let plane = node.childNodes.first as? Plane
             else { return }
@@ -140,7 +139,7 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
         if let distanceNode = plane.distanceNode,
            let distanceGeometry = distanceNode.geometry as? SCNText {
             let currentDistance = simd_distance(node.simdTransform.columns.3, (sceneView.session.currentFrame?.camera.transform.columns.3)!)
-            // var currentSteps = healthKitManager.calToStepCount(meter: Double(currentDistance))
+//             var currentSteps = healthKitManager.calToStepCount(meter: Double(currentDistance))
             var currentSteps = Int(Double(currentDistance) / 0.7)
 
             if (currentSteps > 10) { currentSteps = 10 }
@@ -204,7 +203,7 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
         updateSessionInfoAndSpeak(for: session.currentFrame!, trackingState: camera.trackingState)
     }
 
-    // MARK: - ARSessionObserver
+    // MARK: ARSessionObserver
     func sessionWasInterrupted(_ session: ARSession) {
         /// Inform the user that the session has been interrupted, for example, by presenting an overlay
         print("Session was interrupted")
@@ -231,7 +230,7 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
         let errorMessage = messages.compactMap({ $0 }).joined(separator: "\n")
 
         DispatchQueue.main.async {
-            // Present an alert informing about the error that has occurred.
+            /// Present an alert informing about the error that has occurred.
             let alertController = UIAlertController(title: "The AR session failed.", message: errorMessage, preferredStyle: .alert)
             let restartAction = UIAlertAction(title: "Restart Session", style: .default) { _ in
                 alertController.dismiss(animated: true, completion: nil)
