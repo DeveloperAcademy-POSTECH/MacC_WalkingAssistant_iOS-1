@@ -2,9 +2,14 @@
 
 ![Logo](https://github.com/ADA-1st-macro-walikngAssistant/WalkingAssistant_iOS/blob/dev/Oculo/Assets.xcassets/AppIcon.appiconset/180.png)  <img width="179" alt="Screenshot 2022-12-08 at 11 53 16 AM" src="https://user-images.githubusercontent.com/82295573/206344616-28510432-9ad4-4cbf-874c-ca74e486d658.png">
 
-
 시각장애인의 자기 주도적이고 안전한 보행을 위한 애플리케이션<br>
 A supplementary application for the SELF-DIRECTED and SAFER walking of visually impaired
+
+<br>
+
+## 🎬 Usage guide video
+
+[![Oculo concrete usage video](https://img.youtube.com/vi/5vWxZMugUlc/mqdefault.jpg)](https://www.youtube.com/embed/5vWxZMugUlc)
 
 <br>
 
