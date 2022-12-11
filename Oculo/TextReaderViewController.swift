@@ -15,7 +15,7 @@ class TextReaderViewController: UIViewController, ImageAnalysisInteractionDelega
     /// 카메라 역할을 수행할 ARView
     var arView = ARView()
 
-    /// 실제 사용시에 카메라 화면을 가리기 위한 View
+    /// 실제 사용시 카메라 화면을 가리기 위한 View
     var textReadButton = UIButton()
 
     /// LiveText의 구성 요소
@@ -46,7 +46,7 @@ class TextReaderViewController: UIViewController, ImageAnalysisInteractionDelega
         
     }
 
-    /// hideView의 배경색 지정
+    /// hideView 배경색 지정
     func createTextReadButton() {
         textReadButton.setTitle(Language(rawValue: "Text recognition")?.localized, for: .normal)
         textReadButton.setTitle("", for: .selected)
@@ -84,22 +84,19 @@ class TextReaderViewController: UIViewController, ImageAnalysisInteractionDelega
 
     
     private func textReaderRotor () -> UIAccessibilityCustomRotor {
-        // Create a custor Rotor option, it has a name that will be read by voice over, and
-        // a action that is a action called when this rotor option is interacted with.
-        // The predicate gives you info about the state of this interaction
+        /// Create a custor Rotor option, it has a name that will be read by voice over, and a action that is a action called when this rotor option is interacted with. The predicate gives you info about the state of this interaction
         let propertyRotor = UIAccessibilityCustomRotor.init(name: "메인 화면으로") { (predicate) -> UIAccessibilityCustomRotorItemResult? in
             
-            // Get the direction of the movement when this rotor option is enablade
+            /// Get the direction of the movement when this rotor option is enablade
             let forward = predicate.searchDirection == UIAccessibilityCustomRotor.Direction.next
             
-            // You can do any kind of business logic processing here
+            /// You can do any kind of business logic processing here
             if forward {
-                // 홈 화면으로 돌아감
+                /// 홈 화면으로 돌아감
                 self.dismiss(animated: true)
-               // self.present(TextReaderViewController(), animated: true)
+               /// self.present(TextReaderViewController(), animated: true)
             }
-            // Return the selection of voice over to the element rotorPropertyValueLabel
-            // Use this return to select the desired selection that fills the purpose of its logic
+            /// Return the selection of voice over to the element rotorPropertyValueLabel. Use this return to select the desired selection that fills the purpose of its logic
             return UIAccessibilityCustomRotorItemResult.init()
         }
         return propertyRotor

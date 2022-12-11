@@ -18,15 +18,15 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
     var sceneView = ARSCNView()
     var initializeButton = UIButton()
     var soundManager = SoundManager()
-    //var healthKitManager = HealthKitManager()
+//    var healthKitManager = HealthKitManager()
 
-    // Node의 위치를 구분하기 위해 화면의 크기를 가져옵니다.
+    /// Node의 위치를 구분하기 위해 화면의 크기를 가져옵니다.
     var sceneWidth:CGFloat = 0
 
-    // 방향에 대한 안내를 할 경우, TTS 출돌 현상을 방지하기 위해 Flag를 만들었습니다.
+    /// 방향에 대한 안내를 할 경우, TTS 충돌 현상을 방지하기 위해 Flag를 만들었습니다.
     var alreadySpoke = false
 
-    // 하나의 문만 인식하고 안내하기 위해 plane과 anchor를 담는 array
+    /// 하나의 문만 인식하고 안내하기 위해 plane과 anchor를 담는 array
     private var planes = [UUID: Plane]()
     private var anchors = [UUID: ARAnchor]()
 
@@ -49,21 +49,19 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        // Start the view's AR session with a configuration that uses the rear camera,
-        // device position and orientation tracking, and plane detection.
+        /// Start the view's AR session with a configuration that uses the rear camera, device position and orientation tracking, and plane detection.
         let configuration = ARWorldTrackingConfiguration()
         configuration.planeDetection = [.vertical]
         configuration.isAutoFocusEnabled = true
         self.sceneView.session.run(configuration)
 
-        // Set a delegate to track the number of plane anchors for providing UI feedback.
+        /// Set a delegate to track the number of plane anchors for providing UI feedback.
         self.sceneView.session.delegate = self
 
-        // Prevent the screen from being dimmed after a while as users will likely
-        // have long periods of interaction without touching the screen or buttons.
+        /// Prevent the screen from being dimmed after a while as users will likely have long periods of interaction without touching the screen or buttons.
         UIApplication.shared.isIdleTimerDisabled = true
 
-        // Show debug UI to view performance metrics (e.g. frames per second).
+        /// Show debug UI to view performance metrics (e.g. frames per second).
         self.sceneView.showsStatistics = true
 
         self.sceneWidth = self.sceneView.frame.width
@@ -72,7 +70,7 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        // Pause the view's AR session.
+        /// Pause the view's AR session.
         self.sceneView.session.pause()
         self.anchors.removeAll()
         self.planes.removeAll()
@@ -82,7 +80,7 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
 
     /// - Tag: PlaceARContent
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        // Place content only for anchors found by plane detection.
+        /// Place content only for anchors found by plane detection.
         guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
 
         if planeAnchor.classification.description != ARPlaneAnchor.Classification.door.description {
@@ -91,20 +89,19 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
 
         if !self.planes.isEmpty || !self.anchors.isEmpty { return }
 
-        // Create a custom object to visualize the plane geometry and extent.
+        /// Create a custom object to visualize the plane geometry and extent.
         let plane = Plane(anchor: planeAnchor, in: self.sceneView)
 
         self.planes[anchor.identifier] = plane
         self.anchors[anchor.identifier] = anchor
 
-        // Add the visualization to the ARKit-managed node so that it tracks
-        // changes in the plane anchor as plane estimation continues.
+        /// Add the visualization to the ARKit-managed node so that it tracks changes in the plane anchor as plane estimation continues.
         node.addChildNode(plane)
     }
 
     /// - Tag: UpdateARContent
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
-        // Update only anchors and nodes set up by `renderer(_:didAdd:for:)`.
+        /// Update only anchors and nodes set up by `renderer(_:didAdd:for:)`.
         guard let planeAnchor = anchor as? ARPlaneAnchor,
               let plane = node.childNodes.first as? Plane
             else { return }
@@ -112,12 +109,12 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
         if planeAnchor.classification.description != ARPlaneAnchor.Classification.door.description
         { return }
 
-        // Update ARSCNPlaneGeometry to the anchor's new estimated shape.
+        /// Update ARSCNPlaneGeometry to the anchor's new estimated shape.
         if let planeGeometry = plane.meshNode.geometry as? ARSCNPlaneGeometry {
             planeGeometry.update(from: planeAnchor.geometry)
         }
 
-        // Update extent visualization to the anchor's new bounding rectangle.
+        /// Update extent visualization to the anchor's new bounding rectangle.
         if let extentGeometry = plane.extentNode.geometry as? SCNPlane {
             extentGeometry.width = CGFloat(planeAnchor.planeExtent.width)
             extentGeometry.height = CGFloat(planeAnchor.planeExtent.height)
@@ -125,7 +122,7 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
         }
 
         if let pointOfView = sceneView.pointOfView {
-            // 화면상에 문이 보이지 않는 경우 방향을 안내압니다.
+            /// 화면 상에 문이 보이지 않는 경우 방향 안내
             let isMaybeVisible = renderer.isNode(plane.presentation, insideFrustumOf: pointOfView)
             if (!isMaybeVisible) {
                 getIfHeIsLookingNew(sceneWidth: sceneWidth, nodePosition: self.sceneView.projectPoint(plane.position))
@@ -138,18 +135,20 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
             }
         }
 
-        // Update the plane's distance and the text position
+        /// Update the plane's distance and the text position
         if let distanceNode = plane.distanceNode,
            let distanceGeometry = distanceNode.geometry as? SCNText {
             let currentDistance = simd_distance(node.simdTransform.columns.3, (sceneView.session.currentFrame?.camera.transform.columns.3)!)
-            //var currentSteps = healthKitManager.calToStepCount(meter: Double(currentDistance))
-            var currentSteps = Int(Double(currentDistance)/0.7)
+//             var currentSteps = healthKitManager.calToStepCount(meter: Double(currentDistance))
+            var currentSteps = Int(Double(currentDistance) / 0.7)
+
             if (currentSteps > 10) { currentSteps = 10 }
+
             if let oldSteps = distanceGeometry.string as? String, oldSteps != String(currentSteps) {
                 distanceGeometry.string = String(currentSteps)
 
                 if let pointOfView = sceneView.pointOfView {
-                    // 화면상에 문이 보이지 않는 경우 TTS를 출력하지 않습니다.
+                    /// 화면 상에 문이 보이지 않는 경우 TTS 출력 안함
                     let isMaybeVisible = renderer.isNode(plane.presentation, insideFrustumOf: pointOfView)
 
                     if (isMaybeVisible) {
@@ -189,8 +188,7 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
         }
     }
 
-    // MARK: - ARSessionDelegate
-
+    // MARK: ARSessionDelegate
     func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
         guard let frame = session.currentFrame else { return }
         updateSessionInfoAndSpeak(for: frame, trackingState: frame.camera.trackingState)
@@ -205,15 +203,14 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
         updateSessionInfoAndSpeak(for: session.currentFrame!, trackingState: camera.trackingState)
     }
 
-    // MARK: - ARSessionObserver
-
+    // MARK: ARSessionObserver
     func sessionWasInterrupted(_ session: ARSession) {
-        // Inform the user that the session has been interrupted, for example, by presenting an overlay.
+        /// Inform the user that the session has been interrupted, for example, by presenting an overlay
         print("Session was interrupted")
     }
 
     func sessionInterruptionEnded(_ session: ARSession) {
-        // Reset tracking and/or remove existing anchors if consistent tracking is required.
+        /// Reset tracking and/or remove existing anchors if consistent tracking is required
         print("Session interruption ended")
         resetTracking()
     }
@@ -229,11 +226,11 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
             errorWithInfo.localizedRecoverySuggestion
         ]
 
-        // Remove optional error messages.
+        /// Remove optional error messages
         let errorMessage = messages.compactMap({ $0 }).joined(separator: "\n")
 
         DispatchQueue.main.async {
-            // Present an alert informing about the error that has occurred.
+            /// Present an alert informing about the error that has occurred.
             let alertController = UIAlertController(title: "The AR session failed.", message: errorMessage, preferredStyle: .alert)
             let restartAction = UIAlertAction(title: "Restart Session", style: .default) { _ in
                 alertController.dismiss(animated: true, completion: nil)
@@ -245,34 +242,32 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
     }
 
     private func environmentReaderRotor () -> UIAccessibilityCustomRotor {
-        // Create a custor Rotor option, it has a name that will be read by voice over, and
-        // a action that is a action called when this rotor option is interacted with.
-        // The predicate gives you info about the state of this interaction
+        /// Create a custor Rotor option, it has a name that will be read by voice over, and an action that is a action called when this rotor option is interacted with. The predicate gives you info about the state of this interaction.
         let propertyRotor = UIAccessibilityCustomRotor.init(name: "메인 화면으로") { (predicate) -> UIAccessibilityCustomRotorItemResult? in
 
-            // Get the direction of the movement when this rotor option is enablade
+            /// Get the direction of the movement when this rotor option is enablade
             let forward = predicate.searchDirection == UIAccessibilityCustomRotor.Direction.next
 
-            // You can do any kind of business logic processing here
+            /// You can do any kind of business logic processing here
             if forward {
-                // 홈 화면으로 돌아감
+                /// Return to home screen
                 self.dismiss(animated: true)
             }
-            // Return the selection of voice over to the element rotorPropertyValueLabel
-            // Use this return to select the desired selection that fills the purpose of its logic
+
+            /// Return the selection of voice over to the element rotorPropertyValueLabel. Use this return to select the desired selection that fills the purpose of its logic.
             return UIAccessibilityCustomRotorItemResult.init()
         }
         return propertyRotor
     }
-    // MARK: - Private methods
 
+    // MARK: Private methods
     private func updateSessionInfoAndSpeak(for frame: ARFrame, trackingState: ARCamera.TrackingState) {
-        // Update the UI to provide feedback on the state of the AR experience.
+        /// Update the UI to provide feedback on the state of the AR experience.
         let message: String
 
         switch trackingState {
         case .normal where frame.anchors.isEmpty:
-            // No planes detected; provide instructions for this app's AR interactions.
+            /// No planes detected; provide instructions for this app's AR interactions.
             message = "스마트폰을 좌우, 위아래로 천천히 움직여주세요."
 
         case .notAvailable:
@@ -288,8 +283,7 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
             message = "환경 인식 기능을 초기화 중입니다."
 
         default:
-            // No feedback needed when tracking is normal and planes are visible.
-            // (Nor when in unreachable limited-tracking states.)
+            /// No feedback needed when tracking is normal and planes are visible(Nor when in unreachable limited-tracking states.)
             message = ""
 
         }
@@ -336,6 +330,7 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
         if alreadySpoke {
             return
         }
+
         if (nodePosition.z < 1) {
             if ( nodePosition.x > (Float(sceneWidth)) ) {
                 soundManager.speak(translate("문이 오른쪽에 있습니다"))
@@ -347,6 +342,7 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
         } else {
             soundManager.speak(translate("문이 왼쪽에 있습니다"))
         }
+
         alreadySpoke = true
     }
 }

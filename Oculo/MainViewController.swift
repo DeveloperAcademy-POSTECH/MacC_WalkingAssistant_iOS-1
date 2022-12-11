@@ -39,7 +39,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // 처음 앱을 작동시켰을때 healthKit Manager에서 사용자의 보폭 정보를 불러오기 위한 시험 코드입니다.
+        /// 처음 앱을 작동시켰을때 healthKit Manager에서 사용자의 보폭 정보를 불러오기 위한 시험 코드입니다.
         // print(healthKitManager.calToStepCount(meter: 10))
     }
 
@@ -67,8 +67,8 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
 
         addConstraints()
         
-        if !UserDefaults.standard.bool(forKey: "lanchedBefore") {  /// 앱이 최초로 실행될때
-            UserDefaults.standard.set(true, forKey: "lanchedBefore") /// 앱이 최초로 실행되지않았다고 저장하고
+        if !UserDefaults.standard.bool(forKey: "lanchedBefore") {  /// 앱이 최초로 실행될 때
+            UserDefaults.standard.set(true, forKey: "lanchedBefore") /// 앱이 최초로 실행되지 않았다고 저장하고
             UserDefaults.standard.setValue(Float(0.8), forKey: "speakingRate") /// 말하기 속도를 0.8로 저장
         }
     }
@@ -158,22 +158,19 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     // MARK: Switching Button Custom Rotor
     public func navigationButtonRotor() -> UIAccessibilityCustomRotor {
            
-           // Create a custor Rotor option, it has a name that will be read by voice over, and
-           // a action that is a action called when this rotor option is interacted with.
-           // The predicate gives you info about the state of this interaction
+           /// Create a custor Rotor option, it has a name that will be read by voice over, and a action that is a action called when this rotor option is interacted with. The predicate gives you info about the state of this interaction
            let propertyRotorOption = UIAccessibilityCustomRotor.init(name: "내비게이션") { (predicate) -> UIAccessibilityCustomRotorItemResult? in
                
-               // Get the direction of the movement when this rotor option is enablade
+               /// Get the direction of the movement when this rotor option is enablade
                let forward = predicate.searchDirection == UIAccessibilityCustomRotor.Direction.next
                
-               // You can do any kind of business logic processing here
+               /// You can do any kind of business logic processing here
                if forward {
                    self.selected = 1
                    self.onTouchButton(self.navigationButton)
                }
                
-               // Return the selection of voice over to the element rotorPropertyValueLabel
-               // Use this return to select the desired selection that fills the purpose of its logic
+               /// Return the selection of voice over to the element rotorPropertyValueLabel Use this return to select the desired selection that fills the purpose of its logic
                return UIAccessibilityCustomRotorItemResult.init()
            }
            
@@ -182,22 +179,19 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     
     public func environmentReaderButtonRotor() -> UIAccessibilityCustomRotor {
         
-        // Create a custor Rotor option, it has a name that will be read by voice over, and
-        // a action that is a action called when this rotor option is interacted with.
-        // The predicate gives you info about the state of this interaction
+        /// Create a custor Rotor option, it has a name that will be read by voice over, and an action that is a action called when this rotor option is interacted with. The predicate gives you info about the state of this interaction
         let propertyRotorOption = UIAccessibilityCustomRotor.init(name: "주변 환경 읽기") { (predicate) -> UIAccessibilityCustomRotorItemResult? in
             
-            // Get the direction of the movement when this rotor option is enablade
+            /// Get the direction of the movement when this rotor option is enablade
             let forward = predicate.searchDirection == UIAccessibilityCustomRotor.Direction.next
             
-            // You can do any kind of business logic processing here
+            /// You can do any kind of business logic processing here
             if forward {
                 self.selected = 2
                 self.onTouchButton(self.environmentReaderButton)
             }
 
-            // Return the selection of voice over to the element rotorPropertyValueLabel
-            // Use this return to select the desired selection that fills the purpose of its logic
+            /// Return the selection of voice over to the element rotorPropertyValueLabel. Use this return to select the desired selection that fills the purpose of its logic
             return UIAccessibilityCustomRotorItemResult.init()
         }
         
@@ -205,22 +199,19 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     }
     public func textReaderButtonRotor() -> UIAccessibilityCustomRotor {
         
-        // Create a custor Rotor option, it has a name that will be read by voice over, and
-        // a action that is a action called when this rotor option is interacted with.
-        // The predicate gives you info about the state of this interaction
+        /// Create a custor Rotor option, it has a name that will be read by voice over, and an action that is a action called when this rotor option is interacted with. The predicate gives you info about the state of this interaction
         let propertyRotorOption = UIAccessibilityCustomRotor.init(name: "글자 읽기") { (predicate) -> UIAccessibilityCustomRotorItemResult? in
             
-            // Get the direction of the movement when this rotor option is enablade
+            /// Get the direction of the movement when this rotor option is enablade
             let forward = predicate.searchDirection == UIAccessibilityCustomRotor.Direction.next
             
-            // You can do any kind of business logic processing here
+            /// You can do any kind of business logic processing here
             if forward {
                 self.selected = 3
                 self.onTouchButton(self.textReaderButton)
             }
 
-            // Return the selection of voice over to the element rotorPropertyValueLabel
-            // Use this return to select the desired selection that fills the purpose of its logic
+            /// Return the selection of voice over to the element rotorPropertyValueLabel. Use this return to select the desired selection that fills the purpose of its logic
             return UIAccessibilityCustomRotorItemResult.init()
         }
         
