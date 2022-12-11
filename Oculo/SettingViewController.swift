@@ -15,7 +15,7 @@ class SettingViewController: UIViewController {
     lazy var footerLableView = UILabel()
     lazy var logoImageStackView = UIStackView()
     
-    //let data = [["Membership", "Agreement on sending recorded video"], ["Terms of arrangement", "Privacy", "License", "Contact Us"]]
+//    let data = [["Membership", "Agreement on sending recorded video"], ["Terms of arrangement", "Privacy", "License", "Contact Us"]]
     let data = [["License"],["SPEAKING RATE"]]
     let sectionNames = ["","SPEAKING RATE"]
     
@@ -88,9 +88,9 @@ class CustomCell: UITableViewCell {
     
     lazy var slider : UISlider = {
         let slider = UISlider()
-        slider.maximumValue = 1.0  // 슬라이더 최댓값
-        slider.minimumValue = 0.5  // 슬라이더 최솟값
-        slider.value = soundManger.speakingRate  // soundManager의 speakingRate를 받아옴
+        slider.maximumValue = 1.0  /// 슬라이더 최댓값
+        slider.minimumValue = 0.5  /// 슬라이더 최솟값
+        slider.value = soundManger.speakingRate  /// soundManager의 speakingRate를 받아옴
         slider.addTarget(self, action: #selector(onChangeValueSlider(sender: )), for: UIControl.Event.valueChanged)
         return slider
     }()
@@ -98,7 +98,7 @@ class CustomCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         layout()
-        self.selectionStyle = .none  // 커스텀셀이 터치되어도 변화 없게
+        self.selectionStyle = .none  /// 커스텀 셀이 터치되어도 변화 X
     }
     
     required init?(coder: NSCoder) {
@@ -106,8 +106,8 @@ class CustomCell: UITableViewCell {
     }
     
     func layout() {
-        let imageMargin:CGFloat = 24 // 이미지 와 셀간의 간격 ( [ 여기 이미지 슬라이더 이미지 여기 ] )
-        let sliderMargin:CGFloat = 10 // 슬라이더 와 이미지 사이의 간격 ( [ 이미지 여기 슬라이더 여기 이미지 ] )
+        let imageMargin:CGFloat = 24  /// 이미지와 셀 간 간격 ( [ < 여기 > 이미지 슬라이더 이미지 < 여기 > ] )
+        let sliderMargin:CGFloat = 10  /// 슬라이더와 이미지 간 간격 ( [ 이미지 < 여기 > 슬라이더 < 여기 > 이미지 ] )
         self.contentView.addSubview(turtleImage)
         self.contentView.addSubview(rabbitImage)
         self.contentView.addSubview(slider)
@@ -126,43 +126,43 @@ class CustomCell: UITableViewCell {
         slider.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
     }
     
-    @objc func onChangeValueSlider(sender: UISlider) { // 슬라이더가 변경되었을때
-        UserDefaults.standard.setValue(sender.value, forKey: "speakingRate") // speakingRate 유저디폴트에 저장
+    @objc func onChangeValueSlider(sender: UISlider) {  /// 슬라이더가 변경되었을 때
+        UserDefaults.standard.setValue(sender.value, forKey: "speakingRate")  /// User default에 speakingRate 저장
     }
 }
 
 extension SettingViewController: UITableViewDataSource {
     
-    func numberOfSections(in tableView: UITableView) -> Int {  // 섹션 갯수
+    func numberOfSections(in tableView: UITableView) -> Int {  /// 섹션 갯수
         return data.count
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {  // 섹션당 row 갯수
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {  /// 섹션당 row 갯수
         return data[section].count
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {  // 섹션 title
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {  /// 섹션 title
         return Language(rawValue: sectionNames[section])?.localized
         
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {  // cell 높이
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {  /// cell 높이
         return 44.0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell
         switch indexPath.section {
-        case 0 : // 0번째 섹션일때 (라이선스 부분)
+        case 0 :  /// 0번째 섹션일 때 (라이선스 부분)
             cell = UITableViewCell(style: .default, reuseIdentifier: .none)
             cell.textLabel?.text = Language(rawValue: data[indexPath.section][indexPath.row])?.localized
-        case 1 : // 1번째 섹션일때 (speakingRate 조절하는 슬라이더가 있는 부분)
+        case 1 :  /// 1번째 섹션일 때 (speakingRate 조절하는 슬라이더가 있는 부분)
             let customCell: CustomCell
             customCell = CustomCell(style: .default, reuseIdentifier: .none)
             return customCell
-        default :  // 여기로오면 에러 ㅎㅎ...
+        default :  /// 여기로오 면 에러 ㅎㅎ...
             cell = UITableViewCell(style: .default, reuseIdentifier: .none)
-            cell.textLabel?.text = Language(rawValue: "error")?.localized  // error(에러입니다) 라고 적힌 cell을 반환
+            cell.textLabel?.text = Language(rawValue: "error")?.localized  /// error(에러입니다) 라고 적힌 cell 반환
         }
         return cell
     }
@@ -173,9 +173,9 @@ extension SettingViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath {
-        case [0,0] : // 라이선스셀이 터치 되었을때
-            present(LicenseViewController(), animated: true)  // 라이선스 페이지를 띄움
-        default: // 라이선스셀 외에 다른부분이 터치 되었을때 (에러상황)
+        case [0,0] :  /// 라이선스 셀이 터치 되었을 때
+            present(LicenseViewController(), animated: true)  /// 라이선스 페이지를 띄움
+        default:  /// 라이선스 셀 외에 다른 부분이 터치 되었을 때 (에러상황)
             print("error")
         }
     }

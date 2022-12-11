@@ -223,7 +223,7 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
                     minDepthCoordinate = "\(String(slice.firstIndex(of: minData)!)), \(String(y))"  /// 최솟값이 새로 생길 때마다 좌표 정보 업데이트
                 }
             }
-            minValueDictionary[minDepth] = [minDepthCoordinate, String(prediction.label!)]  /// depth 최솟값을 좌표:깊이 쌍으로 딕셔너리에 추가
+            minValueDictionary[minDepth] = [minDepthCoordinate, String(prediction.label!)]  /// depth 최솟값을 `좌표:깊이` 쌍으로 딕셔너리에 추가
         }
 
         if !minValueDictionary.isEmpty && !soundManager.synthesizer.isSpeaking {
@@ -315,15 +315,15 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
     }
 
     func session(_ session: ARSession, didFailWithError error: Error) {
-        // Present an error message to the user
+        // /Present an error message to the user
     }
 
     func sessionWasInterrupted(_ session: ARSession) {
-        // Inform the user that the session has been interrupted, for example, by presenting an overlay
+        /// Inform the user that the session has been interrupted, for example, by presenting an overlay
     }
 
     func sessionInterruptionEnded(_ session: ARSession) {
-        // Reset tracking and/or remove existing anchors if consistent tracking is required
+        /// Reset tracking and/or remove existing anchors if consistent tracking is required
     }
 
     override func didReceiveMemoryWarning() {
@@ -333,12 +333,12 @@ class ObjectDetectionViewController: UIViewController, ARSessionDelegate, ARSCNV
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         startARSession()
-        //UIDevice.current.isProximityMonitoringEnabled = true
+//        UIDevice.current.isProximityMonitoringEnabled = true
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        //UIDevice.current.isProximityMonitoringEnabled = false
+//        UIDevice.current.isProximityMonitoringEnabled = false
         pauseARSession()
     }
 
@@ -453,7 +453,7 @@ extension ObjectDetectionViewController {
     func predictUsingVision(pixelBuffer: CVPixelBuffer) {
         guard let request = request else { fatalError() }
 
-        /// 참고: 모델의 입력 구성에 따라 비전 프레임워크가 이미지의 입력 크기를 자동으로 구성함.
+        /// 참고: 모델의 입력 구성에 따라 비전 프레임워크가 이미지의 입력 크기를 자동으로 구성함
         self.semaphore.wait()  /// wait(): -1, signal(): +1 반환
         let handler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .up)
         try? handler.perform([request])
@@ -488,22 +488,19 @@ extension ObjectDetectionViewController {
     }
 
     private func navigationRotor () -> UIAccessibilityCustomRotor {
-        // Create a custom Rotor option, it has a name that will be read by voice over, and
-        // a action that is a action called when this rotor option is interacted with.
-        // The predicate gives you info about the state of this interaction
+        /// Create a custom Rotor option, it has a name that will be read by voice over, and a action that is a action called when this rotor option is interacted with. The predicate gives you info about the state of this interaction
         let propertyRotor = UIAccessibilityCustomRotor.init(name: "메인 화면으로") { (predicate) -> UIAccessibilityCustomRotorItemResult? in
             
-            // Get the direction of the movement when this rotor option is enablade
+            /// Get the direction of the movement when this rotor option is enablade
             let forward = predicate.searchDirection == UIAccessibilityCustomRotor.Direction.next
             
-            // You can do any kind of business logic processing here
+            /// You can do any kind of business logic processing here
             if forward {
-                // 홈 화면으로 돌아감
+                /// 홈 화면으로 돌아감
                 self.dismiss(animated: true)
-                // self.present(ObjectDetectionViewController(), animated: true)
+                /// self.present(ObjectDetectionViewController(), animated: true)
             }
-            // Return the selection of voice over to the element rotorPropertyValueLabel
-            // Use this return to select the desired selection that fills the purpose of its logic
+            /// Return the selection of voice over to the element rotorPropertyValueLabel. Use this return to select the desired selection that fills the purpose of its logic
             return UIAccessibilityCustomRotorItemResult.init()
         }
         return propertyRotor

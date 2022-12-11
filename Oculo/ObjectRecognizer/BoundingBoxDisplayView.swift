@@ -10,9 +10,8 @@ import Foundation
 import UIKit
 import Vision
 
-
 class BoundingBoxDisplayView: UIView {
-    // Empty array to store the center points of the bounding boxes
+    /// Empty array to store the center points of the bounding boxes
     var objectCenterCoordinates: [String: [CGFloat]] = [:]
 
     static private var colors: [String: UIColor] = [:]

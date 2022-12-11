@@ -197,8 +197,8 @@ class LicenseViewController: UIViewController {
         licenseTitleLableView.translatesAutoresizingMaskIntoConstraints = false
         licenseContentsLabelView.translatesAutoresizingMaskIntoConstraints = false
         licenseScrollView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate(
-        [
+
+        NSLayoutConstraint.activate([
             self.licenseScrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 8),
             self.licenseScrollView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
             self.licenseScrollView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
@@ -211,6 +211,7 @@ class LicenseViewController: UIViewController {
             self.licenseContentsLabelView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
             self.licenseContentsLabelView.bottomAnchor.constraint(equalTo: self.licenseScrollView.bottomAnchor),
         ])
+
         self.view.backgroundColor = .black
     }
 }

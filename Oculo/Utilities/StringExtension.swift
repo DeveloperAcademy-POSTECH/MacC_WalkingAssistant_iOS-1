@@ -24,13 +24,13 @@ extension Localizable {
 }
 
 enum Language: String, Localizable {
-    // Main View
+    /// Main View
     case navigation = "Navigation"
     case environmentReader = "Environment Reader"
     case textReader = "Text Reader"
     case settings = "Settings"
 
-    // Settings View
+    /// Settings View
     case membership = "Membership"
     case agreement =  "Agreement on sending recorded video"
     case arrangement = "Terms of arrangement"
@@ -40,7 +40,7 @@ enum Language: String, Localizable {
     case error = "error"
     case speakingRate = "SPEAKING RATE"
     
-    // Contorller
+    /// Contorller
     case doorRecognition = "Reset door recognition"
     case textRecognition = "Text recognition"
 }

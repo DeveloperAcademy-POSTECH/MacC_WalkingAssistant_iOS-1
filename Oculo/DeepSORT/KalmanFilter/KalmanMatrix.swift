@@ -13,7 +13,7 @@ public struct KalmanMatrix: Equatable {
 
     // MARK: 칼만 행렬 프로퍼티 정의
     public let rows: Int, columns: Int
-    public var grid: [Double]  // grid: 행렬의 원소를 저장하는 1차원 배열
+    public var grid: [Double]  /// grid: 행렬의 원소를 저장하는 1차원 배열
 
     var isSquare: Bool {
         return rows == columns
