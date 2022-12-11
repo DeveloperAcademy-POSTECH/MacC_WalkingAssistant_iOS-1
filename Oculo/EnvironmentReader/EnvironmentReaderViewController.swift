@@ -23,7 +23,7 @@ class EnvironmentReaderViewController: UIViewController, ARSCNViewDelegate, ARSe
     /// Node의 위치를 구분하기 위해 화면의 크기를 가져옵니다.
     var sceneWidth:CGFloat = 0
 
-    /// 방향에 대한 안내를 할 경우, TTS 출돌 현상을 방지하기 위해 Flag를 만들었습니다.
+    /// 방향에 대한 안내를 할 경우, TTS 충돌 현상을 방지하기 위해 Flag를 만들었습니다.
     var alreadySpoke = false
 
     /// 하나의 문만 인식하고 안내하기 위해 plane과 anchor를 담는 array
