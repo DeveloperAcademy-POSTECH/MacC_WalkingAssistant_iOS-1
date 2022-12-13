@@ -1,0 +1,30 @@
+/* 
+  Localizable.strings
+  Oculo
+
+  Created by 최윤석 on 2022/11/10.
+  Copyright © 2022 Intelligent ATLAS. All rights reserved.
+*/
+
+
+// Main View
+"Navigation" = "내비게이션";
+"Environment Reader" = "주변 환경 읽기";
+"Text Reader" = "글자 읽기";
+"Settings" = "설정";
+
+// Setting View
+"Membership" = "멤버십";
+"Agreement on sending recorded video" = "보행 간 정보 제공 동의";
+
+"Terms of arrangement" = "이용 약관";
+"Privacy" = "개인정보 보호";
+"License" = "사용권 조항";
+"Contact Us" = "고객센터";
+"error" = "에러입니다";
+"SPEAKING RATE" = "말하기 속도";
+
+// Button Text
+"Reset door recognition" = "문 인식 초기화";
+"Text recognition" = "글자 인식";
+"메인 화면으로" = "메인 화면으로";
