@@ -9,7 +9,7 @@ A supplementary application for the SELF-DIRECTED and SAFER walking of visually 
 
 ## 🎬 Usage guide video
 
-[![Oculo concrete usage video](https://img.youtube.com/vi/5vWxZMugUlc/mqdefault.jpg)](https://www.youtube.com/embed/5vWxZMugUlc)
+[![Oculo concrete usage video](https://img.youtube.com/vi/dZZtyLf8h98/mqdefault.jpg)](https://youtu.be/dZZtyLf8h98)
 
 <br>
 
