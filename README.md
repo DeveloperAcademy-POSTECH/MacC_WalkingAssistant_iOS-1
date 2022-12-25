@@ -13,6 +13,47 @@ A supplementary application for the SELF-DIRECTED and SAFER walking of visually 
 
 <br>
 
+## 📂 Project directory structure
+```
+Oculo
+├── MainScreenViewControllers
+│   ├── MainViewController
+│   ├── SettingViewController
+│   └── LicenseViewController
+│
+├─ Object Recognizer
+│   ├── BoundingBoxDisplayView
+│   ├── LabelsTableViewCell
+│   └── ObjectDetectionViewController
+│
+├── DeepSORT
+│   ├── KalmanFilter
+│   │  ├── KalmanFilter
+│   │  └── KalmanMatrix
+│   └── ObjectTracker
+│
+├── EnvironmentReader
+│   ├── Utilities
+│   ├── Plane
+│   └── EnvironmentReaderViewController
+│
+├── TextReader
+│   └── TextReaderViewController
+│
+├── Utilities
+│   ├── MeasurementTool
+│   ├── UIImage_CVPixelBufferTool
+│   ├── StringExtension
+│   └── SoundManager
+│
+├── AIModels
+│   └── yolov5s
+│
+└── Sources
+    └── defaultBeep
+```
+<br>
+
 ## :pushpin: Features
 
 - [x] LiDAR access
