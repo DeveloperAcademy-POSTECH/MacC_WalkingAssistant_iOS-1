@@ -81,6 +81,24 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
+		4D2622612957EA1300E58B43 /* TextReader */ = {
+			isa = PBXGroup;
+			children = (
+				FE1997F4291A1CDD001DA2CF /* TextReaderViewController.swift */,
+			);
+			path = TextReader;
+			sourceTree = "<group>";
+		};
+		4D2622622957EA2700E58B43 /* MainScreenViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				4DB71CAD28EF7D4900A0E21A /* MainViewController.swift */,
+				FE1997F0290A77C2001DA2CF /* SettingViewController.swift */,
+				42C935AE293F22A200FC9FA9 /* LicenseVIewController.swift */,
+			);
+			path = MainScreenViewControllers;
+			sourceTree = "<group>";
+		};
 		4D41E06C2913C34A00A05726 /* AIModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -123,19 +141,17 @@
 		4DB71CA828EF7D4900A0E21A /* Oculo */ = {
 			isa = PBXGroup;
 			children = (
+				4D2622622957EA2700E58B43 /* MainScreenViewControllers */,
+				4D5D87EE291BBA680024C16D /* ObjectRecognizer */,
 				4DD509522935B13600AE2766 /* DeepSORT */,
 				FED8C3BB291CFB000028F659 /* EnvironmentReader */,
-				4D5D87EE291BBA680024C16D /* ObjectRecognizer */,
+				4D2622612957EA1300E58B43 /* TextReader */,
 				4D5D87E7291BB9590024C16D /* Utilities */,
 				4D41E06C2913C34A00A05726 /* AIModels */,
 				420E3D362913B85600E16D16 /* Sources */,
 				4296A68A28F7EB2200E769AE /* Oculo.entitlements */,
-				FE1997F4291A1CDD001DA2CF /* TextReaderViewController.swift */,
 				4DB71CA928EF7D4900A0E21A /* AppDelegate.swift */,
 				4DB71CAB28EF7D4900A0E21A /* SceneDelegate.swift */,
-				4DB71CAD28EF7D4900A0E21A /* MainViewController.swift */,
-				FE1997F0290A77C2001DA2CF /* SettingViewController.swift */,
-				42C935AE293F22A200FC9FA9 /* LicenseVIewController.swift */,
 				4DB71CB228EF7D4A00A0E21A /* Assets.xcassets */,
 				FED8C3C4291CFF310028F659 /* Assets.scnassets */,
 				4DB71CB728EF7D4A00A0E21A /* Info.plist */,
